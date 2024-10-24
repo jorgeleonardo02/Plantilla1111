@@ -1,0 +1,79 @@
+<h3 mat-dialog-title>Crear Contenido</h3>
+<div mat-dialog-content>
+    <form [formGroup]="camposFormulario">
+        <div class="card-body col-sm-12">
+            <mat-form-field class="tresPartes">
+                <mat-label>Titulo</mat-label>
+                <input type="text" name="titulo" matInput placeholder="Titulo" formControlName="titulo">
+                <mat-error> Debe digitar el titulo</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes">
+                <mat-label>Etiquetas</mat-label>
+                <input type="text" name="etiquetas" matInput placeholder="Etiquetas" formControlName="etiquetas">
+                <mat-error> Debe digitar la etiqueta</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes">
+                <mat-label>Descripcion Titulo</mat-label>
+                <textarea type="text" name="descripcion" matInput placeholder="Descripcion" formControlName="descripcion"></textarea>
+                <mat-error> Debe digitar la descripcion</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="categoria">
+                    <mat-option [value]="categoria" *ngFor="let categoria of listaCategoria">{{categoria.nombre}}</mat-option>
+                </mat-select>
+                <mat-error>Debe seleccionar la categoría</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes" *ngIf="tokenService.rolAdmin()">
+                <mat-label>Docentes</mat-label>
+                <mat-select formControlName="usuarioDocentes">
+                    <mat-option [value]="usuario" *ngFor="let usuario of listaUsuarioDocentes">{{usuario.nombreUsuario}}</mat-option>
+                </mat-select>
+                <mat-error>Debe seleccionar la categoría</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes" *ngIf="tokenService.rolDocente()">
+                <mat-label>Docentes</mat-label>
+                <mat-select formControlName="usuarioDocentes">
+                    <mat-option *ngIf="usuarioDocenteActual" [value]="usuarioDocenteActual">{{usuarioDocenteActual.nombreUsuario}}</mat-option>
+                </mat-select>
+                <mat-error>Debe seleccionar la categoría</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes ">
+                <mat-label>Fecha limite</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="fechaLimite">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-slide-toggle class="tresPartes" *ngIf="tokenService.rolDocente()" formControlName="activado">Activar</mat-slide-toggle>
+            <mat-form-field class="tresPartes">
+                <mat-label>Contenido Programatico</mat-label>
+                <textarea type="text" name="programa" matInput placeholder="Contenido programatico" formControlName="programa"></textarea>
+                <mat-error> Debe digitar el contenido programatico del curso</mat-error>
+            </mat-form-field>
+            <mat-form-field class="tresPartes">
+                <mat-label>Precio del curso</mat-label>
+                <input type="number" name="precio" matInput placeholder="Precio curso" formControlName="precio">
+                <mat-error> Debe digitar la el precio del curso</mat-error>
+            </mat-form-field>
+
+            <!-- Interruptor para activar el contenido -->
+
+            <!-- <div class="form-group w-50">
+                <mat-label for="archivoFoto">Imagen del contenido</mat-label>
+                <input id="archivoFoto" type="file" name="archivo" class="form-control-file" (change)="seleccionarFoto($event)">
+            </div> -->
+            <div class="form-group w-50">
+                <mat-label for="archivoFoto">Imagen del contenido</mat-label>
+                <input #archivoFotoInput id="archivoFoto" type="file" name="archivo" class="form-control-file" (change)="seleccionarFoto($event)">
+            </div>
+            <!-- <div class="form-group w-50">
+                <mat-label for="archivoFoto">Imagen del contenido</mat-label>
+                <button mat-button (click)="abrirSelectorDeArchivo()">Seleccionar archivo</button>
+            </div> -->
+        </div>
+    </form>
+</div>
+<!-- botones de acciones -->
+<mat-dialog-actions>
+    <button mat-button (click)="cancelarOperacion()">Cancelar</button>
+    <button mat-button color="primary" (click)="enviarFormulario()">Enviar</button>

@@ -1,0 +1,18 @@
+.ud-heading-sm {
+    font-family: var(--font-stack-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-size: 1.4rem;
+}
+
+.shopping-item-module--buyable-title--M7035 {
+    display: block !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    margin-bottom: .4rem;
+}

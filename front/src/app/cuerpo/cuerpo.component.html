@@ -1,0 +1,462 @@
+<div class="contenedor">
+    <div class="component-margin">
+        <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
+            <div class="unit-title--title-container--2RfU_">
+                <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-180925219">Los mejores cursos de Diseño</h2>
+            </div>
+        </div>
+
+        <div class="filter-select" *ngIf="tokenService.rolDocente() || tokenService.rolAdmin()">
+            <label for="filtro">Filtrar por:</label>
+            <select id="filtro" [(ngModel)]="filtro" (change)="filtrarContenidos()">
+              <option value="todos">Mostrar Todos</option>
+              <option value="activados">Mostrar Activados</option>
+              <option value="desactivados">Mostrar Desactivados</option>
+            </select>
+        </div>
+        <!-- 1 -->
+        <!-- <div class="container">
+            <div class="container">
+                <div class="products sec-padding">
+                    <div class="products-four">
+                        <h3>POPULAR ITEMS</h3>
+
+                        <div class="product-item-1 swiper-container swiper-container-initialized swiper-container-horizontal" style="cursor: grab;">
+                            <div class="swiper-wrapper h-100" *ngIf="listaContenidos && listaContenidos.length > 0">
+                                <swiper [config]="swiperConfig">
+                                    <ng-container *ngFor="let contenido of listaContenidos; let i = index;">
+                                        <ng-template swiperSlide>
+
+                                            <mat-card class="mat-card mat-focus-indicator" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                                <div fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                                </div>
+                                                <div class="product-img ng-star-inserted">
+                                                    <a class="product-link" href="#/home/product/1">
+                                                        <img alt="" [src]="urlFoto+contenido.id">
+                                                    </a>
+                                                </div>
+                                                <div class="product-info-wrapper">
+                                                    <span class="category ng-star-inserted">Headphones</span>
+                                                    <div class="title-wrap ng-star-inserted">
+                                                        <h4>ONTEC E Headset</h4>
+                                                    </div>
+                                                    <div class="price-wrap ng-star-inserted" fxlayout="row" fxlayoutalign="space-between center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;">
+                                                        <div class="stars">
+                                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                            <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                        </div>
+                                                        <p>$175.00</p>
+                                                    </div>
+                                                    <div class="btn-wrap ng-star-inserted" fxlayout="row" fxlayoutalign="space-between center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;">
+                                                        <a class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" color="primary" mat-raised-button="" tabindex="0" aria-disabled="false">
+                                                            <span class="mat-button-wrapper">ADD TO CART 
+                                                                <mat-icon class="mat-icon-lg mat-icon material-icons notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">shopping_cart</mat-icon>
+                                                            </span>
+                                                            <span class="mat-button-ripple mat-ripple" matripple=""></span>
+                                                            <span class="mat-button-focus-overlay"></span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="icons" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                                         -->
+        <!--  <a>
+                                                            <mat-icon class="mat-icon-lg mat-icon material-icons mr-10 notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">favorite_border</mat-icon>
+                                                        </a> -->
+        <!-- <a>
+                                                            <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                                        </a>
+                                                        <a>
+                                                            <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">cached</mat-icon>
+                                                        </a> -->
+        <!--  </div>
+                                                </div>
+                                            </mat-card>
+
+
+                                        </ng-template>
+                                    </ng-container>
+                                </swiper>
+
+                            </div> -->
+        <!-- <button class="swiper-button-prev swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Previous slide">
+                            <span class="mat-button-wrapper">
+                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">
+                                    keyboard_arrow_left
+                                </mat-icon>
+                            </span>
+                            <span class="mat-button-ripple mat-ripple mat-button-ripple-round"></span>
+                            <span class="mat-button-focus-overlay"></span>
+                        </button>
+                        <button class="swiper-button-next swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Next slide">
+                            <span class="mat-button-wrapper">
+                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">
+                                    keyboard_arrow_right
+                                </mat-icon>
+                            </span>
+                            <span class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></span><span class="mat-button-focus-overlay"></span>
+                        </button> -->
+        <!--            <div class="swiper-button-prev my-custom-prev-button"></div>
+                            <div class="swiper-button-next my-custom-next-button"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
+        <!-- 1 -->
+        <section class="content">
+            <div class="card card-solid">
+                <div class="card-body pb-0">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" *ngFor="let contenido of listaContenidos; let i = index;">
+                            <div class="carousel-module--container--27wzs">
+                                <div class="course-unit--grid--1irZ- carousel-module--scroll-port--28Dow carousel-module--grid--3Qw6j ">
+                                    <div class="carousel-module--scroll-item--2CpA_">
+                                        <div>
+                                            <div class="popper-module--popper--2BpLn">
+                                                <div id="u81-popper-trigger--473">
+                                                    <div class="course-card--container--1QM2W course-card--medium--Fdbz0">
+                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="contenido.nombreFoto">
+                                                            <img width="240" height="135" [src]="urlFoto+contenido.id" class="course-card--course-image--3QvbQ browse-course-card--image--1-_Wa card-img">
+                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(contenido)">
+                                                                <mat-icon>add_shopping_cart</mat-icon>
+                                                            </button>
+
+                                                        </div>
+                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="!contenido.nombreFoto">
+                                                            <img width="240" height="135" src="../../assets/img/El estoico1.png" class="course-card--course-image--3QvbQ browse-course-card--image--1-_Wa card-img">
+                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(contenido)">
+                                                                <mat-icon>add_shopping_cart</mat-icon>
+                                                            </button>
+                                                        </div>
+                                                        <div>
+                                                            <h3 class="ud-heading-md">
+                                                                <a>{{contenido?.titulo}}</a></h3>
+
+                                                            <div class="ud-text-xs">
+                                                                <div class="course-card--instructor-list--nH1OC">
+                                                                    {{contenido.listaContenidoUsuario[0].usuario.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria.nombre}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="course-card--row--29Y0w">
+                                                                <!-- <span> -->
+                                                                <!-- <span class="ud-sr-only">Calificación: 4,6 de 5</span> -->
+                                                                <span class="ud-heading-sm star-rating-module--rating-number--2xeHu">4,6</span>
+                                                                <!-- </span> -->
+                                                                <app-estrella [calificacion]="4.6" [claseCSS]="'text-warning'"></app-estrella>
+                                                                <span aria-label="415 reseñas" class="course-card--reviews-text--1yloi">(415)</span>
+                                                            </div>
+                                                            <div>
+                                                                <div class="ud-heading-md">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="ud-btn ud-btn-xsmall ud-btn-ghost ud-heading-sm ud-link-underline course-details-quick-view-box--popover-interaction-btn--1SvvT" data-purpose="open-course-details-popover" id="u81-trigger-button--472"><span>Mostrar los detalles del curso</span></button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 2 -->
+
+        <!-- 2 -->
+        <!-- <div class="common-floor ltr" data-spm="moretolove" st_page_id="opprgkwmimscabuh18bb575d86e3b81a18022cc86d" ae_project_id="180135" exp_page="home" exp_type="area" exp_page_area="moretolove">
+            <div class="responsive-container--containerWrap--38wUhjs">
+                <div class="responsive-container--paddingWrap--2CzLe0N">
+                    <div class="responsive-container--container--3uG91r1">
+                        <div data-spm="moretolove" class="pc2023-more-to-love--motolove-warp--kdaKofl" data-spm-max-idx="30">
+                            <h2 class="pc2023-more-to-love--motolove-title--1oQygxp">
+                                <div class="pc2023-more-to-love--title-text--2NE4NQY">Te va a encantar</div>
+                            </h2>
+                            <div class="_1wVX7" style="margin-left: -8px; margin-right: -8px;">
+                                <div class="_2FypS" *ngFor="let contenido of listaContenidos; let i = index;" style="max-width: 16.6667%; padding-left: 8px; padding-right: 8px; flex-basis: 16.6667%;">
+                                    <div class="SeJ8l card--out-wrapper" style="">
+                                        <a class="_1UZxx" href="//es.aliexpress.com/item/1005005738078947.html?spm=a2g0o.home.moretolove.1.23c070e5htnC78&amp;gps-id=pcJustForYou&amp;scm=1007.13562.333647.0&amp;scm_id=1007.13562.333647.0&amp;scm-url=1007.13562.333647.0&amp;pvid=e3884644-6c64-45a6-9ea3-087909419db6&amp;_t=gps-id:pcJustForYou,scm-url:1007.13562.333647.0,pvid:e3884644-6c64-45a6-9ea3-087909419db6,tpp_buckets:668%232846%238115%232000&amp;pdp_npi=4%40dis%21COP%2140150.66%2114052.73%21%21%2170.00%21%21%402101ef5e16995564858673455e33a6%2112000034166307058%21rec%21CO%21%21AB"
+                                            target="_blank" data-spm-anchor-id="a2g0o.home.moretolove.1">
+                                            <div class="_2bIiW _2xJR2" style="">
+                                                <img class="_1IH3l product-img" style="width: 180px;aspect-ratio: auto 180 / 180;height: 180px;" [src]="urlFoto+contenido.id" alt="Zapatillas deportivas informales para Hombre, zapatos ligeros de cuero PU, transpirables, planos, blancos" aria-hidden="true">
+                                                <div class="_8Ut19" data-spm-anchor-id="a2g0o.home.moretolove.i0.23c070e5htnC78"></div>
+                                                <div class="darm7 _1kiOX"><svg width="23px" height="21px" viewBox="0 0 23 21" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="0808-商卡" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="BTN/加购" transform="translate(-13.000000, -14.000000)" fill-rule="nonzero"><g id="ICON-购物车" transform="translate(12.000000, 12.000000)"><rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="24" height="24"></rect><path d="M7.0774212,18.9926395 C8.08766056,18.9926395 8.90662138,19.8116004 8.90662138,20.8218397 C8.90662138,21.8320791 8.08766056,22.6510399 7.0774212,22.6510399 C6.06718183,22.6510399 5.24822102,21.8320791 5.24822102,20.8218397 C5.24822102,19.8116004 6.06718183,18.9926395 7.0774212,18.9926395 Z M18.0726417,18.9926395 C19.082881,18.9926395 19.9018419,19.8116004 19.9018419,20.8218397 C19.9018419,21.8320791 19.082881,22.6510399 18.0726417,22.6510399 C17.0624023,22.6510399 16.2434415,21.8320791 16.2434415,20.8218397 C16.2434415,19.8116004 17.0624023,18.9926395 18.0726417,18.9926395 Z M1.17443267,2.49165197 C1.49906021,1.99148218 2.16773114,1.8495568 2.66767719,2.17451017 C3.64733797,2.81110008 4.3148453,3.82968869 4.50990294,4.9990376 L5.58968896,14.4573156 C5.65712883,15.0480484 6.15706794,15.4941603 6.75163783,15.4941603 L18.4694998,15.4941603 C19.0426792,15.4941603 19.5313891,15.0787511 19.6237222,14.5130576 L21.0652746,5.68116489 C21.1556925,5.12720531 21.6680507,4.74396606 22.2249912,4.81370734 C22.7263385,4.87648711 23.1001491,5.30310927 23.0992012,5.82942993 L23.0886183,5.95611179 L21.6982271,15.0573509 C21.4655833,16.5223425 20.2213553,17.6131451 18.7344285,17.6521812 L18.6576374,17.6532141 L6.54340335,17.6532141 C5.01073757,17.6532141 3.71149494,16.5257607 3.49485093,15.0033518 L3.48515488,14.9266622 L2.39237826,5.43927195 C2.32653231,4.86738366 2.01850839,4.3512228 1.55178243,4.02538491 L1.49121273,3.98481305 C0.991439345,3.65984946 0.849674211,2.99129799 1.17443267,2.49165197 Z M12.8245656,2.42485311 C13.380613,2.42485311 13.8456887,2.84726083 13.9002042,3.4163949 L13.9040917,3.50437917 L13.9038771,6.42252957 L16.8229909,6.42311514 C17.3628324,6.42338244 17.8133858,6.82083771 17.8903976,7.34444043 L17.9007352,7.45076264 C17.9284077,8.02592825 17.4997692,8.52156459 16.9108119,8.5782797 L16.8228276,8.58216722 L13.9038771,8.5814105 L13.9040917,11.5010665 C13.9038244,12.0409079 13.5063691,12.4914613 12.9827664,12.5684731 L12.8764442,12.5788107 C12.3012786,12.6064833 11.8056422,12.1778448 11.7489271,11.5888874 L11.7450396,11.5009031 L11.7449961,8.5814105 L8.82614033,8.58216718 C8.28629891,8.58189989 7.83574552,8.18444461 7.75873365,7.66084189 L7.74839606,7.55451968 C7.72072354,6.97935407 8.14936205,6.48371773 8.73831938,6.42700262 L8.82630365,6.4231151 L11.7449961,6.42252957 L11.7450396,3.50437917 C11.7450396,2.94543625 12.1698328,2.48570911 12.7141904,2.43042658 L12.8245656,2.42485311 Z" id="形状结合" fill="currentColor"></path></g></g></g></svg></div>
+                                            </div>
+                                            <div class="_11nFI">
+                                                <div title="Zapatillas deportivas informales para Hombre, zapatos ligeros de cuero PU, transpirables, planos, blancos" class="G7dOC" style="margin-top: 8px;">
+                                                    <h1 class="nXeOv">Zapatillas deportivas informales para Hombre, zapatos ligeros de cuero PU, transpirables, planos, blancos </h1>
+                                                </div>
+                                                <div class="_3TqP9"> -->
+        <!--  estrellas -->
+        <!-- <div class="t9_CA">
+                                                        <div class="Ktfxu">
+                                                            <div class="_2E4Wz" dir="ltr" style="width: 10px;"></div><img class="EYoOU" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAABGdBTUEAALGPC/xhBQAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAACCgAwAEAAAAAQAAAB4AAAAA2L2NEgAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAArdJREFUSA2tl81qFFEQhSeJEDEYQYT4g+DCEFwoPoQbA7pwl1UIeQ5fIA/gIyQEJDggKG7VbESEIEQ0hmyjO0FBicTvdN+6Vt++PdOdTkFN1a0659Ttnv6ZGRz/t6tKB2F9OMBiQQuzSUssThQwWyn6gnJRLjjAmxrCxgotWzGZclnu67qTqKcRWW8V6pV9G5j4PuJdUelGsj6uHOgEJqZApuBHPLQicdvlY1Ivl0LVK0YQ13LNotakQH1XvbhJ8kUVZEHtSVQoy/VPG0tntd4tK+mXGXFGtkhjOTZdIoFNA3WNcM/aDqa7koVHYGgCtqm5NkKAd4wQz3IgXmkjAOZ2xJmSYiyGhNIS/hmvDGL9GC8sPQSrW7xG8tIWuThKYNV2lCNarVHAyIqAV4yQxiaBZS8QRFJusc4JvE3JQeABjMNURQKXcoQ2NbgbbXCNGARuaQfDRsSIBrxpPD7RX4/A1lrwZkWW+ZO4U0NmCnDmCmb48AK1SznDF36tr8DdJoHd3MRczQv4u2zdgwFN4roTl3w9zb3AX2tC0ttH63l8nbVs0fo+Vl4+vjEmP6C/wLvqj3CI65H4Cb+BdzJ/BG2J+wDnbbhI5L9Vw9XrZF038BV1HflROiXUFqgL09q6bOALqtnhNs1tQthWZtfAL9AfcBH3XNxD9AfrExvXxyzkm8H1NSlXvIOf1wXU9k0G/nStmM3HED9zutLj1TQTf+GfZa8onBtP7YfQDFyzCvMbsNo7kov9xtTZ0sSlXbHcBgxw4h9t6XgEN000jaNuw+epUI91o5bdhqm2nuMz3IJ6wvU2jlqP6p/4VCrWdAa22gxHeEqeiqbroLWV1rVu2sCzHJhhOmOP8I+4fgHokXykHFNNveLfVIb/NFMr/3aJndg31vfwGfw+vo13NXH0Y/AyLq3veM3+AXQngyvegYcWAAAAAElFTkSuQmCC"
+                                                                width="10" height="10" alt=""></div>
+                                                        <div class="Ktfxu">
+                                                            <div class="_2E4Wz" dir="ltr" style="width: 10px;"></div><img class="EYoOU" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAABGdBTUEAALGPC/xhBQAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAACCgAwAEAAAAAQAAAB4AAAAA2L2NEgAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAArdJREFUSA2tl81qFFEQhSeJEDEYQYT4g+DCEFwoPoQbA7pwl1UIeQ5fIA/gIyQEJDggKG7VbESEIEQ0hmyjO0FBicTvdN+6Vt++PdOdTkFN1a0659Ttnv6ZGRz/t6tKB2F9OMBiQQuzSUssThQwWyn6gnJRLjjAmxrCxgotWzGZclnu67qTqKcRWW8V6pV9G5j4PuJdUelGsj6uHOgEJqZApuBHPLQicdvlY1Ivl0LVK0YQ13LNotakQH1XvbhJ8kUVZEHtSVQoy/VPG0tntd4tK+mXGXFGtkhjOTZdIoFNA3WNcM/aDqa7koVHYGgCtqm5NkKAd4wQz3IgXmkjAOZ2xJmSYiyGhNIS/hmvDGL9GC8sPQSrW7xG8tIWuThKYNV2lCNarVHAyIqAV4yQxiaBZS8QRFJusc4JvE3JQeABjMNURQKXcoQ2NbgbbXCNGARuaQfDRsSIBrxpPD7RX4/A1lrwZkWW+ZO4U0NmCnDmCmb48AK1SznDF36tr8DdJoHd3MRczQv4u2zdgwFN4roTl3w9zb3AX2tC0ttH63l8nbVs0fo+Vl4+vjEmP6C/wLvqj3CI65H4Cb+BdzJ/BG2J+wDnbbhI5L9Vw9XrZF038BV1HflROiXUFqgL09q6bOALqtnhNs1tQthWZtfAL9AfcBH3XNxD9AfrExvXxyzkm8H1NSlXvIOf1wXU9k0G/nStmM3HED9zutLj1TQTf+GfZa8onBtP7YfQDFyzCvMbsNo7kov9xtTZ0sSlXbHcBgxw4h9t6XgEN000jaNuw+epUI91o5bdhqm2nuMz3IJ6wvU2jlqP6p/4VCrWdAa22gxHeEqeiqbroLWV1rVu2sCzHJhhOmOP8I+4fgHokXykHFNNveLfVIb/NFMr/3aJndg31vfwGfw+vo13NXH0Y/AyLq3veM3+AXQngyvegYcWAAAAAElFTkSuQmCC"
+                                                                width="10" height="10" alt=""></div>
+                                                        <div class="Ktfxu">
+                                                            <div class="_2E4Wz" dir="ltr" style="width: 10px;"></div><img class="EYoOU" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAABGdBTUEAALGPC/xhBQAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAACCgAwAEAAAAAQAAAB4AAAAA2L2NEgAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAArdJREFUSA2tl81qFFEQhSeJEDEYQYT4g+DCEFwoPoQbA7pwl1UIeQ5fIA/gIyQEJDggKG7VbESEIEQ0hmyjO0FBicTvdN+6Vt++PdOdTkFN1a0659Ttnv6ZGRz/t6tKB2F9OMBiQQuzSUssThQwWyn6gnJRLjjAmxrCxgotWzGZclnu67qTqKcRWW8V6pV9G5j4PuJdUelGsj6uHOgEJqZApuBHPLQicdvlY1Ivl0LVK0YQ13LNotakQH1XvbhJ8kUVZEHtSVQoy/VPG0tntd4tK+mXGXFGtkhjOTZdIoFNA3WNcM/aDqa7koVHYGgCtqm5NkKAd4wQz3IgXmkjAOZ2xJmSYiyGhNIS/hmvDGL9GC8sPQSrW7xG8tIWuThKYNV2lCNarVHAyIqAV4yQxiaBZS8QRFJusc4JvE3JQeABjMNURQKXcoQ2NbgbbXCNGARuaQfDRsSIBrxpPD7RX4/A1lrwZkWW+ZO4U0NmCnDmCmb48AK1SznDF36tr8DdJoHd3MRczQv4u2zdgwFN4roTl3w9zb3AX2tC0ttH63l8nbVs0fo+Vl4+vjEmP6C/wLvqj3CI65H4Cb+BdzJ/BG2J+wDnbbhI5L9Vw9XrZF038BV1HflROiXUFqgL09q6bOALqtnhNs1tQthWZtfAL9AfcBH3XNxD9AfrExvXxyzkm8H1NSlXvIOf1wXU9k0G/nStmM3HED9zutLj1TQTf+GfZa8onBtP7YfQDFyzCvMbsNo7kov9xtTZ0sSlXbHcBgxw4h9t6XgEN000jaNuw+epUI91o5bdhqm2nuMz3IJ6wvU2jlqP6p/4VCrWdAa22gxHeEqeiqbroLWV1rVu2sCzHJhhOmOP8I+4fgHokXykHFNNveLfVIb/NFMr/3aJndg31vfwGfw+vo13NXH0Y/AyLq3veM3+AXQngyvegYcWAAAAAElFTkSuQmCC"
+                                                                width="10" height="10" alt=""></div>
+                                                        <div class="Ktfxu">
+                                                            <div class="_2E4Wz" dir="ltr" style="width: 10px;"></div><img class="EYoOU" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAABGdBTUEAALGPC/xhBQAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAACCgAwAEAAAAAQAAAB4AAAAA2L2NEgAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAArdJREFUSA2tl81qFFEQhSeJEDEYQYT4g+DCEFwoPoQbA7pwl1UIeQ5fIA/gIyQEJDggKG7VbESEIEQ0hmyjO0FBicTvdN+6Vt++PdOdTkFN1a0659Ttnv6ZGRz/t6tKB2F9OMBiQQuzSUssThQwWyn6gnJRLjjAmxrCxgotWzGZclnu67qTqKcRWW8V6pV9G5j4PuJdUelGsj6uHOgEJqZApuBHPLQicdvlY1Ivl0LVK0YQ13LNotakQH1XvbhJ8kUVZEHtSVQoy/VPG0tntd4tK+mXGXFGtkhjOTZdIoFNA3WNcM/aDqa7koVHYGgCtqm5NkKAd4wQz3IgXmkjAOZ2xJmSYiyGhNIS/hmvDGL9GC8sPQSrW7xG8tIWuThKYNV2lCNarVHAyIqAV4yQxiaBZS8QRFJusc4JvE3JQeABjMNURQKXcoQ2NbgbbXCNGARuaQfDRsSIBrxpPD7RX4/A1lrwZkWW+ZO4U0NmCnDmCmb48AK1SznDF36tr8DdJoHd3MRczQv4u2zdgwFN4roTl3w9zb3AX2tC0ttH63l8nbVs0fo+Vl4+vjEmP6C/wLvqj3CI65H4Cb+BdzJ/BG2J+wDnbbhI5L9Vw9XrZF038BV1HflROiXUFqgL09q6bOALqtnhNs1tQthWZtfAL9AfcBH3XNxD9AfrExvXxyzkm8H1NSlXvIOf1wXU9k0G/nStmM3HED9zutLj1TQTf+GfZa8onBtP7YfQDFyzCvMbsNo7kov9xtTZ0sSlXbHcBgxw4h9t6XgEN000jaNuw+epUI91o5bdhqm2nuMz3IJ6wvU2jlqP6p/4VCrWdAa22gxHeEqeiqbroLWV1rVu2sCzHJhhOmOP8I+4fgHokXykHFNNveLfVIb/NFMr/3aJndg31vfwGfw+vo13NXH0Y/AyLq3veM3+AXQngyvegYcWAAAAAElFTkSuQmCC"
+                                                                width="10" height="10" alt=""></div>
+                                                        <div class="Ktfxu">
+                                                            <div class="_2E4Wz" dir="ltr" style="width: 2px;"></div><img class="EYoOU" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAeCAYAAAE6DSy/AAAABGdBTUEAALGPC/xhBQAAAGxlWElmTU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAIdpAAQAAAABAAAATgAAAAAAAACQAAAAAQAAAJAAAAABAAKgAgAEAAAAAQAAACCgAwAEAAAAAQAAAB4AAAAA2L2NEgAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAArdJREFUSA2tl81qFFEQhSeJEDEYQYT4g+DCEFwoPoQbA7pwl1UIeQ5fIA/gIyQEJDggKG7VbESEIEQ0hmyjO0FBicTvdN+6Vt++PdOdTkFN1a0659Ttnv6ZGRz/t6tKB2F9OMBiQQuzSUssThQwWyn6gnJRLjjAmxrCxgotWzGZclnu67qTqKcRWW8V6pV9G5j4PuJdUelGsj6uHOgEJqZApuBHPLQicdvlY1Ivl0LVK0YQ13LNotakQH1XvbhJ8kUVZEHtSVQoy/VPG0tntd4tK+mXGXFGtkhjOTZdIoFNA3WNcM/aDqa7koVHYGgCtqm5NkKAd4wQz3IgXmkjAOZ2xJmSYiyGhNIS/hmvDGL9GC8sPQSrW7xG8tIWuThKYNV2lCNarVHAyIqAV4yQxiaBZS8QRFJusc4JvE3JQeABjMNURQKXcoQ2NbgbbXCNGARuaQfDRsSIBrxpPD7RX4/A1lrwZkWW+ZO4U0NmCnDmCmb48AK1SznDF36tr8DdJoHd3MRczQv4u2zdgwFN4roTl3w9zb3AX2tC0ttH63l8nbVs0fo+Vl4+vjEmP6C/wLvqj3CI65H4Cb+BdzJ/BG2J+wDnbbhI5L9Vw9XrZF038BV1HflROiXUFqgL09q6bOALqtnhNs1tQthWZtfAL9AfcBH3XNxD9AfrExvXxyzkm8H1NSlXvIOf1wXU9k0G/nStmM3HED9zutLj1TQTf+GfZa8onBtP7YfQDFyzCvMbsNo7kov9xtTZ0sSlXbHcBgxw4h9t6XgEN000jaNuw+epUI91o5bdhqm2nuMz3IJ6wvU2jlqP6p/4VCrWdAa22gxHeEqeiqbroLWV1rVu2sCzHJhhOmOP8I+4fgHokXykHFNNveLfVIb/NFMr/3aJndg31vfwGfw+vo13NXH0Y/AyLq3veM3+AXQngyvegYcWAAAAAElFTkSuQmCC"
+                                                                width="10" height="10" alt=""></div>
+                                                    </div><span class="Ktbl2">4.000+ vendidos</span></div>
+                                                <div class="_1okBC">
+                                                    <div class="U-S0j"><span style="font-size: 12px;">COP</span><span style="font-size: 24px;">14</span><span style="font-size: 12px;">,</span><span style="font-size: 24px;">052</span><span style="font-size: 12px;">.</span>
+                                                        <span style="font-size: 12px;">73</span>
+                                                    </div>
+                                                    <div class="_1zEQq"></div>
+                                                </div>
+                                                <div class="T8SnT"><span class="_1BSEX _3dc7w _1jUmO" title="COP16,712.54 de descuento cada COP83,562.69 el 11 de nov" style="color: rgb(253, 56, 79);">COP16,712.54 de descuento cada COP83,562.69 el 11 de nov</span></div>
+                                            </div>
+                                            <div class="eFkEW rcmd-hover-more-action">
+                                                <div class="_3W0hl" style="width: 100%;"><span title="Previsualizar" class="_3bWs9">Previsualizar ::before</span></div>
+                                            </div>
+                                        </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pc2023-more-to-love--view-more--35Y6RI3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+        <!-- 3 -->
+        <!-- <div _ngcontent-serverapp-c1200531750="" class="products-tabs">
+            <mat-tab-group _ngcontent-serverapp-c1200531750="" ngskiphydration="" mat-stretch-tabs="" class="mat-mdc-tab-group mat-primary mat-mdc-tab-group-stretch-tabs">
+                <mat-tab-header class="mat-mdc-tab-header mat-mdc-tab-header-rtl"><button aria-hidden="true" type="button" mat-ripple="" tabindex="-1" class="mat-ripple mat-mdc-tab-header-pagination mat-mdc-tab-header-pagination-before mat-mdc-tab-header-pagination-disabled" disabled=""><div class="mat-mdc-tab-header-pagination-chevron"></div></button>
+                    <div class="mat-mdc-tab-label-container">
+                        <div role="tablist" class="mat-mdc-tab-list" style="transform: translateX(0px);">
+                            <div class="mat-mdc-tab-labels">
+                                <div role="tab" mattablabelwrapper="" cdkmonitorelementfocus="" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator mdc-tab--active ng-star-inserted mdc-tab-indicator--active" id="mat-tab-label-2-0" tabindex="0" aria-posinset="1" aria-setsize="4" aria-controls="mat-tab-content-2-0"
+                                    aria-selected="true" aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                                    <div mat-ripple="" class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label">Featured</span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
+                                </div>
+                                <div role="tab" mattablabelwrapper="" cdkmonitorelementfocus="" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-2-1" tabindex="-1" aria-posinset="2" aria-setsize="4" aria-controls="mat-tab-content-2-1" aria-selected="false"
+                                    aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                                    <div mat-ripple="" class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label">On Sale</span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
+                                </div>
+                                <div role="tab" mattablabelwrapper="" cdkmonitorelementfocus="" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-2-2" tabindex="-1" aria-posinset="3" aria-setsize="4" aria-controls="mat-tab-content-2-2" aria-selected="false"
+                                    aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                                    <div mat-ripple="" class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label">Top Rated</span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
+                                </div>
+                                <div role="tab" mattablabelwrapper="" cdkmonitorelementfocus="" class="mdc-tab mat-mdc-tab mat-mdc-focus-indicator ng-star-inserted" id="mat-tab-label-2-3" tabindex="-1" aria-posinset="4" aria-setsize="4" aria-controls="mat-tab-content-2-3" aria-selected="false"
+                                    aria-disabled="false"><span class="mdc-tab__ripple"></span>
+                                    <div mat-ripple="" class="mat-ripple mat-mdc-tab-ripple"></div><span class="mdc-tab__content"><span class="mdc-tab__text-label">New Arrivals</span></span><span class="mdc-tab-indicator"><span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><button aria-hidden="true" type="button" mat-ripple="" tabindex="-1" class="mat-ripple mat-mdc-tab-header-pagination mat-mdc-tab-header-pagination-after mat-mdc-tab-header-pagination-disabled" disabled=""><div class="mat-mdc-tab-header-pagination-chevron"></div></button></mat-tab-header>
+                <div class="mat-mdc-tab-body-wrapper">
+                    <mat-tab-body role="tabpanel" class="mat-mdc-tab-body ng-tns-c2851851566-73 mat-mdc-tab-body-active ng-star-inserted" id="mat-tab-content-2-0" aria-labelledby="mat-tab-label-2-0">
+                        <div cdkscrollable="" class="mat-mdc-tab-body-content ng-tns-c2851851566-73 ng-trigger ng-trigger-translateTab" style="transform: none;">
+                            <app-products-carousel _ngcontent-serverapp-c1200531750="" _nghost-serverapp-c638993594="" class="ng-star-inserted" style="">
+                                <div _ngcontent-serverapp-c638993594="" class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events ng-star-inserted" style="cursor: grab;">
+                                    <div _ngcontent-serverapp-c638993594="" class="swiper-wrapper h-100" id="swiper-wrapper-a1021e8c8c8260911" aria-live="polite">
+                                        <div _ngcontent-serverapp-c638993594="" class="swiper-slide ng-star-inserted swiper-slide-active" role="group" aria-label="1 / 6" style="width: 260px; margin-right: 16px;">
+                                            <mat-card _ngcontent-serverapp-c638993594="" class="mat-mdc-card mdc-card product-item">
+
+                                                <a _ngcontent-serverapp-c638993594="" class="image-link" href="/products/1/Keyboard"><img _ngcontent-serverapp-c638993594="" class="swiper-lazy swiper-lazy-loaded" src="assets/images/products/keyboard/1-medium.png"></a>
+                                                <h4 _ngcontent-serverapp-c638993594="" class="category text-muted">Electronics</h4><a _ngcontent-serverapp-c638993594="" class="title text-truncate" href="/products/1/Keyboard"> Keyboard </a>
+                                                <div _ngcontent-serverapp-c638993594="" fxlayout="row" fxlayoutalign="space-between center" class="prices" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;">
+                                                    <div _ngcontent-serverapp-c638993594="" fxlayout="column" fxlayoutalign="center start" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: flex-start center; align-items: flex-start;">
+                                                        <p _ngcontent-serverapp-c638993594="" class="old-price text-muted">
+
+                                                        </p>
+                                                        <p _ngcontent-serverapp-c638993594="" class="new-price">$175.00</p>
+                                                    </div>
+                                                    <app-rating _ngcontent-serverapp-c638993594="" _nghost-serverapp-c1315404325="">
+                                                        <div _ngcontent-serverapp-c1315404325="" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: flex-end center; align-items: flex-end;">
+                                                            <div _ngcontent-serverapp-c1315404325="" class="ratings">
+                                                                <mat-icon _ngcontent-serverapp-c1315404325="" role="img" class="mat-icon notranslate mat-icon-xs material-icons mat-ligature-font mat-icon-no-color ng-star-inserted" aria-hidden="true" data-mat-icon-type="font">star</mat-icon>
+                                                                <mat-icon _ngcontent-serverapp-c1315404325="" role="img" class="mat-icon notranslate mat-icon-xs material-icons mat-ligature-font mat-icon-no-color ng-star-inserted" aria-hidden="true" data-mat-icon-type="font">star</mat-icon>
+                                                                <mat-icon _ngcontent-serverapp-c1315404325="" role="img" class="mat-icon notranslate mat-icon-xs material-icons mat-ligature-font mat-icon-no-color ng-star-inserted" aria-hidden="true" data-mat-icon-type="font">star</mat-icon>
+                                                                <mat-icon _ngcontent-serverapp-c1315404325="" role="img" class="mat-icon notranslate mat-icon-xs material-icons mat-ligature-font mat-icon-no-color ng-star-inserted" aria-hidden="true" data-mat-icon-type="font">star</mat-icon>
+                                                                <mat-icon _ngcontent-serverapp-c1315404325="" role="img" class="mat-icon notranslate mat-icon-xs material-icons mat-ligature-font mat-icon-no-color ng-star-inserted" aria-hidden="true" data-mat-icon-type="font">star_half</mat-icon>
+
+                                                            </div>
+                                                            <p _ngcontent-serverapp-c1315404325="" class="ratings-count text-muted ng-star-inserted">4 ratings</p>
+
+                                                        </div>
+                                                    </app-rating>
+                                                </div>
+                                                <div _ngcontent-serverapp-c638993594="" class="divider mt-2"></div>
+                                                <div _ngcontent-serverapp-c638993594="" class="icons">
+                                                    <app-controls _ngcontent-serverapp-c638993594="" _nghost-serverapp-c2913752738="">
+                                                        <div _ngcontent-serverapp-c2913752738="" fxlayout="row" fxlayout.xs="column" class="text-muted" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
+
+                                                            <div _ngcontent-serverapp-c2913752738="" class="ng-star-inserted"><button _ngcontent-serverapp-c2913752738="" mat-icon-button="" mattooltip="Add to wishlist" class="mat-mdc-tooltip-trigger mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base"
+                                                                    aria-describedby="cdk-describedby-message-serverApp-1-11" cdk-describedby-host="serverApp-1"><span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span><mat-icon _ngcontent-serverapp-c2913752738="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">favorite</mat-icon><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-mdc-button-ripple"></span></button>
+                                                                <button _ngcontent-serverapp-c2913752738="" mat-icon-button="" mattooltip="Add to cart" class="mat-mdc-tooltip-trigger mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base ng-star-inserted" aria-describedby="cdk-describedby-message-serverApp-1-13"
+                                                                    cdk-describedby-host="serverApp-1"><span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span><mat-icon _ngcontent-serverapp-c2913752738="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">shopping_cart</mat-icon><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-mdc-button-ripple"></span></button>
+
+                                                                <button _ngcontent-serverapp-c2913752738="" mat-icon-button="" mattooltip="Add to compare" class="mat-mdc-tooltip-trigger mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base" aria-describedby="cdk-describedby-message-serverApp-1-12" cdk-describedby-host="serverApp-1"><span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span><mat-icon _ngcontent-serverapp-c2913752738="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">compare</mat-icon><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-mdc-button-ripple"></span></button>
+                                                                <button _ngcontent-serverapp-c2913752738="" mat-icon-button="" mattooltip="Quick view" class="mat-mdc-tooltip-trigger mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base ng-star-inserted" aria-describedby="cdk-describedby-message-serverApp-1-14"
+                                                                    cdk-describedby-host="serverApp-1"><span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span><mat-icon _ngcontent-serverapp-c2913752738="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span><span class="mat-mdc-button-ripple"></span></button>
+                                                            </div>
+                                                        </div>
+                                                    </app-controls>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div><button _ngcontent-serverapp-c638993594="" mat-button-ripple-uninitialized="" mat-mini-fab="" class="swiper-button-prev swipe-arrow mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base swiper-button-disabled"
+                                        disabled="" tabindex="-1" aria-label="Previous slide" aria-controls="swiper-wrapper-a1021e8c8c8260911" aria-disabled="true"><span class="mat-mdc-button-persistent-ripple mdc-fab__ripple"></span><mat-icon _ngcontent-serverapp-c638993594="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_left</mat-icon><span class="mdc-button__label"></span><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span></button>
+                                    <button _ngcontent-serverapp-c638993594="" mat-button-ripple-uninitialized="" mat-mini-fab="" class="swiper-button-next swipe-arrow mdc-fab mdc-fab--mini mat-mdc-mini-fab mat-accent mat-mdc-button-base" tabindex="0" aria-label="Next slide" aria-controls="swiper-wrapper-a1021e8c8c8260911"
+                                        aria-disabled="false"><span class="mat-mdc-button-persistent-ripple mdc-fab__ripple"></span>
+                                <mat-icon _ngcontent-serverapp-c638993594="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_right</mat-icon><span class="mdc-button__label"></span><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span></button>
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                            </app-products-carousel>
+                        </div>
+                    </mat-tab-body>
+                    <mat-tab-body role="tabpanel" class="mat-mdc-tab-body ng-tns-c2851851566-74 ng-star-inserted" id="mat-tab-content-2-1" aria-labelledby="mat-tab-label-2-1">
+                        <div cdkscrollable="" class="mat-mdc-tab-body-content ng-tns-c2851851566-74 ng-trigger ng-trigger-translateTab" style="transform: translate3d(-100%, 0px, 0px); min-height: 1px; visibility: hidden;">
+                        </div>
+                    </mat-tab-body>
+                    <mat-tab-body role="tabpanel" class="mat-mdc-tab-body ng-tns-c2851851566-75 ng-star-inserted" id="mat-tab-content-2-2" aria-labelledby="mat-tab-label-2-2">
+                        <div cdkscrollable="" class="mat-mdc-tab-body-content ng-tns-c2851851566-75 ng-trigger ng-trigger-translateTab" style="transform: translate3d(-100%, 0px, 0px); min-height: 1px; visibility: hidden;">  
+                        </div>
+                    </mat-tab-body>
+                    <mat-tab-body role="tabpanel" class="mat-mdc-tab-body ng-tns-c2851851566-76 ng-star-inserted" id="mat-tab-content-2-3" aria-labelledby="mat-tab-label-2-3">
+                        <div cdkscrollable="" class="mat-mdc-tab-body-content ng-tns-c2851851566-76 ng-trigger ng-trigger-translateTab" style="transform: translate3d(-100%, 0px, 0px); min-height: 1px; visibility: hidden;">
+                        </div>
+                    </mat-tab-body>
+                </div>
+            </mat-tab-group>
+        </div> -->
+        <!-- 4 -->
+        <!-- <div class="offset-md-1 col-md-11">
+            <swiper [slidesPerView]="4.6" [spaceBetween]="50" [breakpoints]="breakpoints">
+                <ng-container *ngFor="let contenido of listaContenidos; let i = index;">
+                    <ng-template swiperSlide>
+                        <div class="card card-border-none resp-wrap-aling-center">
+                            <h5 class="badge global-btn-custom-color">50% Off</h5>
+                            <img class="card-img-top" [src]="urlFoto+contenido.id" alt="Card image cap">
+                            <div class="card-body ">
+                                <h5 class="card-title ">{{contenido.titulo}}</h5>
+                                <p class="card-text ">
+                                    <b class="global-text-color mr-1 ">{{contenido.titulo}}</b>
+                                    <s>75.00{{contenido.titulo}}</s>
+                                </p>
+                                <div class="d-flex add--to-cart ">
+                                    <button class="btn product-button " (click)="agregarACarrito() ">
+                                        AÑADIR A CARRO
+                                        <img src="../../asset/icons/bucket.svg "/>
+                                    </button>
+                                    <button class="swiper-button-prev swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Previous slide"><span class="mat-button-wrapper"><mat-icon _ngcontent-dmf-c26="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_left</mat-icon></span><span class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></span><span class="mat-button-focus-overlay"></span></button>
+                                    <button class="btn global-btn-custom-color ">
+                                        Buy now
+                                        <img src="../../asset/icons/arrow.svg "/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+                <button class="swiper-button-prev swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Previous slide"><span class="mat-button-wrapper"><mat-icon _ngcontent-wtf-c26="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_left</mat-icon></span><span class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></span><span class="mat-button-focus-overlay"></span></button>
+                <button class="swiper-button-next swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Next slide"><span class="mat-button-wrapper"><mat-icon _ngcontent-wtf-c26="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_right</mat-icon></span><span class="mat-button-ripple mat-ripple mat-button-ripple-round"matripple=""></span><span class="mat-button-focus-overlay"></span></button>
+            </swiper>
+        </div>
+    </div> -->
+        <!-- 5 -->
+        <!-- <div class="container">
+        <div class="products sec-padding">
+            <div class="products-four">
+                <h3>POPULAR ITEMS</h3>
+                <app-product-carousel>
+                    <div class="product-item-1 swiper-container swiper-container-initialized swiper-container-horizontal" style="cursor: grab;">
+                        <div class="swiper-wrapper h-100">
+                            <div class="swiper-slide ng-star-inserted" style="width: 245.2px; margin-right: 16px;" *ngFor="let contenido of listaContenidos; let i = index;">
+                                <mat-card class="mat-card mat-focus-indicator" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                    <div fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                    </div>
+                                    <div class="product-img ng-star-inserted">
+                                        <a class="product-link" href="#/home/product/1">
+                                            <img alt="" [src]="urlFoto+contenido.id">
+                                        </a>
+                                    </div>
+                                    <div class="product-info-wrapper">
+                                        <span class="category ng-star-inserted">Headphones</span>
+                                        <div class="title-wrap ng-star-inserted">
+                                            <h4>ONTEC E Headset</h4>
+                                        </div>
+                                        <div class="price-wrap ng-star-inserted" fxlayout="row" fxlayoutalign="space-between center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;">
+                                            <div class="stars">
+                                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                                <mat-icon class="mat-icon-xs mat-icon material-icons ng-star-inserted notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">star_rate</mat-icon>
+                                            </div>
+                                            <p>$175.00</p>
+                                        </div>
+                                        <div class="btn-wrap ng-star-inserted" fxlayout="row" fxlayoutalign="space-between center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center space-between; align-items: center;"><a _ngcontent-wtf-c26="" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" color="primary" mat-raised-button="" tabindex="0" aria-disabled="false"><span class="mat-button-wrapper">ADD TO CART <mat-icon _ngcontent-wtf-c26="" class="mat-icon-lg mat-icon material-icons notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">shopping_cart</mat-icon></span><span class="mat-button-ripple mat-ripple" matripple=""></span><span class="mat-button-focus-overlay"></span></a></div>
+                                        <div class="icons" fxlayout="column" style="flex-direction: column; box-sizing: border-box; display: flex;">
+                                            <a>
+                                                <mat-icon class="mat-icon-lg mat-icon material-icons mr-10 notranslate mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">favorite_border</mat-icon>
+                                            </a>
+                                            <a>
+                                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                            </a>
+                                            <a>
+                                                <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">cached</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+                        <button class="swiper-button-prev swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Previous slide"><span class="mat-button-wrapper"><mat-icon _ngcontent-wtf-c26="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_left</mat-icon></span><span class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></span><span class="mat-button-focus-overlay"></span></button>
+                        <button class="swiper-button-next swipe-arrow mat-focus-indicator mat-mini-fab mat-button-base mat-accent" mat-mini-fab="" tabindex="0" role="button" aria-label="Next slide"><span class="mat-button-wrapper"><mat-icon _ngcontent-wtf-c26="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true" data-mat-icon-type="font">keyboard_arrow_right</mat-icon></span><span class="mat-button-ripple mat-ripple mat-button-ripple-round"matripple=""></span><span class="mat-button-focus-overlay"></span></button>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                </app-product-carousel>
+            </div>
+        </div>
+    </div> -->
+        <!-- 6 -->
+
+        <!-- 7 -->
+
+
+        <!-- 8 -->
+        <mat-paginator [length]="totalRegistros" [pageSize]="totalPorPaginas" [pageIndex]="paginaActual" [pageSizeOptions]="pageSizeOptions" (page)="paginar($event)" showFirstLastButtons class="float-left mx-2"></mat-paginator>
+    </div>
+
+
+    <!-- <div class="container">
+    <swiper [config]="config">
+        <ng-template swiperSlide *ngFor="let contenido of listaContenidos; let i = index;">
+            <a target="_blank">
+                <img [src]="urlFoto+contenido.id" alt="foto" />
+            </a>
+        </ng-template>
+    </swiper>
+</div> -->
+    <!-- 3 -->
+    <!-- <swiper #swiper [virtual]="true">
+    <ng-template swiperSlide>Slide 1</ng-template>
+    <ng-template swiperSlide>Slide 2</ng-template>
+    <ng-template swiperSlide>Slide 3</ng-template>
+    <ng-template swiperSlide>Slide 4</ng-template>
+    <ng-template swiperSlide>Slide 5</ng-template>
+    <ng-template swiperSlide>Slide 6</ng-template>
+    <ng-template swiperSlide>Slide 7</ng-template>
+</swiper>
+<button (click)="slideNext()">Next slide</button>
+<button (click)="slidePrev()">Prev slide</button> -->
+    <!-- 4 -->

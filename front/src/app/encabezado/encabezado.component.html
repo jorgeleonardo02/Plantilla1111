@@ -1,0 +1,335 @@
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+    <div class="container">
+        <!-- style="margin-left: 30px; margin-right: 0px;" -->
+        <a href="/inicio" class="navbar-brand">
+            <img src="../../assets/img/El estoico1.png" alt="AdminLTE Logo" height="50px" width="100px" class="brand-image img-circle elevation-3" style="opacity: 2">
+            <!-- <span class="brand-text font-weight-light">    Pilos</span> -->
+        </a>
+
+        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <!-- Categorías -->
+                <li class="nav-link dropdown-hover">
+                    <a class="nav-link p-0">Categorías</a>
+                    <!-- dropdown-menu: esconde la lista en el menu -->
+                    <!-- dropdown-toggle: direccionde despliege de menu -->
+                    <!-- dropdown-menu-lg: sin padding -->
+                    <ul class="dropdown-menu dropdown-menu-lg border-0">
+                        <li class="dropdown-submenu">
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <!-- <a class="dropdown-item" style="border-top: #e9ecef solid 1px;" *ngFor="let categoria of listaCategorias"(click)="id(categoria.id)" href="/cuerpo" (click)="contenidoService.setIdCategoria(categoria.id)">{{categoria.nombre}}</a> -->
+                            <a class="dropdown-item" style="border-top: #e9ecef solid 1px;" *ngFor="let categoria of listaCategorias" (click)="seleccionarCategoria(categoria)"> {{categoria.nombre}} </a>
+                            <!-- <ul class="dropdown-menu dropdown-menu-lg">
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item">leo</a>
+                                </li>
+                            </ul> -->
+                        </li>
+                    </ul>
+                </li>
+                <!-- Buscar -->
+                <form class="form-inline ml-3">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                          <i class="fas fa-search"></i>
+                        </button>
+                        </div>
+                    </div>
+                </form>
+                <!-- enseña -->
+                <li class="nav-link dropdown-hover">
+                    <a class="nav-link p-0">Enseña</a>
+                    <!-- dropdown-menu: esconde la lista en el menu -->
+                    <!-- dropdown-toggle: direccionde despliege de menu -->
+                    <ul class="dropdown-menu dropdown-menu-lg">
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-item">
+
+                                <p class="text-lg-center">
+                                    Ven a enseñar con nosotros, llega a millones de personas en todo el mundo
+                                </p>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item dropdown-footer">Mas información</a>
+
+                        </li>
+                    </ul>
+                </li>
+                <!-- Empresarial -->
+                <li class="nav-link dropdown-hover">
+                    <a class="nav-link p-0">Empresarial</a>
+                    <!-- dropdown-menu: esconde la lista en el menu -->
+                    <!-- dropdown-toggle: direccionde despliege de menu -->
+                    <ul class="dropdown-menu dropdown-menu-lg">
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-item">
+                                <p class="text-lg-center text-dark">
+                                    Ten acceso a todas nuestras clases, te capacitamos a tus empleados.
+                                </p>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item dropdown-footer">Prueba</a>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Right navbar links -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+            <!-- dropdown-hover: desplegue automatico -->
+            <!-- dropdown: desplegue haciendo click -->
+            <!-- dropdown-menu-right: menu hacia la izquierda -->
+            <!--  <div *ngIf="!tokenService.logueado()"> -->
+            <li class="nav-link p-0 pr-4" *ngIf="!tokenService.logueado()">
+                <button class="btn btn-outline-warning my-2 my-sm-0" (click)="pagina='registro'" routerLink="/registro" type="submit">
+                    <i class="fas fa-sign-in-alt "></i> Registrate</button>
+            </li>
+            <li class="nav-link p-0 pr-4" *ngIf="!tokenService.logueado()">
+                <button class="btn btn-outline-warning my-2 my-sm-0" (click)="pagina='login'" routerLink="/login" type="submit">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
+            </li>
+            <!-- </div> -->
+
+            <!-- Cesta Compras Dropdown Menu -->
+            <li class="nav-link dropdown-hover">
+                <a routerLink="/carrito" class="nav-link p-0" data-toggle="dropdown" href="#">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span *ngIf="contenidoEnCarrito.length!==0" class="badge badge-info navbar-badge Large .btn-lg">{{contenidoEnCarrito.length}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">Cesta</span>
+                    <div class="dropdown-divider"></div>
+                    <div [ngClass]="{'pre-scrollable': contenidoEnCarrito.length > 5}">
+                        <div *ngFor="let contenido of contenidoEnCarrito; let i = index;">
+                            <a class="dropdown-item">
+                                <div class="media">
+                                    <img *ngIf="contenido.nombreFoto" width="240" height="135" [src]="urlFoto+contenido.id" alt="User Avatar" class="size-50 mr-3 img-square">
+                                    <img *ngIf="!contenido.nombreFoto" width="240" height="135" src="../../assets/img/El estoico1.png" alt="User Avatar" class="size-50 mr-3 img-square">
+                                    <div class="media-body">
+                                        <ul class="ml-1 mb-0 fa-ul text-muted">
+                                            <li class="small text-primary"> <b>{{contenido?.titulo}}</b></li>
+                                            <!-- <li class="small"> {{contenido.listaContenidoUsuario[0].usuario?.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria?.nombre}}</li> -->
+                                            <li class="small">{{ contenido.listaContenidoUsuario[0].usuario.nombre }}, {{ contenido.listaContenidoUsuario[0].contenido.categoria.nombre }}</li>
+                                            <li class="small"> <b>{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$</b></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </div>
+                    <!-- <a *ngIf="contenidoEnCarrito.length !==0" class="dropdown-item dropdown-footer ">Total: {{sumaTotal | number:'1.0-0'}}&nbsp;COL$</a> -->
+                    <a *ngIf="contenidoEnCarrito.length !==0" class="ud-heading-sm ml-4">Total: {{sumaTotal | number:'1.0-0'}}&nbsp;COL$</a>
+                    <div class="dropdown-divider"></div>
+
+                    <div class="dropdown-divider"></div>
+                    <a routerLink="/carrito" class="dropdown-item dropdown-footer">Ir a cesta</a>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" *ngIf="contenidoEnCarrito.length === 0">
+                    <span class="dropdown-header">Cesta vacía</span>
+                </div>
+            </li>
+            <li class="nav-link" *ngIf="tokenService.rolAdmin()">
+                <!-- " && tokenService.rolDocente()" -->
+                <a class="nav-link p-0" (click)="abrirVentanaModalForm()">Contenido</a>
+            </li>
+            <!-- Mi aprendizaje -->
+            <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
+                <a class="nav-link p-0">Mi aprendizaje</a>
+                <!-- dropdown-menu: esconde la lista en el menu -->
+                <!-- dropdown-toggle: direccionde despliege de menu -->
+                <ul class="dropdown-menu dropdown-menu-lg border-0">
+                    <li class="dropdown-submenu">
+                        <a href="#" class="dropdown-item media">
+                            <!-- Message Start -->
+                            <div class="media">
+
+                                <img src="../../assets/img/Img2.png" alt="User Avatar" class="size-50 mr-3 img-square">
+
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        curso de Java en todo
+                                    </h3>
+                                    <p class="text-sm">Java desde cero...</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">Ir a mi aprendizaje</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Mensajes Dropdown Menu -->
+            <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
+                <a class="nav-link p-0" data-toggle="dropdown" href="#">
+                    <i class="fas fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../../assets/img/leo.png" alt="User Avatar" class="size-50 mr-3 img-circle">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Leo Bateca
+                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Llámame siempre que puedas...</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> hace 4 horas</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../../assets/img/sergio.png" alt="User Avatar" class="size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Sergio Bateca
+                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Se recibio el mensaje</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> hace 4 horas</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <img src="../../assets/img/nubia.png" alt="User Avatar" class="size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Nubia Parada
+                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">El tema va aquí</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>Hace 4 horas</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">Ver todos los mensajes</a>
+                </div>
+            </li>
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
+                <a class="nav-link p-0" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">15 Notificaciones</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 4 mensajes nuevos
+                        <span class="float-right text-muted text-sm">3 mins</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 8 solicitudes de amistad
+                        <span class="float-right text-muted text-sm">12 hours</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-file mr-2"></i> 3 nuevos informes
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">Ir a notificaciones</a>
+                </div>
+            </li>
+            <!-- Lista De Deseos Dropdown Menu -->
+            <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
+                <a class="nav-link p-0" data-toggle="dropdown" href="#">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                </a>
+                <!-- dropdown-menu-right: menu a la izquierda -->
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">Lista de deseos</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <div class="media">
+                            <img src="../../assets/img/Img3.png" alt="User Avatar" class="size-50 mr-3 img-square">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    curso de Java en todo
+                                </h3>
+                                <p class="text-sm">Java desde cero...</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">Ir a lista de deseos</a>
+                </div>
+            </li>
+            <!-- Usuario Dropdown Menu -->
+            <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
+                <a class="nav-link p-0" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">
+                        {{ tokenService.getUserName() }}<br>
+                        {{ tokenService.nombreRol() }}<br>
+                        {{ tokenService.getNombreUsuario() }}<br>
+                        {{tokenService.getCorreoUsuario()}}<br>
+                        <!-- ***************************<br> -->
+                        <!-- {{ usuario1?.nombreUsuario }}<br>
+                        <div *ngIf="rolNombre === 'ROLE_ADMIN'">ADMINISTRADOR</div>
+                        <div *ngIf="rolNombre === 'ROLE_DOCENTE'">DOCENTE</div>
+                        <div *ngIf="rolNombre === 'ROLE_ESTUDIANTE'">ESTUDIANTE</div>
+                        <div *ngIf="rolNombre === 'ROLE_VISITANTE'">VISITANTE</div>
+                        <div *ngIf="rolNombre === 'ROLE_GERENCIA'">GERENCIA</div>
+                        {{ usuario1?.nombre }}<br>
+                        {{ usuario1?.correo }}<br> -->
+                    </span>
+                    <div class="dropdown-divider"></div>
+                    <div *ngIf="tokenService.rolAdmin()">
+                        <a href="#" class="dropdown-item" routerLink="/registro">Registrar usuario nuevo</a>
+                        <a href="#" class="dropdown-item">Aprendizaje</a>
+                        <a href="#" class="dropdown-item">Cesta</a>
+                        <a href="#" class="dropdown-item">Lista de deseos</a>
+                        <a href="#" class="dropdown-item">Enseña</a>
+                    </div>
+                    <!-- <div *ngIf="tokenService.rolDocente() || tokenService.rolVisitante()"> -->
+                    <div>
+                        <a class="dropdown-item" (click)="abrirVentanaModalForm()">Contenido</a>
+                        <a href="#" class="dropdown-item">Mis cursos</a>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a href="#" class="dropdown-item">Notificaciones</a>
+                    <a href="#" class="dropdown-item">Mensajes</a>
+
+                    <div class="dropdown-divider"></div>
+                    <div>
+                        <a href="#" class="dropdown-item">Configuración de mi cuenta</a>
+                        <a href="#" class="dropdown-item" *ngIf="tokenService.rolAdmin()">Historial de compras</a>
+                    </div>
+                    <a href="#" class="dropdown-item">Editar perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item dropdown-footer" (click)="cerrarSesion()">Cerrar sesión</a>
+                </div>
+            </li>
+            <!-- </div> -->
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,10 @@
+<div [formGroup]="formGroup">
+    <!-- Input para el nombre de la subsección -->
+    <input formControlName="nombreSubseccion" placeholder="Nombre de la Subsección" />
+
+    <!-- Editor Quill para el contenido -->
+    <quill-editor formControlName="contenidoTexto"></quill-editor>
+
+    <!-- Botón para eliminar subsección -->
+    <button (click)="eliminar.emit()">Eliminar Subsección</button>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>Gestión de Secciones</h2>
+
+    <form [formGroup]="formularioSeccion" (ngSubmit)="guardarSeccion()">
+        <div class="form-group">
+            <label for="nombreSeccion">Nombre de la Sección:</label>
+            <input formControlName="nombreSeccion" class="form-control" placeholder="Nombre de la Sección">
+        </div>
+
+        <div formArrayName="subsecciones">
+            <div *ngFor="let sub of subsecciones.controls; let i = index" [formGroupName]="i" class="form-group">
+                <hr>
+                <label for="nombreSubseccion">Nombre de la Subsección:</label>
+                <input formControlName="nombreSubseccion" class="form-control" placeholder="Nombre de la Subsección">
+
+                <label for="contenidoTipo">Tipo de Contenido:</label>
+                <select formControlName="contenidoTipo" class="form-control">
+            <option value="texto">Texto</option>
+            <option value="url">URL</option>
+          </select>
+
+                <label for="contenidoTexto">Contenido:</label>
+                <textarea formControlName="contenidoTexto" class="form-control" placeholder="Contenido"></textarea>
+
+                <button type="button" class="btn btn-danger mt-2" (click)="eliminarSubseccion(i)">Eliminar Subsección</button>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary mt-3" (click)="agregarSubseccion()">Agregar Subsección</button>
+        <button type="submit" class="btn btn-success mt-3">Guardar Sección</button>
+    </form>
+
+    <div class="mt-5">
+        <h3>Lista de Secciones</h3>
+        <ul>
+            <li *ngFor="let seccion of secciones">
+                {{ seccion.nombreSeccion }}
+                <button class="btn btn-danger btn-sm" (click)="eliminarSeccion(seccion.id)">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+</div>

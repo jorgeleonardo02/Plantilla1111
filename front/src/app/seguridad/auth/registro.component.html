@@ -1,0 +1,96 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a><b>E</b>l estoico</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Registrate a El estoico</p>
+            <form [formGroup]="camposFormulario">
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" name="nombre" matInput placeholder="Nombre" formControlName="nombre">
+                    <mat-icon matSuffix><span class="fas fa-user"></span></mat-icon>
+                    <mat-error>Debe Digitar el Nombre</mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <input type="email" name="correo" matInput placeholder="Correo" formControlName="correo">
+                    <mat-icon matSuffix><span class="fas fa-envelope"></span></mat-icon>
+                    <mat-error>Debe digitar el correo</mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input type="text" name="nombreUsuario" matInput placeholder="Nombre Usuario" formControlName="nombreUsuario">
+                    <mat-icon matSuffix><span class="fas fa-user"></span></mat-icon>
+                    <mat-error>Debe Digitar el Nombre de Usuario </mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <!-- <input type="text" *ngIf="eventoCheckbox" name="password" matInput placeholder="Contraseña" formControlName="password"> -->
+                    <input type="password" name="password" matInput placeholder="Contraseña" formControlName="password">
+                    <mat-icon matSuffix><span class="fas fa-lock"></span></mat-icon>
+                    <mat-error>Debe digitar la contraseña</mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" *ngIf="tokenService.logueado()" appearance="outline">
+                    <mat-label>Roles</mat-label>
+                    <mat-select formControlName="roles" (selectionChange)="onRolSelectionChange($event)">
+                        <mat-option *ngFor="let rol of listaRoles" [value]="rol">{{rol}}</mat-option>
+                    </mat-select>
+                    <mat-error>Debe seleccionar el rol</mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" *ngIf="mostrarLimiteContenidos" appearance="outline">
+                    <mat-label>Límite de Contenidos</mat-label>
+                    <input matInput formControlName="limiteContenidos" type="number" placeholder="Límite de Contenidos">
+                    <mat-error>Debe ingresar un límite válido</mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field class="input-group mb-3" *ngIf="tokenService.logueado()" appearance="outline">
+                    <mat-label>Roles</mat-label>
+                    <mat-select formControlName="roles">
+                        <mat-option [value]="rol" *ngFor="let rol of listaRoles" (selectionChange)="onRolSelectionChange($event)">{{rol}}</mat-option>
+                    </mat-select>
+                    <mat-error>Debe seleccionar el rol</mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" *ngIf="mostrarLimiteContenidos" appearance="outline">
+                    <mat-label>Límite de Contenidos</mat-label>
+                    <input matInput formControlName="limiteContenidos" type="number">
+                </mat-form-field> -->
+                <div class="row" style="padding-top: 0px;">
+                    <div class="col-6">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label class="p-2" for="agreeTerms">
+                                ofertas <a href="#">terminos</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- <div class="col-6">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember" class="align-items-center">
+                            <label for="remember">
+                            Remember Me
+                          </label>
+                        </div>
+                    </div> -->
+                    <!-- /.col -->
+                    <div class="col-6">
+                        <button class="btn btn-outline-success btn-block" (click)="Registrar()" [disabled]=camposFormulario.invalid type="submit"><i class="fas fa-sign-in-alt"></i>Registrar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i> Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i> Sign up using Google+
+                </a>
+            </div>
+            <a href="login.html" class="text-center">I already have a membership</a> -->
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- /.card -->
+</div>

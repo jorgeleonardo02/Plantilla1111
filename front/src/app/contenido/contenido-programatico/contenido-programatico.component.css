@@ -1,0 +1,362 @@
+/* Ajusta el tamaño del contenido para que se ajuste al formato de carta (8.5in x 11in) con márgenes de 0.5in */
+
+
+/* #contenidoPDF {
+    max-width: 7.5in; */
+
+
+/* Ancho máximo para carta (8.5in - 1in de margen total) 
+    margin: 0 auto;
+    /* Centrar el contenido */
+
+
+/* padding: 0.5in; */
+
+
+/* Padding para que coincida con los márgenes del PDF */
+
+
+/* } */
+
+
+/* .ql-editor {
+    max-width: 100%;
+    word-wrap: break-word; */
+
+
+/* Ajusta las palabras largas */
+
+
+/* } */
+
+
+/* Ajuste de imágenes dentro del editor Quill */
+
+
+/* .ql-editor img {
+    max-width: 100%; */
+
+
+/* Ajustar el tamaño de la imagen */
+
+
+/* height: auto; */
+
+
+/* Mantener la proporción de la imagen */
+
+
+/* page-break-inside: avoid; */
+
+
+/* Evitar que la imagen se corte entre páginas */
+
+
+/* } */
+
+
+/* .ql-editor {
+    padding: 1in; */
+
+
+/* Añadir un margen de 1 pulgada */
+
+
+/* box-sizing: border-box;
+    max-width: 8.5in; */
+
+
+/* Ancho de una hoja tamaño carta (8.5 pulgadas) */
+
+
+/* max-height: 11in; */
+
+
+/* Altura de una hoja tamaño carta (11 pulgadas) */
+
+
+/*  margin: 0 auto;
+} */
+
+
+/* 3 */
+
+
+/* .pdf-content {
+    font-family: 'Times New Roman', serif;
+    margin: 1in;
+    text-align: justify;
+}
+
+.pdf-content h1,
+.pdf-content h2,
+.pdf-content h3 {
+    text-align: center;
+    margin-top: 0.5in;
+}
+
+.pdf-content img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    margin: 0 auto;
+    display: block;
+} */
+
+
+/* 4 */
+
+
+/* .container {
+    margin-top: 20px;
+}
+
+.text-center {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.quill-editor {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+} */
+
+
+/* 4 */
+
+
+/* .container {
+    margin-top: 20px;
+}
+ */
+
+
+/* Títulos y secciones */
+
+
+/* .text-center {
+    margin-bottom: 20px;
+    page-break-before: always;
+} */
+
+
+/* Formato de la tarjeta */
+
+
+/* .card-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+
+/* Margen de las secciones */
+
+
+/* .form-group {
+    margin-bottom: 20px;
+} */
+
+
+/* Botón */
+
+
+/* .btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+} */
+
+
+/* Editor Quill */
+
+
+/* .quill-editor {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    page-break-inside: avoid;
+} */
+
+
+/* Ajuste de imágenes */
+
+
+/* img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    page-break-inside: avoid;
+    page-break-before: auto;
+    page-break-after: auto;
+} */
+
+
+/* Evitar cortes de páginas en secciones */
+
+
+/* .section,
+.subsection {
+    page-break-inside: avoid;
+} */
+
+
+/* 5 */
+
+
+/* .contenido-container {
+    margin-top: 20px;
+} */
+
+
+/* Títulos y secciones */
+
+
+/* .text-center {
+    margin-bottom: 20px;
+    page-break-before: always;
+} */
+
+
+/* Formato de la tarjeta */
+
+
+/*.
+ card-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+
+/* Margen de las secciones */
+
+
+/* .form-group {
+    margin-bottom: 20px;
+} */
+
+
+/* Botón */
+
+
+/* .btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+} */
+
+
+/* Editor Quill */
+
+
+/* .quill-editor {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    page-break-inside: avoid;
+} */
+
+
+/* Ajuste de imágenes */
+
+
+/* img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    page-break-inside: avoid;
+    page-break-before: auto;
+    page-break-after: auto;
+} */
+
+
+/* Evitar cortes de páginas en secciones */
+
+
+/* .section,
+.subsection {
+    page-break-inside: avoid;
+} */
+
+
+/* 6 */
+
+.contenido-container {
+    margin-top: 20px;
+}
+
+.text-center {
+    margin-bottom: 20px;
+    page-break-before: always;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.quill-editor {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    page-break-inside: avoid;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    page-break-inside: avoid;
+}
+
+.ql-align-right {
+    text-align: right !important;
+}
+
+.ql-align-center {
+    text-align: center !important;
+}
+
+.ql-align-left {
+    text-align: left !important;
+}
+
+.ql-editor p {
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+}

@@ -1,0 +1,20 @@
+<div class="container" *ngIf="tokenService.getUserName()">
+    <div class="jumbotron">
+        <h1 class="display-4">Hola, {{tokenService.getUserName()}}</h1>
+        <p class="lead">Tenga un Bendecido día, muchos exitos todos los dias de tu vida, queremos que seas Feliz en nuestra Organizacion.</p>
+        <p>Eres importante</p>
+        <hr class="my-4">
+        <p>{{tokenService.nombreRol()}}</p>
+        <a class="btn btn-primary btn-lg" *ngIf="tokenService.rolAdmin()" routerLink="/registro" role="button">Crear Cuenta</a>
+    </div>
+</div>
+<div class="container" *ngIf="!tokenService.getUserName()">
+    <div class="jumbotron">
+        <h1 class="display-4">No se ha Iniciado Sesion</h1>
+        <p class="lead">Debes iniciar sesion, para continuar.</p>
+        <hr class="my-4">
+        <p>Puedes iniciar sesion aca.</p>
+        <a class="btn btn-primary btn-lg" routerLink="/login" role="button">Iniciar Sesion</a>
+    </div>
+</div>
+<img alt="" width="1800" height="600" class="hero-header--billboard--33iW1" src="https://s.udemycdn.com/teaching/billboard-desktop-v4.jpg" srcset="https://s.udemycdn.com/teaching/billboard-desktop-v4.jpg 1x, https://s.udemycdn.com/teaching/billboard-desktop-2x-v4.jpg 2x">

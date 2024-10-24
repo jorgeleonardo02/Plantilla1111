@@ -1,0 +1,17 @@
+<!-- <div class="estrellas-horizontal"> -->
+<div [ngClass]="claseCSS">
+    <ng-container *ngFor="let estrella of obtenerArrayEstrellas(); let i = index">
+        <ng-container *ngIf="estrella === 1">
+            <mat-icon [style.color]="colorEstrella">star</mat-icon>
+            <!-- Estrella completa -->
+        </ng-container>
+        <ng-container *ngIf="estrella === 0.5">
+            <mat-icon [style.color]="colorEstrella">star_half</mat-icon>
+            <!-- Estrella mitad -->
+        </ng-container>
+        <ng-container *ngIf="estrella === 0">
+            <mat-icon [style.color]="colorEstrella">star_border</mat-icon>
+            <!-- Estrella vacía -->
+        </ng-container>
+    </ng-container>
+</div>

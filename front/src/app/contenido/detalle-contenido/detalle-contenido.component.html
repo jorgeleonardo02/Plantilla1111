@@ -1,0 +1,11 @@
+<div>
+    <!-- Botón para agregar nueva sección -->
+    <button (click)="agregarSeccion()">Agregar Sección</button>
+
+    <!-- Listado de Secciones -->
+    <div *ngFor="let seccion of secciones.controls; let i = index">
+        <app-seccion [formGroup]="getSeccionFormGroup(i)" (eliminar)="eliminarSeccion(i)"></app-seccion>
+    </div>
+
+    <button (click)="guardar()">Guardar y Generar PDF</button>
+</div>

@@ -1,0 +1,105 @@
+<!-- <div *ngFor="let contenido of contenidoEnCarrito">
+    {{ contenido.titulo }} - {{ 10000 }}
+    <button (click)="eliminarDelCarrito(contenido)">Eliminar del carrito</button>
+</div> -->
+
+<div class="contenedor ">
+    <div class="ud-heading-md">Cesta</div>
+    <div class="card card-default color-palette-box p-lg-3">
+        <!-- <div class="container-lg"> -->
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- <h4>Cesta</h4> -->
+                        <div class="post clearfix" *ngFor="let contenido of contenidoEnCarrito; let i= index">
+                            <div>
+                                <!--class="user-block" <img class="img-circle img-bordered-sm" width="90" height="90" [src]="urlFoto+contenido.id" alt="User Image">
+                            <div class="course-card--main-content--2XqiY course-card--has-price-text--1c0ze">class="size-50 mr-3 img-square"
+                                <h3 class="ud-heading-md">
+                                    <a>{{contenido?.titulo}}</a></h3>
+                                <div class="ud-text-xs">
+                                    <div class="course-card--instructor-list--nH1OC">
+                                        {{contenido.listaContenidoUsuario[0].usuario.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria.nombre}}
+                                    </div>
+                                </div>
+                                <div class="course-card--row--29Y0w">
+                                    <span class="ud-heading-sm star-rating-module--rating-number--2xeHu">4,6</span>
+                                    <app-estrella [calificacion]="4.6" [claseCSS]="'text-warning'"></app-estrella>
+                                    <span aria-label="415 reseñas" class="course-card--reviews-text--1yloi">(415)</span>
+                                </div>
+                                <div>
+                                    <div class="ud-heading-md">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                    </div>
+                                </div>
+                            </div> -->
+                                <div class="media">
+                                    <img *ngIf="contenido.nombreFoto" width="840" height="735" [src]="urlFoto+contenido.id" class="img-lg2 nav-link">
+                                    <img *ngIf="!contenido.nombreFoto" width="840" height="735" src="../../assets/img/El estoico1.png" class="img-lg2 nav-link">
+                                    <div class="media-body">
+                                        <div>
+                                            <div class="course-card--main-content--2XqiY course-card--has-price-text--1c0ze nav-link">
+                                                <h3 class="ud-heading-md">
+                                                    <a>{{contenido?.titulo}}</a></h3>
+
+                                                <div class="ud-text-xs">
+                                                    <div class="course-card--instructor-list--nH1OC">
+                                                        {{contenido.listaContenidoUsuario[0].usuario.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria.nombre}}
+                                                    </div>
+                                                </div>
+                                                <div class="course-card--row--29Y0w">
+
+                                                    <span class="ud-heading-sm star-rating-module--rating-number--2xeHu">4,6</span>
+
+                                                    <app-estrella [calificacion]="4.6" [claseCSS]="'text-warning'"></app-estrella>
+                                                    <span aria-label="415 reseñas" class="course-card--reviews-text--1yloi">(415)</span>
+                                                </div>
+                                                <div>
+                                                    <!-- <div class="ud-heading-md">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                                </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="username nav-link">
+                                    <a class="text-primary" (click)="carritoService.eliminarElementoDelCarrito(contenido.id)">Eliminar</a>
+                                  </span>
+                                    <div class="ud-heading-md nav-link">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                    </div>
+                                </div>
+
+                            </div>
+                            <tr>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="contenidoEnCarrito.length!==0" class="col-12 col-md-12 col-lg-4 order-1 order-md-2 nav-link">
+                <h3 class="text-primary">
+                    Total</h3>
+                <p class="ud-heading-md">
+                    {{sumaTotal | number:'1.0-0'}}&nbsp;COL$
+                </p>
+                <div>
+                    <!-- <a (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
+                    <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="(tokenService.rolVisitante()||tokenService.rolEstudiante()) && contenidoUsuario()" class="btn btn-lg btn-block btn-warning">Pagar</a>
+                    <!-- <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
+                </div>
+            </div>
+        </div>
+        <div *ngIf="contenidoEnCarrito.length==0" class="navbar-collapse">
+            <p class="ud-heading-md">
+                Cesta vacía.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- <div *ngFor="let contenido of contenidos1">
+    <p>{{ contenido.titulo }}</p>
+    <p>{{ contenido.descripcion }}</p>
+    
+</div> -->

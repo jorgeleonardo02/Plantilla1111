@@ -1,0 +1,74 @@
+.contenedor {
+    padding: 30px 120px;
+}
+
+.img-lg2 {
+    width: 11.25rem;
+    height: 8.25rem;
+}
+
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* ud-heading-md */
+
+.ud-heading-md {
+    font-family: udemy sans, -apple-system, BlinkMacSystemFont, Roboto, segoe ui, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.02rem;
+    font-size: 1.6rem;
+}
+
+
+/* ud-text-xs */
+
+.ud-text-xs {
+    font-family: udemy sans, sf pro text, -apple-system, BlinkMacSystemFont, Roboto, segoe ui, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 1.2rem;
+}
+
+
+/* course-card--instructor-list--nH1OC */
+
+.course-card--instructor-list--nH1OC {
+    display: block!important;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    color: #6a6f73;
+}
+
+
+/* course-card--row--29Y0w */
+
+.course-card--row--29Y0w {
+    display: flex;
+    /*align-items: center;*/
+    flex-wrap: wrap;
+}
+
+
+/* star-rating-module--rating-number--2xeHu */
+
+.star-rating-module--rating-number--2xeHu {
+    margin-right: .4rem;
+    color: #b4690e;
+}
+
+
+/* text-warning */
+
+
+/* course-card--reviews-text--1yloi */
+
+.course-card--reviews-text--1yloi {
+    color: #6a6f73;
+    margin-left: .4rem;
+}

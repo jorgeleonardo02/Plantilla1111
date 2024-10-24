@@ -1,0 +1,53 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a><b>E</b>l estoico</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Iniciar sesion</p>
+            <form [formGroup]="camposFormulario">
+
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input type="text" name="nombreUsuario" matInput placeholder="Usuario" formControlName="nombreUsuario">
+                    <mat-icon matSuffix><span class="fas fa-envelope"></span></mat-icon>
+                    <mat-error>Debe Digitar el Nombre de Usuario </mat-error>
+                </mat-form-field>
+                <mat-form-field class="input-group mb-3" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" name="password" matInput placeholder="Contraseña" formControlName="password">
+                    <mat-icon matSuffix><span class="fas fa-lock"></span></mat-icon>
+                    <mat-error>Debe digitar la contraseña</mat-error>
+                </mat-form-field>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label class="p-1" for="agreeTerms">
+                    ofertas <a href="#">terminos</a>
+                </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button mat-button color="primary" class="btn btn-outline-success btn-block" (click)="Login()" [disabled]=camposFormulario.invalid type="submit"> <i class="fas fa-sign-in-alt"></i>Iniciar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <!-- <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i> Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i> Sign up using Google+
+                </a>
+            </div>
+            <a href="login.html" class="text-center">I already have a membership</a> -->
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- /.card -->
+</div>
