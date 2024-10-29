@@ -80,15 +80,6 @@ export class ContenidoProgramaticoComponent implements AfterViewInit {
     }
   }
 
-  /* onEditorCreated(quill: Quill) {
-    if (this.quillEditorComponent) {
-      this.quillEditorComponent.quillEditor = quill;
-      this.quillInitialized = true;
-      console.log('El editor Quill se ha inicializado correctamente en onEditorCreated.', quill);
-    } else {
-      console.error('El ViewChild quillEditor no está disponible en onEditorCreated.');
-    }
-  } */
     onEditorCreated(quill: Quill) {
       if (this.quillEditorComponent) {
         this.quillEditorComponent.quillEditor = quill;
@@ -141,134 +132,71 @@ export class ContenidoProgramaticoComponent implements AfterViewInit {
     // Generar y descargar el PDF
     pdfMake.createPdf(docDefinition).download('contenido.pdf');
   }
+  
+  convertirDeltaAPdfmake(delta: any) {
+    const pdfContent: any[] = [];
+    let paragraph: any[] = [];
 
-    /* convertirDeltaAPdfmake(delta: any) {
-      const pdfContent: any[] = [];
-      let paragraph: any[] = [];
-      console.log(delta);
-      console.log("delta");
-      delta.ops.forEach((op: any) => {
-        if (typeof op.insert === 'string') {
-          const text = op.insert;
-          const lines = text.split('\n');
-          lines.forEach((line: string, index: number) => {
-            if (line.trim() !== '') {
-              const textObj: any = { text: line };
-    
-              // Aplica los atributos de estilo si existen
-              if (op.attributes) {
-                if (op.attributes.bold) {
-                  textObj.bold = true;
-                }
-                if (op.attributes.italic) {
-                  textObj.italics = true;
-                }
-                if (op.attributes.underline) {
-                  textObj.decoration = 'underline';
-                }
-                if (op.attributes.color) {
-                  textObj.color = op.attributes.color;
-                }
-                if (op.attributes.background) {
-                  textObj.background = op.attributes.background;
-                }
-                if (op.attributes.size) {
-                  textObj.fontSize = this.convertirTamaño(op.attributes.size);
-                }
-                if (op.attributes.font) {
-                  textObj.font = this.convertirFuente(op.attributes.font);
-                }
-                if (op.attributes.align) {
-                  textObj.alignment = this.convertirAlineacion(op.attributes.align);
-                }
-              }
-              // Agrega el texto al párrafo actual
-              paragraph.push(textObj);
-            }
-            // Si es la última línea del texto o hay un salto de línea
-            if (index < lines.length - 1 || text.endsWith('\n')) {
-               //Agrega el párrafo al contenido PDF si tiene texto
-              if (paragraph.length > 0) {
-                pdfContent.push({ text: paragraph });
-                paragraph = []; // Reinicia el párrafo
-              }
-            }
-          });
-        } else if (op.insert && op.insert.image) {
-          pdfContent.push({
-            image: op.insert.image,
-            width: 200
-          });
-        }
-      });
-    
-       //Agrega el último párrafo si queda algo pendiente
-      if (paragraph.length > 0) {
-        pdfContent.push({ text: paragraph });
-      }
-      return pdfContent;
-    }  */
+    delta.ops.forEach((op: any, index: number) => {
+      if (typeof op.insert === 'string') {
+        // Procesar texto y estilos
+        const text = op.insert;
+        const lines = text.split('\n');
+        lines.forEach((line: string, idx: number) => {
+          if (line.trim() !== '') {
+            const textObj: any = { text: line };
 
-      convertirDeltaAPdfmake(delta: any) {
-        const pdfContent: any[] = [];
-        let paragraph: any[] = [];
-        
-        delta.ops.forEach((op: any) => {
-          if (typeof op.insert === 'string') {
-            const text = op.insert;
-            const lines = text.split('\n');
-      
-            lines.forEach((line: string, index: number) => {
-              if (line.trim() !== '') {
-                const textObj: any = { text: line };
-      
-                // Aplica los atributos de estilo si existen
-                if (op.attributes) {
-                  if (op.attributes.bold) textObj.bold = true;
-                  if (op.attributes.italic) textObj.italics = true;
-                  if (op.attributes.underline) textObj.decoration = 'underline';
-                  if (op.attributes.color) textObj.color = op.attributes.color;
-                  if (op.attributes.background) textObj.background = op.attributes.background;
-                  if (op.attributes.size) textObj.fontSize = this.convertirTamaño(op.attributes.size);
-                  if (op.attributes.font) textObj.font = this.convertirFuente(op.attributes.font);
-                }
-      
-                // Agrega el texto al párrafo actual
-                paragraph.push(textObj);
+            // Aplicar atributos de texto
+            if (op.attributes) {
+              if (op.attributes.bold) textObj.bold = true;
+              if (op.attributes.italic) textObj.italics = true;
+              if (op.attributes.underline) textObj.decoration = 'underline';
+              if (op.attributes.color) textObj.color = op.attributes.color;
+              if (op.attributes.background) textObj.background = op.attributes.background;
+              if (op.attributes.size) textObj.fontSize = this.convertirTamaño(op.attributes.size);
+              if (op.attributes.font) textObj.font = this.convertirFuente(op.attributes.font);
+            }
+
+            paragraph.push(textObj);
+          }
+
+          if (idx < lines.length - 1 || text.endsWith('\n')) {
+            if (paragraph.length > 0) {
+              const paragraphBlock: any = { text: paragraph };
+              if (op.attributes?.align) {
+                paragraphBlock.alignment = this.convertirAlineacion(op.attributes.align);
               }
-      
-              // Si es la última línea del texto o un salto de línea explícito
-              if (index < lines.length - 1 || text.endsWith('\n')) {
-                // Inserta el párrafo al contenido PDF solo si tiene texto
-                if (paragraph.length > 0) {
-                  // Aplica alineación al párrafo si está presente en los atributos
-                  const paragraphBlock: any = { text: paragraph };
-                  if (op.attributes?.align) {
-                    paragraphBlock.alignment = this.convertirAlineacion(op.attributes.align);
-                  }
-      
-                  pdfContent.push(paragraphBlock);
-                  paragraph = []; // Reinicia el párrafo
-                }
-              }
-            });
-          } else if (op.insert && op.insert.image) {
-            pdfContent.push({
-              image: op.insert.image,
-              width: 200
-            });
+              pdfContent.push(paragraphBlock);
+              paragraph = [];
+            }
           }
         });
-      
-        // Agrega el último párrafo si queda algo pendiente
-        if (paragraph.length > 0) {
-          pdfContent.push({ text: paragraph });
+      } else if (op.insert && op.insert.image) {
+        // Procesar imagen y alineación
+        const imageObj: any = {
+          image: op.insert.image,
+          width: 200 // Ajusta el tamaño según lo necesites
+        };
+
+        // Verificar si el próximo bloque tiene alineación especificada
+        const nextOp = delta.ops[index + 1];
+        if (nextOp && nextOp.attributes && nextOp.attributes.align) {
+          imageObj.alignment = this.convertirAlineacion(nextOp.attributes.align);
+        } else {
+          imageObj.alignment = 'left'; // Valor por defecto si no hay alineación especificada
         }
-        
-        return pdfContent;
+
+        pdfContent.push(imageObj);
       }
-          
-      
+    });
+
+    // Agregar el último párrafo en caso de que haya contenido restante
+    if (paragraph.length > 0) {
+      pdfContent.push({ text: paragraph });
+    }
+
+    return pdfContent;
+  }
           
   convertirTamaño(size: string) {
     switch (size) {
@@ -308,5 +236,7 @@ export class ContenidoProgramaticoComponent implements AfterViewInit {
     }
   }  
 }
+
+
 
 
