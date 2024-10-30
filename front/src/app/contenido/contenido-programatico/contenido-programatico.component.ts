@@ -133,7 +133,7 @@ export class ContenidoProgramaticoComponent implements AfterViewInit {
     pdfMake.createPdf(docDefinition).download('contenido.pdf');
   }
   
-  convertirDeltaAPdfmake(delta: any) {
+  /* convertirDeltaAPdfmake(delta: any) {
     const pdfContent: any[] = [];
     let paragraph: any[] = [];
 
@@ -196,7 +196,78 @@ export class ContenidoProgramaticoComponent implements AfterViewInit {
     }
 
     return pdfContent;
-  }
+  } */
+
+    convertirDeltaAPdfmake(delta: any) {
+      const pdfContent: any[] = [];
+      let paragraph: any[] = [];
+    
+      delta.ops.forEach((op: any, index: number) => {
+        if (typeof op.insert === 'string') {
+          // Procesar texto y estilos
+          const text = op.insert;
+          const lines = text.split('\n');
+    
+          lines.forEach((line: string, idx: number) => {
+            if (line.trim() !== '') {
+              const textObj: any = { text: line };
+    
+              // Aplicar atributos de texto
+              if (op.attributes) {
+                if (op.attributes.bold) textObj.bold = true;
+                if (op.attributes.italic) textObj.italics = true;
+                if (op.attributes.underline) textObj.decoration = 'underline';
+                if (op.attributes.color) textObj.color = op.attributes.color;
+                if (op.attributes.background) textObj.background = op.attributes.background;
+                if (op.attributes.size) textObj.fontSize = this.convertirTamaño(op.attributes.size);
+                if (op.attributes.font) textObj.font = this.convertirFuente(op.attributes.font);
+              }
+    
+              paragraph.push(textObj);
+            }
+    
+            // Procesar salto de línea o fin del bloque de texto
+            if (idx < lines.length - 1 || text.endsWith('\n')) {
+              if (paragraph.length > 0) {
+                const paragraphBlock: any = { text: paragraph };
+                if (op.attributes?.align) {
+                  paragraphBlock.alignment = this.convertirAlineacion(op.attributes.align);
+                }
+                pdfContent.push(paragraphBlock);
+                paragraph = [];
+              }
+    
+              // Añadir un espacio vacío para cada salto de línea adicional
+              pdfContent.push({ text: '', margin: [0, 5] }); // Ajusta el margen según el espacio deseado entre líneas
+            }
+          });
+        } else if (op.insert && op.insert.image) {
+          // Procesar imagen y alineación
+          const imageObj: any = {
+            image: op.insert.image,
+            width: 200 // Ajusta el tamaño según lo necesites
+          };
+    
+          // Verificar si el próximo bloque tiene alineación especificada
+          const nextOp = delta.ops[index + 1];
+          if (nextOp && nextOp.attributes && nextOp.attributes.align) {
+            imageObj.alignment = this.convertirAlineacion(nextOp.attributes.align);
+          } else {
+            imageObj.alignment = 'left'; // Valor por defecto si no hay alineación especificada
+          }
+    
+          pdfContent.push(imageObj);
+        }
+      });
+    
+      // Agregar el último párrafo en caso de que haya contenido restante
+      if (paragraph.length > 0) {
+        pdfContent.push({ text: paragraph });
+      }
+    
+      return pdfContent;
+    }
+    
           
   convertirTamaño(size: string) {
     switch (size) {
