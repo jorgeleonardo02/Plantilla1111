@@ -6,5 +6,6 @@ import Plantilla.apirest.models.entity.SubSeccion;
 
 @Repository
 public interface ISubSeccionRepository extends JpaRepository<SubSeccion, Long> {
-
+    boolean existsBySeccionIdAndNumeroSubSeccion(Long seccionId, Long numeroSubSeccion);
 }
+

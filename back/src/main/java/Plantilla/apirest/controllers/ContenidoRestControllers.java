@@ -506,24 +506,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 	}
 
 	// 11.
-	/// api/contenidos/buscar-por-categoria-usuario-activado?categoria=Desarrollo%20web&activado=true&usuarioId=4
-	// @GetMapping("/buscar-por-categoria-usuario-activado")
-	// public ResponseEntity<Page<Contenido>> buscarPorCategoriaUsuarioYActivado(
-	// @RequestParam("categoria") String categoria, @RequestParam("usuarioId") Long
-	// usuarioId,
-	// @RequestParam("activado") Boolean activado,
-	// @PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable) {
-
-	// Page<Contenido> resultados =
-	// iContenidoService.buscarContenidosPorCategoriaUsuarioYActivado(categoria,
-	// usuarioId, activado, pageable);
-
-	// if (resultados.isEmpty()) {
-	// return ResponseEntity.noContent().build();
-	// }
-
-	// return ResponseEntity.ok(resultados);
-	// }
+	
 
 	// 22. Muestra todos los contenidos de categoria y de usuario sin activados
 	// api/contenidos/buscar-por-categoria-usuario?categoria=Desarrollo%20web&usuarioId=4
@@ -555,14 +538,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 	}
 
 	// 55.
-	// @GetMapping("/by-usuario/{usuarioId}")
-	// public ResponseEntity<Page<Contenido>> getContenidosByUsuarioId(
-	// @PathVariable Long usuarioId,
-	// Pageable pageable) {
-	// Page<Contenido> contenidos =
-	// iContenidoService.findContenidosByUsuarioId(usuarioId, pageable);
-	// return ResponseEntity.ok(contenidos);
-	// }
+	
 
 	// 66.
 	// http://localhost:8880/api/contenidos/por-categoria/Desarrollo%20web
@@ -604,142 +580,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 
 	// 777.
 
-	/*
-	 * @GetMapping("/")
-	 * public ResponseEntity<Page<ContenidoDto>> obtenerContenidosPaginados(
-	 * 
-	 * @RequestParam(required = false) String nombreCategoria,
-	 * 
-	 * @RequestParam(required = false) String titulo,
-	 * 
-	 * @RequestParam(required = false) Boolean activado,
-	 * 
-	 * @RequestParam(required = false) String nombreUsuario,
-	 * 
-	 * @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable
-	 * pageable,
-	 * 
-	 * @RequestParam(defaultValue = "0") int page,
-	 * 
-	 * @RequestParam(defaultValue = "10") int size,
-	 * 
-	 * @RequestParam(defaultValue = "false") Boolean mostrarTodos) {
-	 * 
-	 * Page<Contenido> contenidos = null;
-	 * 
-	 * if (nombreUsuario == null || nombreUsuario.isEmpty()) {
-	 * nombreUsuario = "visitante";
-	 * }
-	 * 
-	 * Optional<Usuario> usuarioOptional =
-	 * iUsuarioService.buscarPorUsuarioNombre(nombreUsuario);
-	 * log.info("**************************************************************");
-	 * 
-	 * if (usuarioOptional.isPresent()) {
-	 * Usuario usuario = usuarioOptional.get();
-	 * 
-	 * String roleToCheck1 = "ROLE_ADMIN";
-	 * 
-	 * boolean isAdmin = usuario.getRoles().stream()
-	 * .anyMatch(rol ->
-	 * rol.getRolNombre().toString().equalsIgnoreCase(roleToCheck1));
-	 * 
-	 * String roleToCheck2 = "ROLE_DOCENTE";
-	 * 
-	 * boolean isDocente = usuario.getRoles().stream()
-	 * .anyMatch(rol ->
-	 * rol.getRolNombre().toString().equalsIgnoreCase(roleToCheck2));
-	 * log.info("**************************************************************");
-	 * log.info("usuario" + usuarioOptional);
-	 * log.info("**************************************************************");
-	 * log.info("isDocente" + isDocente);
-	 * log.info("**************************************************************");
-	 * log.info("isAdmin" + isAdmin);
-	 * log.info("**************************************************************");
-	 * log.info("isDocente", isDocente);
-	 * 
-	 * if (isAdmin) {
-	 * // ... (Resto de tu lógica para administradores)
-	 * log.info("El usuario es ADMIN1");
-	 * 
-	 * if (mostrarTodos != null && mostrarTodos) {
-	 * log.info("mostrarTodos1: " + mostrarTodos);
-	 * log.info("activado1: " + activado);
-	 * // consulta 66 .
-	 * contenidos = iContenidoService.findByCategoriaNombre(nombreCategoria,
-	 * pageable);
-	 * 
-	 * } else if (activado != null && activado) {
-	 * log.info("mostrarTodos2: " + mostrarTodos);
-	 * log.info("activado2: " + activado);
-	 * log.info("TodoslosContenidosActivados: ");
-	 * // consulta 77 . activado=true
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * } else {
-	 * log.info("mostrarTodos3: " + mostrarTodos);
-	 * log.info("activado3: " + activado);
-	 * log.info("TodoslosContenidosDesactivados: ");
-	 * // consulta 77 . activado=fale
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, false,
-	 * pageable);
-	 * }
-	 * } else if (isDocente) {
-	 * // ... (Resto de tu lógica para docentes)
-	 * log.info("El usuario es DOCENTE");
-	 * if (mostrarTodos != null && mostrarTodos) {
-	 * log.info("mostrarTodos1: " + mostrarTodos);
-	 * log.info("activado111: " + activado);
-	 * log.info("nombreCategoria: " + nombreCategoria);
-	 * log.info("id-usuario: " + usuarioOptional.get().getId());
-	 * // consulta 22 .
-	 * contenidos = iContenidoService.buscarPorCategoriaUsuario(nombreCategoria,
-	 * usuarioOptional.get().getId(), pageable);
-	 * } else if (activado != null && activado) {
-	 * log.info("mostrarTodos2: " + mostrarTodos);
-	 * log.info("activado2: " + activado);
-	 * log.info("TodoslosContenidosActivadosDeEsteDocente: ");
-	 * // consulta 44 .
-	 * contenidos =
-	 * iContenidoService.obtenerContenidoActivadoPorUsuario(usuarioOptional.get().
-	 * getId(),
-	 * pageable);
-	 * } else {
-	 * log.info("mostrarTodos3: " + mostrarTodos);
-	 * log.info("activado3: " + activado);
-	 * log.info("TodoslosContenidosDesactivadosDeEsteDocente: ");
-	 * // consulta 33 .
-	 * contenidos =
-	 * iContenidoService.obtenerContenidoDesactivadoPorUsuario(usuarioOptional.get()
-	 * .getId(),
-	 * pageable);
-	 * }
-	 * } else {
-	 * log.info("El usuario NO es DOCENTE ni ADMIN");
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * }
-	 * } else {
-	 * log.error(
-	 * "**************************************************************************************"
-	 * );
-	 * log.error("Usuario no encontrado: ");
-	 * // consulta 77 . activado = true
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * }
-	 * 
-	 * Page<ContenidoDto> dtoPage = contenidos.map(contenido ->
-	 * convertirContenidoADTO(contenido));
-	 * 
-	 * return new ResponseEntity<>(dtoPage, HttpStatus.OK);
-	 * // return new ResponseEntity<>(contenidos, HttpStatus.OK);
-	 * }
-	 */
+	
 	@GetMapping("/")
 	public ResponseEntity<Page<ContenidoDto>> obtenerContenidosPaginados(
 
@@ -881,119 +722,6 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		// return new ResponseEntity<>(contenidos, HttpStatus.OK);
 	}
 
-	/*
-	 * @GetMapping("/")
-	 * public ResponseEntity<Page<ContenidoDto>> obtenerContenidosPaginados(
-	 * 
-	 * @RequestParam(required = false) String nombreCategoria,
-	 * 
-	 * @RequestParam(required = false) String titulo,
-	 * 
-	 * @RequestParam(required = false) Boolean activado,
-	 * 
-	 * @RequestParam(required = false) String nombreUsuario,
-	 * 
-	 * @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable
-	 * pageable,
-	 * 
-	 * @RequestParam(defaultValue = "0") int page,
-	 * 
-	 * @RequestParam(defaultValue = "10") int size,
-	 * 
-	 * @RequestParam(defaultValue = "false") Boolean mostrarTodos) {
-	 * 
-	 * Page<Contenido> contenidos = null;
-	 * List<Contenido> contenidosSuscritos = new ArrayList<>(); // Definir la
-	 * variable fuera del bloque if
-	 * 
-	 * if (nombreUsuario == null || nombreUsuario.isEmpty()) {
-	 * nombreUsuario = "visitante";
-	 * }
-	 * 
-	 * Optional<Usuario> usuarioOptional =
-	 * iUsuarioService.buscarPorUsuarioNombre(nombreUsuario);
-	 * 
-	 * if (usuarioOptional.isPresent()) {
-	 * Usuario usuario = usuarioOptional.get();
-	 * 
-	 * String roleToCheck1 = "ROLE_ADMIN";
-	 * 
-	 * boolean isAdmin = usuario.getRoles().stream()
-	 * .anyMatch(rol ->
-	 * rol.getRolNombre().toString().equalsIgnoreCase(roleToCheck1));
-	 * 
-	 * String roleToCheck2 = "ROLE_DOCENTE";
-	 * 
-	 * boolean isDocente = usuario.getRoles().stream()
-	 * .anyMatch(rol ->
-	 * rol.getRolNombre().toString().equalsIgnoreCase(roleToCheck2));
-	 * 
-	 * String roleToCheck3 = "ROLE_ESTUDIANTE";
-	 * 
-	 * boolean isEstudiante = usuario.getRoles().stream()
-	 * .anyMatch(rol ->
-	 * rol.getRolNombre().toString().equalsIgnoreCase(roleToCheck3));
-	 * 
-	 * if (isAdmin) {
-	 * 
-	 * log.info("El usuario es ADMIN1");
-	 * 
-	 * if (mostrarTodos != null && mostrarTodos) {
-	 * 
-	 * contenidos = iContenidoService.findByCategoriaNombre(nombreCategoria,
-	 * pageable);
-	 * 
-	 * } else if (activado != null && activado) {
-	 * 
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * } else {
-	 * 
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, false,
-	 * pageable);
-	 * }
-	 * } else if (isDocente) {
-	 * 
-	 * if (mostrarTodos != null && mostrarTodos) {
-	 * 
-	 * contenidos = iContenidoService.buscarPorCategoriaUsuario(nombreCategoria,
-	 * usuarioOptional.get().getId(), pageable);
-	 * } else if (activado != null && activado) {
-	 * 
-	 * contenidos =
-	 * iContenidoService.obtenerContenidoActivadoPorUsuario(usuarioOptional.get().
-	 * getId(),
-	 * pageable);
-	 * } else {
-	 * 
-	 * contenidos =
-	 * iContenidoService.obtenerContenidoDesactivadoPorUsuario(usuarioOptional.get()
-	 * .getId(),
-	 * pageable);
-	 * }
-	 * } else if (isEstudiante) {
-	 * 
-	 * 
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * }
-	 * } else {
-	 * 
-	 * contenidos =
-	 * iContenidoService.findByCategoriaNombreAndActivado(nombreCategoria, true,
-	 * pageable);
-	 * }
-	 * 
-	 * Page<ContenidoDto> dtoPage = contenidos.map(contenido ->
-	 * convertirContenidoADTO(contenido));
-	 * 
-	 * return new ResponseEntity<>(dtoPage, HttpStatus.OK);
-	 * }
-	 */
-
 	public ContenidoDto convertirContenidoADTO(Contenido contenido) {
 		ContenidoDto dto = new ContenidoDto();
 		dto.setId(contenido.getId());
@@ -1012,5 +740,17 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 
 		return dto;
 	}
+
+	@GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<List<Contenido>> getContenidosByUsuarioId(@PathVariable Long usuarioId) {
+        List<Contenido> contenidos = iContenidoService.findContenidosByUsuarioId(usuarioId);
+
+        // Valida si hay resultados
+        if (contenidos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(contenidos);
+    }
 
 }

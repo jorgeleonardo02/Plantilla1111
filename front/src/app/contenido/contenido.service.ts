@@ -213,4 +213,8 @@ export class ContenidoService extends CommonService<Contenido> {
     return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/titulo?page="+pagina+"&size="+tamanoPagina/* "/titulo", { params: parametros} */);
   }
 
+  contenidosPorIdUsuario(idUsuario: number){
+    return this.httpCliente.get(this.rutaEndPoint+"/usuario/"+idUsuario);
+  }
+
 }

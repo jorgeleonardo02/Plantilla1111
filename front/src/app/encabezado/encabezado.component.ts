@@ -63,10 +63,13 @@ export class EncabezadoComponent {
       this.calcularSumaTotal();
     });
     this.tokenService.usuarioActual().subscribe((usuario: UsuarioDto2) => {
-      this.usuario1 = usuario;
+      if(usuario!=null){
+        this.usuario1 = usuario;
       //this.rolNombre = this.usuario1.roles[0].rolNombre;
       //console.log(this.usuario1.roles[0].rolNombre);
       console.log(this.usuario1);
+      }
+      
     });
     //------------------------------------------------------
     /* this.tokenService.usuarioActual2().subscribe(

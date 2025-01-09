@@ -123,14 +123,7 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
 
     // ********************************************************************************
     // 11.
-    // @Override
-    // public Page<Contenido> buscarContenidosPorCategoriaUsuarioYActivado(String
-    // nombreCategoria, Long usuarioId,
-    // Boolean activado, Pageable pageable) {
-    // return
-    // contenidoRepository.findByCategoriaNombreAndListaContenidoUsuarioUsuarioIdAndActivado(
-    // nombreCategoria, usuarioId, activado, pageable);
-    // }
+   
 
     // 22.
     public Page<Contenido> buscarPorCategoriaUsuario(String nombreCategoria, Long usuarioId, Pageable pageable) {
@@ -150,10 +143,7 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
     }
 
     // 55.
-    // public Page<Contenido> findContenidosByUsuarioId(Long usuarioId, Pageable
-    // pageable) {
-    // return contenidoRepository.findByUsuarioId(usuarioId, pageable);
-    // }
+    
     // 66.
     @Override
     public Page<Contenido> findByCategoriaNombre(String nombreCategoria, Pageable pageable) {
@@ -167,39 +157,6 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
         return contenidoRepository.findByCategoriaNombreAndActivado(nombreCategoria, activado, pageable);
     }
 
-    /*
-     * @Override
-     * public Page<Contenido>
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdIsNullAndListaContenidoUsuarioUsuarioRolesRolNombreNot(
-     * String nombreCategoria, boolean activado, Long usuarioId, Pageable pageable)
-     * {
-     * return contenidoRepository
-     * .findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdIsNullAndListaContenidoUsuarioUsuarioRolesRolNombreNot(
-     * nombreCategoria, activado, usuarioId, pageable);
-     * }
-     * 
-     * @Override
-     * public Page<Contenido>
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdNot(String
-     * nombreCategoria,
-     * boolean activado, Long usuarioId, Pageable pageable) {
-     * return contenidoRepository.
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdNot(
-     * nombreCategoria,
-     * activado, usuarioId, pageable);
-     * }
-     * 
-     * @Override
-     * public Page<Contenido>
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdAndListaContenidoUsuarioIsNull(
-     * String nombreCategoria, boolean activado, Long usuarioId, Pageable pageable)
-     * {
-     * return contenidoRepository
-     * .findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdAndListaContenidoUsuarioIsNull(
-     * nombreCategoria, activado, usuarioId, pageable);
-     * }
-     */
-
     @Override
     public Page<Contenido> findByCategoriaNombreAndActivadoAndUsuarioIdIsNull(String nombreCategoria, Long usuarioId,
             Pageable pageable) {
@@ -207,17 +164,9 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
                 nombreCategoria, usuarioId, pageable);
     }
 
-    /*
-     * @Override
-     * public Page<Contenido>
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdIsNullAndListaContenidoUsuarioUsuarioRolesRolNombreNot
-     * (String nombreCategoria,
-     * boolean activado, Long usuarioId, Pageable pageable) {
-     * return contenidoRepository.
-     * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdIsNullAndListaContenidoUsuarioUsuarioRolesRolNombreNot
-     * (nombreCategoria,
-     * activado, usuarioId, pageable);
-     * }
-     */
+    public List<Contenido> findContenidosByUsuarioId(Long usuarioId) {
+        // Llama al repositorio para obtener los contenidos
+        return contenidoRepository.findContenidosByUsuarioId(usuarioId);
+    }
 
 }

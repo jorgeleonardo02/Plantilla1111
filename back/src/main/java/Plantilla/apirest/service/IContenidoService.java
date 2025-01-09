@@ -62,18 +62,5 @@ public interface IContenidoService extends ICommonService<Contenido> {
 
         public boolean existsContenido(String nombreCategoria, Long usuarioId, Long contenidoId);
 
-        /*
-         * public Page<Contenido>
-         * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdIsNullAndListaContenidoUsuarioUsuarioRolesRolNombreNot(
-         * String nombreCategoria,
-         * boolean activado, Long usuarioId, Pageable pageable);
-         * 
-         * public Page<Contenido>
-         * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdNot(
-         * String nombreCategoria, boolean activado, Long usuarioId, Pageable pageable);
-         * 
-         * public Page<Contenido>
-         * findByCategoriaNombreAndActivadoAndListaContenidoUsuarioUsuarioIdAndListaContenidoUsuarioIsNull(
-         * String nombreCategoria, boolean activado, Long usuarioId, Pageable pageable);
-         */
+        public List<Contenido> findContenidosByUsuarioId(Long usuarioId);
 }

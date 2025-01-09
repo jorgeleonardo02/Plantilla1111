@@ -42,4 +42,16 @@ export class ContenidoUsuarioService extends CommonService<ContenidoUsuario> {
       );
   }
 
+  contenidosPorIdUsuario(idUsuario: number){
+    return this.httpCliente
+      .get(this.rutaEndPoint+'/usuario/'+idUsuario)
+      .pipe(
+        catchError((e: any) => {
+          alertasSweet.fire('Error', e.error.error);
+          return throwError('error');
+        })
+      );
+    //return this.httpCliente.get(this.rutaEndPoint+"/usuario/"+idUsuario);
+  }
+
 }

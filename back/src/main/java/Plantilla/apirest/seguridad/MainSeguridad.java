@@ -247,6 +247,8 @@ public class MainSeguridad extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/api/categorias").permitAll()
+                //.antMatchers("/api/secciones").permitAll()
+                //.antMatchers("/api/subsecciones").permitAll()
                 .antMatchers("/api/usuario/onombre/docente").permitAll()
                 .antMatchers("/media/subir").hasRole("ADMIN")
                 .antMatchers("/media/image").permitAll()

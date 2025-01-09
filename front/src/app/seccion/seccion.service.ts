@@ -7,7 +7,7 @@ import { Seccion } from './seccion';
   providedIn: 'root'
 })
 export class SeccionService extends CommonService<Seccion> {
-  protected override rutaEndPoint: string = 'http://localhost:8880/api/secciones'; // URL del backend
+  protected override rutaEndPoint: string = 'http://localhost:8888/api/secciones'; // URL del backend
   constructor(httpCliente: HttpClient, enrutador: Router) {
     super(enrutador, httpCliente);
   }

@@ -303,60 +303,69 @@
 
 /* 6 */
 
-.contenido-container {
+/* .contenido-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 20px;
-}
-
-.text-center {
-    margin-bottom: 20px;
-    page-break-before: always;
-}
-
-.card-body {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.btn-primary {
-    display: block;
+  }
+  
+  .formulario {
+    max-width: 800px;
     width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .campo-formulario {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .seccion-card {
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  
+  .boton-pequeno {
+    margin: 8px 0;
+    font-size: 0.875rem; 
+    padding: 4px 8px;
+  }
+  
+  .editor-container {
+    margin-top: 16px;
+  }
+  
+  .subseccion-titulo {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+   */
+   .contenedor-formulario {
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .btn {
     margin-top: 10px;
-}
-
-.quill-editor {
-    min-height: 200px;
-    max-height: 400px;
-    overflow-y: auto;
-    page-break-inside: avoid;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    page-break-inside: avoid;
-}
-
-.ql-align-right {
-    text-align: right !important;
-}
-
-.ql-align-center {
-    text-align: center !important;
-}
-
-.ql-align-left {
-    text-align: left !important;
-}
-
-.ql-editor p {
-    margin: 0 !important;
-    page-break-inside: avoid !important;
-}
+  }
+  
+  .quill-editor {
+    margin-top: 20px;
+  }
