@@ -47,7 +47,7 @@
     <br>
     <label for="contenido">Selecciona un contenido:</label>
     <select formControlName="opcionSeleccionada" id="contenido" required>
-      <option *ngFor="let contenido of contenidos" [ngValue]="contenido">{{ contenido.titulo }}</option>
+      <option *ngFor="let contenido of contenidos" [ngValue]="contenido">{{ contenido.nombre }}</option>
     </select>
 
     <h1>-------------------------------------------------------------------------------</h1>
@@ -86,6 +86,66 @@
   </form>
 </div>
 <button (click)="PDF()" class="btn btn-primary">PDF</button>
+
+
+ <!-- Barra Lateral -->
+ <!-- <div class="sidebar">
+  <h2>Cursos</h2>
+  <ul>
+    <li><a href="#">Curso 1</a></li>
+    <li><a href="#">Curso 2</a></li>
+    <li><a href="#">Curso 3</a></li>
+  </ul>
+</div> -->
+
+<div>
+  <label for="metaInput">Metas del curso:</label>
+  <input
+    type="text"
+    id="metaInput"
+    placeholder="Escribe una meta..."
+    [(ngModel)]="nuevaMeta"
+  />
+  <button (click)="agregarMeta()">Añadir Meta</button>
+</div>
+<ul>
+  <li *ngFor="let meta of metas">{{ meta }}</li>
+</ul>
+
+<!-- Contenido Principal -->
+<div class="main-content">
+  <h1>Gestión de Curso</h1>
+  <form>
+    <div class="form-group">
+      <label for="course-title">Título del Curso:</label>
+      <input type="text" id="course-title" placeholder="Ingrese el título del curso">
+    </div>
+    <div class="form-group">
+      <label for="course-description">Descripción:</label>
+      <textarea id="course-description" rows="4" placeholder="Ingrese una descripción del curso"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="course-goals">Metas del Curso:</label>
+      <textarea id="course-goals" rows="3" placeholder="Ingrese las metas del curso"></textarea>
+    </div>
+    <button type="button">Guardar Curso</button>
+  </form>
+
+  <h2>Secciones</h2>
+  <div class="section">
+    <div class="section-header">Sección 1</div>
+    <div class="subsection">Subsección 1.1</div>
+    <div class="subsection">Subsección 1.2</div>
+    <div class="action-buttons">
+      <button>Agregar Subsección</button>
+      <button>Editar Sección</button>
+      <button>Eliminar Sección</button>
+    </div>
+  </div>
+
+  <button type="button">Agregar Sección</button>
+</div>
+
 <!-- <div class="contenido-form-container">
   <form [formGroup]="formulario" (ngSubmit)="guardar()">
     <mat-form-field appearance="fill">

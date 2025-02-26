@@ -50,7 +50,7 @@ export class FormContenidoComponent implements OnInit {
   crearFormulario(): void {
     this.camposFormulario = this.constructorFormulario.group(
       {
-        titulo: ['', Validators.required],
+        nombre: ['', Validators.required],
         descripcion: ['', Validators.required],
         etiquetas: ['', Validators.required],
         fechaLimite:[''],

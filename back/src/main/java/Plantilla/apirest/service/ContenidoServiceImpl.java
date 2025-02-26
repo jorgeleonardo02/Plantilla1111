@@ -1,7 +1,5 @@
 package Plantilla.apirest.service;
-
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,24 +10,18 @@ import Plantilla.apirest.common.CommonServiceImpl;
 import Plantilla.apirest.models.dao.IContenidoDao;
 import Plantilla.apirest.models.dao.IContenidoRepository;
 import Plantilla.apirest.models.entity.Contenido;
-import Plantilla.apirest.seguridad.entidad.Usuario;
 
 @Service
 @Transactional
 public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenidoDao> implements IContenidoService {
 
-    /*
-     * private final IContenidoDao iContenidoDao;
-     * private final ModelMapper modelMapper;
-     */
+    
     private final IContenidoRepository contenidoRepository;
 
     public ContenidoServiceImpl(IContenidoDao iContenidoDao, IContenidoRepository contenidoRepository,
             ModelMapper modelMapper) {
         super(iContenidoDao); // Pasa iContenidoDao al constructor de la superclase
-        // this.iContenidoDao = iContenidoDao;
         this.contenidoRepository = contenidoRepository;
-        // this.modelMapper = modelMapper;
     }
 
     public boolean contenidoExiste(Long id) {
@@ -64,24 +56,24 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
     }
 
     @Override
-    public Page<Contenido> buscarPorCategoriaYPorTitulo(Long categoriaId, String titulo, Pageable pageable) {
-        return contenidoRepository.findByCategoriaIdAndTituloContainingIgnoreCase(categoriaId, titulo, pageable);
+    public Page<Contenido> buscarPorCategoriaYPorTitulo(Long categoriaId, String nombreCurso, Pageable pageable) {
+        return contenidoRepository.findByCategoriaIdAndNombreCursoContainingIgnoreCase(categoriaId, nombreCurso, pageable);
     }
 
     @Override
-    public Page<Contenido> buscarPorNombreCategoriaYPorTitulo(String nombreCategoria, String titulo,
+    public Page<Contenido> buscarPorNombreCategoriaYPorTitulo(String nombreCategoria, String nombreCurso,
             Pageable pageable) {
-        return contenidoRepository.findByCategoriaNombreAndTituloContainingIgnoreCase(nombreCategoria, titulo,
+        return contenidoRepository.findByCategoriaNombreAndNombreContainingIgnoreCase(nombreCategoria, nombreCurso,
                 pageable);
     }
 
-    public Page<Contenido> obtenerContenidosPaginados(String nombreCategoria, String titulo, Boolean activado, int page,
+    public Page<Contenido> obtenerContenidosPaginados(String nombreCategoria, String nombreCurso, Boolean activado, int page,
             int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        if (nombreCategoria != null && titulo != null && activado != null) {
-            return contenidoRepository.findByCategoriaNombreAndTituloContainingIgnoreCaseAndActivado(nombreCategoria,
-                    titulo,
+        if (nombreCategoria != null && nombreCurso != null && activado != null) {
+            return contenidoRepository.findByCategoriaNombreAndNombreContainingIgnoreCaseAndActivado(nombreCategoria,
+                    nombreCurso,
                     activado, pageable);
         }
 
@@ -94,10 +86,10 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
         Pageable pageable = PageRequest.of(page, size);
 
         if (nombreCategoria != null && titulo != null && activado != null) {
-            return contenidoRepository.findByCategoriaNombreAndTituloContainingIgnoreCaseAndActivado(
+            return contenidoRepository.findByCategoriaNombreAndNombreContainingIgnoreCaseAndActivado(
                     nombreCategoria, titulo, activado, pageable);
         } else if (nombreCategoria != null && titulo != null) {
-            return contenidoRepository.findByCategoriaNombreAndTituloContainingIgnoreCase1(
+            return contenidoRepository.findByCategoriaNombreAndNombreCursoContainingIgnoreCase1(
                     nombreCategoria, titulo, pageable);
         } else if (activado != null) {
             if (activado) {
@@ -112,7 +104,7 @@ public class ContenidoServiceImpl extends CommonServiceImpl<Contenido, IContenid
 
     @Override
     public Page<Contenido> obtenerContenidosPorCategoria(String nombreCategoria, boolean activado, int page, int size) {
-        return contenidoRepository.obtenerContenidoPorNombreCategoriaYTituloPaginadoYActivado(
+        return contenidoRepository.obtenerContenidoPorNombreCategoriaYNombreCursoPaginadoYActivado(
                 nombreCategoria, "", activado, PageRequest.of(page, size));
     }
 

@@ -30,7 +30,7 @@ public class Contenido implements Serializable {
 	private String nombreFoto;
 	@NotNull
 	@Column(unique = true)
-	private String titulo;
+	private String nombre;
 	private String descripcion;
 	private String etiquetas;
 	private String fechaLimite;
@@ -55,12 +55,12 @@ public class Contenido implements Serializable {
 	public Contenido() {
 	}
 
-	public Contenido(Long id, String nombreFoto, String titulo, String descripcion, String etiquetas,
+	public Contenido(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
 			String fechaLimite, String programa, Long matriculados, Boolean activado, Categoria categoria,
 			Long precio, double porcentajeAdmin, double calificacion) {
 		this.id = id;
 		this.nombreFoto = nombreFoto;
-		this.titulo = titulo;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.etiquetas = etiquetas;
 		this.fechaLimite = fechaLimite;

@@ -89,13 +89,12 @@ export class ContenidoService extends CommonService<Contenido> {
     const datosFormulario = new FormData();
 
     datosFormulario.append('archivo', archivo);
-    datosFormulario.append('titulo', contenido.titulo);
+    datosFormulario.append('nombre', contenido.nombre);
     datosFormulario.append('descripcion', contenido.descripcion);
     datosFormulario.append('etiquetas', contenido.etiquetas);
     datosFormulario.append('programa', contenido.programa);
     datosFormulario.append('activado', contenido.activado.toString());
     //JSON.stringify: se convierte el objeto en una cadena JSON para poder enviarlo en el cuerpo de la solicitud HTTP
-
     datosFormulario.append("idCategoria", contenido.categoria.id.toString());
     datosFormulario.append("precio", contenido.precio.toString());
 
@@ -117,7 +116,7 @@ export class ContenidoService extends CommonService<Contenido> {
   modificarContenidoConfoto(contenido: Contenido, archivo: File): Observable<any> {
     const datosFormulario = new FormData();
     datosFormulario.append('archivo', archivo);
-    datosFormulario.append('titulo', contenido.titulo);
+    datosFormulario.append('nombre', contenido.nombre);
     datosFormulario.append('descripcion', contenido.descripcion);
     datosFormulario.append('etiquetas', contenido.etiquetas);
     datosFormulario.append('programa', contenido.programa);
@@ -188,7 +187,7 @@ export class ContenidoService extends CommonService<Contenido> {
     const parametros = new HttpParams()
     .set('page', pagina)
     .set('size', tamanoPagina);
-    return this.httpCliente.get(`${this.rutaEndPoint}/categoria/${idCategoria}/titulo?page=${pagina}&size=${tamanoPagina}`, { params: parametros});
+    return this.httpCliente.get(`${this.rutaEndPoint}/categoria/${idCategoria}/nombre?page=${pagina}&size=${tamanoPagina}`, { params: parametros});
   }
   contenidosCompleto(nombreCategoria: string, nombreUsuario: string, mostrarTodos: boolean, activado: boolean, pagina?: number, tamanoPagina?: number): Observable<any> {
     let url = `${this.rutaEndPoint}/?nombreCategoria=${nombreCategoria.replace(/-/g, " ")}&nombreUsuario=${nombreUsuario}&mostrarTodos=${mostrarTodos}&activado=${activado}`;
@@ -206,11 +205,11 @@ export class ContenidoService extends CommonService<Contenido> {
   }
 
   contenidosPorNombreDeCategoriaPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number): Observable<any> {
-    return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/titulo?page="+pagina+"&size="+tamanoPagina/* , { params: parametros} */ );
+    return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/nombre?page="+pagina+"&size="+tamanoPagina/* , { params: parametros} */ );
   }
 
   contenidosPorNombreDeCategoriaActivadoPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number/* , activado: boolean */): Observable<any> {
-    return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/titulo?page="+pagina+"&size="+tamanoPagina/* "/titulo", { params: parametros} */);
+    return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/nombre?page="+pagina+"&size="+tamanoPagina/* "/titulo", { params: parametros} */);
   }
 
   contenidosPorIdUsuario(idUsuario: number){

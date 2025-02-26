@@ -4,7 +4,7 @@ import { ContenidoUsuario } from "../contenido-usuario/contenido-usuario";
 export class Contenido {
     id: number;
     nombreFoto: string;
-    titulo: string;
+    nombre: string;
     descripcion: string;
     etiquetas: string;
     fechaLimite: string;

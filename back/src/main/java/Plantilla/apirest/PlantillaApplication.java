@@ -4,19 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-
 import Plantilla.apirest.service.IRepositorioService;
-
-//@SpringBootApplication(scanBasePackages = "ICategoriasDao, IRepositorioService")
-
-/* @SpringBootApplication(scanBasePackages = { "Plantilla.apirest.seguridad.servicio",
-		"Plantilla.apirest.service", "Plantilla.apirest.seguridad.repositorio" */
-/*
- * "Plantilla.apirest.models.dao.ICategoriasDao"
- *//* , */
-/* "Plantilla.apirest.service.IRepositorioService" */ /* "Plantilla.apirest.service.CategoriaServiceImpl" */
-/* }, exclude = JpaRepositoriesAutoConfiguration.class) */
 
 @SpringBootApplication
 public class PlantillaApplication implements CommandLineRunner {

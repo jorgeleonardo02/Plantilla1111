@@ -115,7 +115,7 @@
                                     <img *ngIf="!contenido.nombreFoto" width="240" height="135" src="../../assets/img/El estoico1.png" alt="User Avatar" class="size-50 mr-3 img-square">
                                     <div class="media-body">
                                         <ul class="ml-1 mb-0 fa-ul text-muted">
-                                            <li class="small text-primary"> <b>{{contenido?.titulo}}</b></li>
+                                            <li class="small text-primary"> <b>{{contenido?.nombre}}</b></li>
                                             <!-- <li class="small"> {{contenido.listaContenidoUsuario[0].usuario?.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria?.nombre}}</li> -->
                                             <li class="small">{{ contenido.listaContenidoUsuario[0].usuario.nombre }}, {{ contenido.listaContenidoUsuario[0].contenido.categoria.nombre }}</li>
                                             <li class="small"> <b>{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$</b></li>

@@ -212,7 +212,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 			contenidoNuevo = super.iService.guardarElemento(contenido);
 		} catch (DataAccessException e) {
 
-			if (iContenidoRepository.existsByTitulo(contenido.getTitulo())) {
+			if (iContenidoRepository.existsByNombre(contenido.getNombre())) {
 				mapa.put("mensaje", "Ocurrió un error al registrar el elemento");
 				mapa.put("error", "El titulo de contenido ya existe");
 				return new ResponseEntity<>(mapa,
@@ -251,7 +251,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		try {
 			contenidoExistente.setId(contenidoFormulario.getId());
 			contenidoExistente.setNombreFoto(contenidoFormulario.getNombreFoto());
-			contenidoExistente.setTitulo(contenidoFormulario.getTitulo());
+			contenidoExistente.setNombre(contenidoFormulario.getNombre());
 			contenidoExistente.setDescripcion(contenidoFormulario.getDescripcion());
 			contenidoExistente.setEtiquetas(contenidoFormulario.getEtiquetas());
 			contenidoExistente.setFechaLimite(contenidoFormulario.getFechaLimite());
@@ -270,10 +270,10 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 			contenidoNuevo = iContenidoService.guardarElemento(contenidoExistente);
 
 		} catch (DataAccessException e) {
-			mapa.put("mensaje", "Ocurrio un error al modificar el contenido " + contenidoExistente.getTitulo());
+			mapa.put("mensaje", "Ocurrio un error al modificar el contenido " + contenidoExistente.getNombre());
 		}
 
-		mapa.put("mensaje", "El contenido " + contenidoExistente.getTitulo() + " ha sido modificado exitosamente");
+		mapa.put("mensaje", "El contenido " + contenidoExistente.getNombre() + " ha sido modificado exitosamente");
 		mapa.put("contenido", contenidoNuevo);
 
 		return new ResponseEntity<>(mapa, HttpStatus.OK);
@@ -294,7 +294,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		try {
 			contenidoActual.setId(contenido.getId());
 			contenidoActual.setNombreFoto(contenido.getNombreFoto());
-			contenidoActual.setTitulo(contenido.getTitulo());
+			contenidoActual.setNombre(contenido.getNombre());
 			contenidoActual.setDescripcion(contenido.getDescripcion());
 			contenidoActual.setEtiquetas(contenido.getEtiquetas());
 			contenidoActual.setFechaLimite(contenido.getFechaLimite());
@@ -337,12 +337,12 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		}
 	}
 
-	@GetMapping("/categoria/nombre/{nombreCategoria}/titulo")
-	public Page<ContenidoDto> buscarPorNombreCategoriaYPorTitulo(
+	@GetMapping("/categoria/nombre/{nombreCategoria}/nombre")
+	public Page<ContenidoDto> buscarPorNombreCategoriaYPorNombreCurso(
 			@PathVariable String nombreCategoria,
-			@RequestParam(required = false, defaultValue = "") String titulo,
+			@RequestParam(required = false, defaultValue = "") String nombreCurso,
 			@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-		Page<Contenido> contenidos = iContenidoService.buscarPorNombreCategoriaYPorTitulo(nombreCategoria, titulo,
+		Page<Contenido> contenidos = iContenidoService.buscarPorNombreCategoriaYPorTitulo(nombreCategoria, nombreCurso,
 				pageable);
 		log.info("contenidos-contenidos-contenidos-contenidos-contenidos: " + contenidos);
 		return contenidos.map(this::convertToDto);
@@ -362,17 +362,17 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		return contenidoDto;
 	}
 
-	@GetMapping("/categoria/nombre/activado/{nombreCategoria}/titulo")
-	public Page<ContenidoDto> buscarPorNombreCategoriaYPorTituloYActivado(
+	@GetMapping("/categoria/nombre/activado/{nombreCategoria}/nombre")
+	public Page<ContenidoDto> buscarPorNombreCategoriaYPorNombreCursoYActivado(
 			@PathVariable String nombreCategoria,
-			@RequestParam(required = false, defaultValue = "") String titulo,
+			@RequestParam(required = false, defaultValue = "") String nombreCurso,
 			/* @RequestParam(required = false) Boolean activado, */
 			@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 		Page<Contenido> contenidos;
 
 		// if (activado != null) {
 		contenidos = iContenidoRepository
-				.obtenerContenidoPorNombreCategoriaYTituloPaginadoYActivado(nombreCategoria, titulo, true, /*
+				.obtenerContenidoPorNombreCategoriaYNombreCursoPaginadoYActivado(nombreCategoria, nombreCurso, true, /*
 																											 * activado,
 																											 */
 						pageable);
@@ -386,20 +386,20 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		return contenidos.map(this::convertToDto);
 	}
 
-	@GetMapping("/categoria/nombre/activado/{nombreCategoria}/mostrarTodos/titulo")
-	public Page<ContenidoDto> buscarPorNombreCategoriaYPorTituloYActivadoYTodos(
+	@GetMapping("/categoria/nombre/activado/{nombreCategoria}/mostrarTodos/nombre")
+	public Page<ContenidoDto> buscarPorNombreCategoriaYPorNombreCursoYActivadoYTodos(
 			@PathVariable String nombreCategoria,
-			@RequestParam(required = false, defaultValue = "") String titulo,
+			@RequestParam(required = false, defaultValue = "") String nombreCurso,
 			@RequestParam(required = false) Boolean activado,
 			@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 		Page<Contenido> contenidos;
 
 		if (activado != null) {
 			contenidos = iContenidoRepository
-					.obtenerContenidoPorNombreCategoriaYTituloPaginadoYActivado(nombreCategoria, titulo, activado,
+					.obtenerContenidoPorNombreCategoriaYNombreCursoPaginadoYActivado(nombreCategoria, nombreCurso, activado,
 							pageable);
 		} else {
-			contenidos = iContenidoService.buscarPorNombreCategoriaYPorTitulo(nombreCategoria, titulo,
+			contenidos = iContenidoService.buscarPorNombreCategoriaYPorTitulo(nombreCategoria, nombreCurso,
 					pageable);
 		}
 
@@ -432,15 +432,15 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		typeMap.setConverter(contenidoUsuarioConverter);
 	}
 
-	@GetMapping("/categoria/nombre/{nombreCategoria}/activado/titulo")
+	@GetMapping("/categoria/nombre/{nombreCategoria}/activado/nombre")
 	public Page<ContenidoDto> buscarPorNombreCategoriaYPorTituloActivado(
 			@PathVariable String nombreCategoria,
-			@RequestParam(required = false, defaultValue = "") String titulo,
+			@RequestParam(required = false, defaultValue = "") String nombreCurso,
 			@RequestParam(required = false) Boolean activado,
 			@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
-		Page<Contenido> contenidos = iContenidoRepository.obtenerContenidoPorNombreCategoriaYTituloPaginadoYActivado(
-				nombreCategoria, titulo, activado, pageable);
+		Page<Contenido> contenidos = iContenidoRepository.obtenerContenidoPorNombreCategoriaYNombreCursoPaginadoYActivado(
+				nombreCategoria, nombreCurso, activado, pageable);
 
 		log.info("contenidos-contenidos-contenidos-contenidos-contenidos: " + contenidos);
 		return contenidos.map(this::convertToDto);
@@ -461,7 +461,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 					pageable);
 		} else {
 			// Filtrar por estado de activación proporcionado
-			contenidos = iContenidoRepository.obtenerContenidoPorNombreCategoriaYTituloPaginadoYActivado(
+			contenidos = iContenidoRepository.obtenerContenidoPorNombreCategoriaYNombreCursoPaginadoYActivado(
 					nombreCategoria,
 					titulo, activado, pageable);
 		}
@@ -726,7 +726,7 @@ public class ContenidoRestControllers extends CommonRestController<Contenido, IC
 		ContenidoDto dto = new ContenidoDto();
 		dto.setId(contenido.getId());
 		dto.setNombreFoto(contenido.getNombreFoto());
-		dto.setTitulo(contenido.getTitulo());
+		dto.setNombre(contenido.getNombre());
 		dto.setDescripcion(contenido.getDescripcion());
 		dto.setEtiquetas(contenido.getEtiquetas());
 		dto.setFechaLimite(contenido.getFechaLimite());

@@ -13,7 +13,7 @@ import lombok.Setter;
 public class ContenidoDto {
 	private Long id;
 	private String nombreFoto;
-	private String titulo;
+	private String nombre;
 	private String descripcion;
 	private String etiquetas;
 	private String fechaLimite;
@@ -33,7 +33,7 @@ public class ContenidoDto {
 	public ContenidoDto(Contenido contenido) {
 		this.id = contenido.getId();
 		this.nombreFoto = contenido.getNombreFoto();
-		this.titulo = contenido.getTitulo();
+		this.nombre = contenido.getNombre();
 		this.descripcion = contenido.getDescripcion();
 		this.etiquetas = contenido.getEtiquetas();
 		this.fechaLimite = contenido.getFechaLimite();
@@ -46,12 +46,12 @@ public class ContenidoDto {
 		this.categoria = new CategoriaDto(contenido.getCategoria());
 	}
 
-	public ContenidoDto(Long id, String nombreFoto, String titulo, String descripcion, String etiquetas,
+	public ContenidoDto(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
 			String fechaLimite, String programa, Long matriculados, Boolean activado,
 			Long precio, double porcentajeAdmin, double calificacion, CategoriaDto categoria) {
 		this.id = id;
 		this.nombreFoto = nombreFoto;
-		this.titulo = titulo;
+		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.etiquetas = etiquetas;
 		this.fechaLimite = fechaLimite;

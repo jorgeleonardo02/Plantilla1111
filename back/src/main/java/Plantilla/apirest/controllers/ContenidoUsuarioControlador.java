@@ -205,7 +205,7 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
             ContenidoDto contenidoDTO = new ContenidoDto(
                     contenido.getId(),
                     contenido.getNombreFoto(),
-                    contenido.getTitulo(),
+                    contenido.getNombre(),
                     contenido.getDescripcion(),
                     contenido.getEtiquetas(),
                     contenido.getFechaLimite(),

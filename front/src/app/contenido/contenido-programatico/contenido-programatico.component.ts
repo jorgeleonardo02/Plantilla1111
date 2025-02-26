@@ -82,6 +82,8 @@ export class ContenidoProgramaticoComponent implements OnInit, AfterViewInit {
     contenidoForm: FormGroup;
     //seccionForm: FormGroup;
     secciones: Seccion[] = []; // Cambiado a un arreglo
+    metas: string[] = []; // Arreglo para almacenar las metas
+  nuevaMeta: string = ''; // Variable para el input
 
     seccion: Seccion;
   constructor(
@@ -108,6 +110,13 @@ export class ContenidoProgramaticoComponent implements OnInit, AfterViewInit {
   }
 
   
+
+  agregarMeta(): void {
+    if (this.nuevaMeta.trim() !== '') {
+      this.metas.push(this.nuevaMeta.trim());
+      this.nuevaMeta = ''; // Limpiar el campo de entrada
+    }
+  }  
  
 ngAfterViewInit() {
       const maxRetries = 10; // Máximo número de intentos
