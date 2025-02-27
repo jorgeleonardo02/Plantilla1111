@@ -3,7 +3,7 @@ package Plantilla.apirest.models.dto;
 import lombok.Data;
 
 @Data
-public class ContenidoUsuarioDto {
+public class CursoUsuarioDto {
     private Long id;
     private UsuarioDto2 usuario;
 	public Long getId() {

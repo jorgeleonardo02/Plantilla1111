@@ -3,9 +3,9 @@ import { url } from "./url"
 export const environment = {
     production: true,
     endPointCategoria: url + 'api/categorias',
-    endPointContenido: url + 'api/contenidos',
+    endPointContenido: url + 'api/cursos',
     endPointAuth: url + 'auth/',
-    endPointFoto: url + 'api/contenidos/contenidoFoto/',
+    endPointFoto: url + 'api/cursos/cursoFoto/',
     endPointUsuario: url + 'api/usuario',
-    endPointContenidoUsuario: url + 'api/contenidoUsuario'
+    endPointContenidoUsuario: url + 'api/cursoUsuario'
 }

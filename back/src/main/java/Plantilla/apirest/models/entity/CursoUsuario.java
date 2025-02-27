@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class ContenidoUsuario implements Serializable {
+public class CursoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,27 +25,27 @@ public class ContenidoUsuario implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "listaContenidoUsuario", "handler", "hibernateLazyInitializer" })
-    private Contenido contenido;
+    @JsonIgnoreProperties(value = { "listaCursoUsuario", "handler", "hibernateLazyInitializer" })
+    private Curso curso;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "password", "listaContenidoUsuario", "handler", "hibernateLazyInitializer" })
+    @JsonIgnoreProperties(value = { "password", "listaCursoUsuario", "handler", "hibernateLazyInitializer" })
     private Usuario usuario;
 
-    public ContenidoUsuario() {
+    public CursoUsuario() {
 
     }
 
-    public ContenidoUsuario(Contenido contenido, Usuario usuario) {
-        this.contenido = contenido;
+    public CursoUsuario(Curso curso, Usuario usuario) {
+        this.curso = curso;
         this.usuario = usuario;
     }
 
     @Override
     public String toString() {
-        return "ContenidoUsuario{" +
+        return "CursoUsuario{" +
                 "id=" + id +
-                ", contenido=" + contenido.getId() +
+                ", curso=" + curso.getId() +
                 ", usuario=" + usuario.getId() +
                 // Omitir la llamada a listaContenidoUsuario en toString()
                 // ", listaContenidoUsuario=" + listaContenidoUsuario +

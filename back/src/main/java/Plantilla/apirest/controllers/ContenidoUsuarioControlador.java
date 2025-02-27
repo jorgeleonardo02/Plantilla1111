@@ -25,57 +25,57 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Plantilla.apirest.common.CommonRestController;
-import Plantilla.apirest.models.dao.IContenidoUsuarioDao;
+import Plantilla.apirest.models.dao.ICursoUsuarioDao;
 import Plantilla.apirest.models.dto.CategoriaDto;
-import Plantilla.apirest.models.dto.ContenidoDto;
-import Plantilla.apirest.models.dto.ContenidoUsuarioDto3;
-import Plantilla.apirest.models.entity.Contenido;
-import Plantilla.apirest.models.entity.ContenidoUsuario;
+import Plantilla.apirest.models.dto.CursoDto;
+import Plantilla.apirest.models.dto.CursoUsuarioDto3;
+import Plantilla.apirest.models.entity.Curso;
+import Plantilla.apirest.models.entity.CursoUsuario;
 import Plantilla.apirest.seguridad.entidad.Usuario;
-import Plantilla.apirest.service.IContenidoService;
-import Plantilla.apirest.service.IContenidoUsuarioServicio;
+import Plantilla.apirest.service.ICursoService;
+import Plantilla.apirest.service.ICursoUsuarioServicio;
 import Plantilla.apirest.service.IUsuarioService;
 
 //@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/contenidoUsuario")
 @RestController
-public class ContenidoUsuarioControlador extends CommonRestController<ContenidoUsuario, IContenidoUsuarioServicio> {
+public class ContenidoUsuarioControlador extends CommonRestController<CursoUsuario, ICursoUsuarioServicio> {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     boolean tieneRolDocente;
     Usuario usuario;
 
     @Autowired
-    IContenidoService iContenidoServicio;
+    ICursoService iCursoServicio;
 
     @Autowired
     IUsuarioService iUsuarioService;
 
     @Autowired
-    private IContenidoUsuarioDao iContenidoUsuarioDao;
+    private ICursoUsuarioDao iCursoUsuarioDao;
 
     @Autowired
-    private IContenidoUsuarioServicio iContenidoUsuarioServicio;
+    private ICursoUsuarioServicio iCursoUsuarioServicio;
 
 
     @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Contenido>> getContenidosByUsuarioId(@PathVariable Long usuarioId) {
-        List<Contenido> contenidos = iContenidoUsuarioDao.findByUsuarioId(usuarioId);
+    public ResponseEntity<List<Curso>> getCursosByUsuarioId(@PathVariable Long usuarioId) {
+        List<Curso> cursos = iCursoUsuarioDao.findByUsuarioId(usuarioId);
 
         // Valida si hay resultados
-        if (contenidos.isEmpty()) {
+        if (cursos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(contenidos);
+        return ResponseEntity.ok(cursos);
     }
 
     @GetMapping("/rolDocente/{contenidoId}")
-    public ResponseEntity<ContenidoUsuario> getContenidoUsuarioByRolDocente(@PathVariable Long contenidoId) {
-        Optional<ContenidoUsuario> contenidoUsuario = iContenidoUsuarioDao.ContenidoUsuarioPorRolDocente(contenidoId);
-        if (contenidoUsuario.isPresent()) {
-            return ResponseEntity.ok(contenidoUsuario.get());
+    public ResponseEntity<CursoUsuario> getCursoUsuarioByRolDocente(@PathVariable Long contenidoId) {
+        Optional<CursoUsuario> cursoUsuario = iCursoUsuarioDao.CursoUsuarioPorRolDocente(contenidoId);
+        if (cursoUsuario.isPresent()) {
+            return ResponseEntity.ok(cursoUsuario.get());
         } else {
             // Manejar el caso en el que no se encuentre un resultado
             return ResponseEntity.notFound().build();
@@ -85,33 +85,33 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
     @Override
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('DOCENTE') or hasRole('ESTUDIANTE')")
-    public ResponseEntity<?> guardarElemento(@RequestBody ContenidoUsuario contenidoUsuario) {
+    public ResponseEntity<?> guardarElemento(@RequestBody CursoUsuario cursoUsuario) {
         // Obtener el usuario de alguna manera, por ejemplo, a través de un repositorio
-        Usuario usuario = iUsuarioService.buscarPorUsuarioNombre(contenidoUsuario.getUsuario().getNombreUsuario())
+        Usuario usuario = iUsuarioService.buscarPorUsuarioNombre(cursoUsuario.getUsuario().getNombreUsuario())
                 .orElse(null);
         if (usuario == null) {
             return ResponseEntity.badRequest().body("El usuario no fue encontrado");
         }
 
         // Obtener el contenido por su ID si está presente
-        Contenido contenido = null;
-        if (contenidoUsuario.getContenido() != null && contenidoUsuario.getContenido().getId() != null) {
-            Long contenidoId = contenidoUsuario.getContenido().getId();
-            contenido = iContenidoServicio.obtenerElementoPorID(contenidoId);
-            if (contenido == null) {
-                return ResponseEntity.badRequest().body("El contenido no fue encontrado");
+        Curso curso = null;
+        if (cursoUsuario.getCurso() != null && cursoUsuario.getCurso().getId() != null) {
+            Long cursoId = cursoUsuario.getCurso().getId();
+            curso = iCursoServicio.obtenerElementoPorID(cursoId);
+            if (curso == null) {
+                return ResponseEntity.badRequest().body("El curso no fue encontrado");
             }
         }
 
         // Verificar si el usuario ya está suscrito como ESTUDIANTE al contenido
-        boolean usuarioYaEsEstudiante = iContenidoUsuarioDao.existeRelacionUsuarioContenido(contenido.getId(),
+        boolean usuarioYaEsEstudiante = iCursoUsuarioDao.existeRelacionUsuarioCurso(curso.getId(),
                 usuario.getId());
         if (usuarioYaEsEstudiante) {
-            return ResponseEntity.badRequest().body("El usuario ya está suscrito a este contenido como ESTUDIANTE");
+            return ResponseEntity.badRequest().body("El usuario ya está suscrito a este curso como ESTUDIANTE");
         }
 
         // Verificar si el contenido existe y tiene una lista de contenido-usuario
-        if (contenido != null && contenido.getListaContenidoUsuario() != null) {
+        if (curso != null && curso.getListaCursoUsuario() != null) {
             // Verificar si ya existe un usuario con rol Docente asociado al contenido
             /*
              * boolean existeDocente = contenido.getListaContenidoUsuario().stream()
@@ -120,24 +120,24 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
              */
 
             // Consulta si existe ya la relacion de este contenido con usuario rol Docente
-            boolean existeDocente1 = iContenidoUsuarioDao
-                    .existeContenidoConDocente(contenido.getId());
+            boolean existeDocente1 = iCursoUsuarioDao
+                    .existeCursoConDocente(curso.getId());
 
             if (existeDocente1 && usuario.tieneRolDocente()) {
                 // Si ya existe un usuario con rol docente y el usuario actual también tiene ese
                 // rol, retornar un error
-                return ResponseEntity.badRequest().body("Ya existe un usuario con rol Docente asociado al contenido");
+                return ResponseEntity.badRequest().body("Ya existe un usuario con rol Docente asociado al curso");
             } else if (usuario.tieneRolEstudiante()) {
                 // Si el usuario es estudiante, permitir guardar la relación
                 // Aquí puedes agregar la lógica para guardar la relación en la base de datos
-                return super.guardarElemento(contenidoUsuario);
+                return super.guardarElemento(cursoUsuario);
             } else {
                 // Verificar otros casos
                 if (usuario.tieneRolVisitante()) {
-                    return ResponseEntity.badRequest().body("No puede asociar un usuario con rol vitrina al contenido");
+                    return ResponseEntity.badRequest().body("No puede asociar un usuario con rol vitrina al curso");
                 } else if (usuario.tieneRolGerencia()) {
                     return ResponseEntity.badRequest()
-                            .body("No puede relacionar un usuario de rol Gerencia al contenido");
+                            .body("No puede relacionar un usuario de rol Gerencia al curso");
                 } else {
                     /*
                      * boolean usuarioYaExisteEnContenido =
@@ -145,12 +145,12 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
                      * .anyMatch(cu -> cu.getUsuario() != null && cu.getUsuario().equals(usuario));
                      */
 
-                    boolean usuarioYaExisteEnContenido1 = iContenidoUsuarioDao
-                            .existeRelacionUsuarioContenido(contenido.getId(), usuario.getId());
+                    boolean usuarioYaExisteEnContenido1 = iCursoUsuarioDao
+                            .existeRelacionUsuarioCurso(curso.getId(), usuario.getId());
 
                     if (usuarioYaExisteEnContenido1) {
                         return ResponseEntity.badRequest()
-                                .body("Ya existe una relación entre el usuario y el contenido");
+                                .body("Ya existe una relación entre el usuario y el curso");
                     }
                 }
             }
@@ -173,16 +173,16 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
         }
 
         // Llamar al método guardarElemento con el objeto ContenidoUsuarioDto
-        return super.guardarElemento(contenidoUsuario);
+        return super.guardarElemento(cursoUsuario);
     }
 
-    @GetMapping("/cantidadContenidos/{usuarioId}")
-    public ResponseEntity<?> cantidadContenidosDeDocente(@PathVariable Long usuarioId) {
+    @GetMapping("/cantidadCursos/{usuarioId}")
+    public ResponseEntity<?> cantidadCursosDeDocente(@PathVariable Long usuarioId) {
         Map<String, Object> mapa = new HashMap<>();
-        Long cantidad = iContenidoUsuarioDao.cantidadContenidosDeDocente(usuarioId);
-        Long limiteContenidos = iUsuarioService.obtenerElementoPorID(usuarioId).getLimiteContenidos();
-        log.info("idUsuario: " + usuarioId + ", limiteContenidos:" + limiteContenidos);
-        if (cantidad != null && cantidad < limiteContenidos) {
+        Long cantidad = iCursoUsuarioDao.cantidadCursosDeDocente(usuarioId);
+        Long limiteCursos = iUsuarioService.obtenerElementoPorID(usuarioId).getLimiteCursos();
+        log.info("idUsuario: " + usuarioId + ", limiteCursos:" + limiteCursos);
+        if (cantidad != null && cantidad < limiteCursos) {
             return ResponseEntity.ok(cantidad);
         } else {
             // armo el mapa para agregarlo al ResponseEntity
@@ -192,45 +192,45 @@ public class ContenidoUsuarioControlador extends CommonRestController<ContenidoU
     }
 
     @GetMapping("/usuarios1/{usuarioId}/contenidos")
-    public ResponseEntity<Page<ContenidoUsuarioDto3>> obtenerContenidosPorUsuarioId1(
+    public ResponseEntity<Page<CursoUsuarioDto3>> obtenerContenidosPorUsuarioId1(
             @PathVariable Long usuarioId,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<ContenidoUsuario> pageContenidos = iContenidoUsuarioServicio.obtenerContenidosPorUsuarioId(usuarioId,
+        Page<CursoUsuario> pageCursos = iCursoUsuarioServicio.obtenerCursosPorUsuarioId(usuarioId,
                 pageable);
 
-        Page<ContenidoUsuarioDto3> pageContenidosDTO = pageContenidos.map(contenidoUsuario -> {
-            Contenido contenido = contenidoUsuario.getContenido();
-            ContenidoDto contenidoDTO = new ContenidoDto(
-                    contenido.getId(),
-                    contenido.getNombreFoto(),
-                    contenido.getNombre(),
-                    contenido.getDescripcion(),
-                    contenido.getEtiquetas(),
-                    contenido.getFechaLimite(),
-                    contenido.getPrograma(),
-                    contenido.getMatriculados(),
-                    contenido.getActivado(),
-                    contenido.getPrecio(),
-                    contenido.getPorcentajeAdmin(),
-                    contenido.getCalificacion(),
-                    new CategoriaDto(contenido.getCategoria().getId(), contenido.getCategoria().getNombre()));
-            return new ContenidoUsuarioDto3(contenidoUsuario.getId(), contenidoDTO);
+        Page<CursoUsuarioDto3> pageCursosDTO = pageCursos.map(cursoUsuario -> {
+            Curso curso = cursoUsuario.getCurso();
+            CursoDto cursoDTO = new CursoDto(
+                curso.getId(),
+                curso.getNombreFoto(),
+                curso.getNombre(),
+                curso.getDescripcion(),
+                curso.getEtiquetas(),
+                curso.getFechaLimite(),
+                curso.getPrograma(),
+                curso.getMatriculados(),
+                curso.getActivado(),
+                curso.getPrecio(),
+                curso.getPorcentajeAdmin(),
+                curso.getCalificacion(),
+                    new CategoriaDto(curso.getCategoria().getId(), curso.getCategoria().getNombre()));
+            return new CursoUsuarioDto3(cursoUsuario.getId(), cursoDTO);
         });
 
-        return new ResponseEntity<>(pageContenidosDTO, HttpStatus.OK);
+        return new ResponseEntity<>(pageCursosDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/usuarios/contenidos/{usuarioId}")
-    public ResponseEntity<Page<Contenido>> obtenerContenidosPorUsuarioIdPaginado(
+    @GetMapping("/usuarios/cursos/{usuarioId}")
+    public ResponseEntity<Page<Curso>> obtenerCursosPorUsuarioIdPaginado(
             @PathVariable Long usuarioId,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Contenido> pageContenidos = iContenidoUsuarioServicio.obtenerContenidosPorUsuarioIdPaginado(usuarioId,
+        Page<Curso> pageCursos = iCursoUsuarioServicio.obtenerCursosPorUsuarioIdPaginado(usuarioId,
                 pageable);
-        return new ResponseEntity<>(pageContenidos, HttpStatus.OK);
+        return new ResponseEntity<>(pageCursos, HttpStatus.OK);
     }
 
 }

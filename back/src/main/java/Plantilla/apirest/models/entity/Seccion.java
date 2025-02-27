@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table //(name = "seccion")
+@Table 
 public class Seccion {
 
     @Id
@@ -23,9 +23,9 @@ public class Seccion {
     private String nombreSeccion;
 
     @ManyToOne
-    @JoinColumn(name = "contenido_id", nullable = true)
-    @JsonIgnoreProperties({ "listaContenidoUsuario", "handler", "hibernateLazyInitializer" })
-    private Contenido contenido;
+    @JoinColumn(name = "curso_id", nullable = true)
+    @JsonIgnoreProperties({ "listaCursoUsuario", "handler", "hibernateLazyInitializer" })
+    private Curso curso;
 
     @OneToMany(mappedBy = "seccion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubSeccion> listaSubSeccion;

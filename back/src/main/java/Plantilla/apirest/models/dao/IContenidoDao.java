@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query; */
 import org.springframework.data.repository.PagingAndSortingRepository;
 //import org.springframework.data.repository.query.Param;
 
-import Plantilla.apirest.models.entity.Contenido;
+/* import Plantilla.apirest.models.entity.Contenido;
 
-public interface IContenidoDao extends PagingAndSortingRepository<Contenido, Long> {
+public interface IContenidoDao extends PagingAndSortingRepository<Contenido, Long> { */
 
         /*
          * @Query("SELECT c FROM Contenido c WHERE c.categoria.id = :categoriaId")
@@ -136,4 +136,4 @@ public interface IContenidoDao extends PagingAndSortingRepository<Contenido, Lon
          * @Query("SELECT c FROM Contenido c WHERE c.activado = false")
          * List<Contenido> findContenidosDesactivados();
          */
-}
+/* } */

@@ -115,7 +115,7 @@ public class UsuarioControlador extends CommonRestController<Usuario, IUsuarioSe
             usuarioDto.setNombre(usuario.getNombre());
             usuarioDto.setNombreUsuario(usuario.getNombreUsuario());
             usuarioDto.setCorreo(usuario.getCorreo());
-            usuarioDto.setLimiteContenidos(usuario.getLimiteContenidos());
+            usuarioDto.setLimiteCursos(usuario.getLimiteCursos());
             usuarioDto.setRoles(usuario.getRoles());
             return ResponseEntity.ok(usuarioDto); // Devuelve el UsuarioDto en lugar del Usuario
         } else {
@@ -141,9 +141,9 @@ public class UsuarioControlador extends CommonRestController<Usuario, IUsuarioSe
             usuarioActual.setNombre(usuario.getNombre());
             usuarioActual.setNombreUsuario(usuario.getNombreUsuario());
             usuarioActual.setPassword(usuario.getPassword());
-            usuarioActual.setLimiteContenidos(usuario.getLimiteContenidos());
+            usuarioActual.setLimiteCursos(usuario.getLimiteCursos());
             usuarioActual.setRoles(usuario.getRoles());
-            usuarioActual.setListaContenidoUsuario(usuario.getListaContenidoUsuario());
+            usuarioActual.setListaCursoUsuario(usuario.getListaCursoUsuario());
 
             usuarioActual = iService.guardarElemento(usuarioActual);// persistir o guardar
         } catch (DataAccessException e) {

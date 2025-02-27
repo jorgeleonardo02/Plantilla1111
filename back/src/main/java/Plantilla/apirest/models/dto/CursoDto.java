@@ -1,16 +1,15 @@
 package Plantilla.apirest.models.dto;
 
 import java.util.List;
-
-import Plantilla.apirest.models.entity.Contenido;
-import Plantilla.apirest.models.entity.ContenidoUsuario;
+import Plantilla.apirest.models.entity.Curso;
+import Plantilla.apirest.models.entity.CursoUsuario;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ContenidoDto {
+public class CursoDto {
 	private Long id;
 	private String nombreFoto;
 	private String nombre;
@@ -25,28 +24,28 @@ public class ContenidoDto {
 	private Long precio;
 	private double porcentajeAdmin;
 	private double calificacion;
-	private List<ContenidoUsuario> listaContenidoUsuario;
+	private List<CursoUsuario> listaContenidoUsuario;
 
-	public ContenidoDto() {
+	public CursoDto() {
 	}
 
-	public ContenidoDto(Contenido contenido) {
-		this.id = contenido.getId();
-		this.nombreFoto = contenido.getNombreFoto();
-		this.nombre = contenido.getNombre();
-		this.descripcion = contenido.getDescripcion();
-		this.etiquetas = contenido.getEtiquetas();
-		this.fechaLimite = contenido.getFechaLimite();
-		this.programa = contenido.getPrograma();
-		this.matriculados = contenido.getMatriculados();
-		this.activado = contenido.getActivado();
-		this.precio = contenido.getPrecio();
-		this.porcentajeAdmin = contenido.getPorcentajeAdmin();
-		this.calificacion = contenido.getCalificacion();
-		this.categoria = new CategoriaDto(contenido.getCategoria());
+	public CursoDto(Curso curso) {
+		this.id = curso.getId();
+		this.nombreFoto = curso.getNombreFoto();
+		this.nombre = curso.getNombre();
+		this.descripcion = curso.getDescripcion();
+		this.etiquetas = curso.getEtiquetas();
+		this.fechaLimite = curso.getFechaLimite();
+		this.programa = curso.getPrograma();
+		this.matriculados = curso.getMatriculados();
+		this.activado = curso.getActivado();
+		this.precio = curso.getPrecio();
+		this.porcentajeAdmin = curso.getPorcentajeAdmin();
+		this.calificacion = curso.getCalificacion();
+		this.categoria = new CategoriaDto(curso.getCategoria());
 	}
 
-	public ContenidoDto(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
+	public CursoDto(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
 			String fechaLimite, String programa, Long matriculados, Boolean activado,
 			Long precio, double porcentajeAdmin, double calificacion, CategoriaDto categoria) {
 		this.id = id;

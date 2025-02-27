@@ -5,10 +5,10 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ContenidoDto2 {
+public class CursoDto2 {
 	private Long id;
 	private String nombreFoto;
-	private String titulo;
+	private String nombre;
 	private String descripcion;
 	private String etiquetas;
 	private String fechaLimite;
@@ -16,7 +16,7 @@ public class ContenidoDto2 {
 	private Long matriculados;
 	private boolean comprado;
 	private CategoriaDto categoria;
-	private List<ContenidoUsuarioDto> listaContenidoUsuario;
+	private List<CursoUsuarioDto> listaContenidoUsuario;
 	private Long precio;
 	private double valorAdmin;
 	private double calificacion;
@@ -37,12 +37,12 @@ public class ContenidoDto2 {
 		this.nombreFoto = nombreFoto;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getDescripcion() {
@@ -101,11 +101,11 @@ public class ContenidoDto2 {
 		this.categoria = categoria;
 	}
 
-	public List<ContenidoUsuarioDto> getListaContenidoUsuario() {
+	public List<CursoUsuarioDto> getListaContenidoUsuario() {
 		return listaContenidoUsuario;
 	}
 
-	public void setListaContenidoUsuario(List<ContenidoUsuarioDto> listaContenidoUsuario) {
+	public void setListaContenidoUsuario(List<CursoUsuarioDto> listaContenidoUsuario) {
 		this.listaContenidoUsuario = listaContenidoUsuario;
 	}
 

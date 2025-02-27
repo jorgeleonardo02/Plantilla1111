@@ -17,9 +17,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Entity
-@Table(name = "contenidos")
+@Table(name = "cursos")
 @Data
-public class Contenido implements Serializable {
+public class Curso implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,15 +47,15 @@ public class Contenido implements Serializable {
 	private Categoria categoria;
 
 	// @JsonIgnore
-	@OneToMany(mappedBy = "contenido", fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "contenido", "handler", "hibernateLazyInitializer" })
-	private List<ContenidoUsuario> listaContenidoUsuario;
+	@OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "curso", "handler", "hibernateLazyInitializer" })
+	private List<CursoUsuario> listaCursoUsuario;
 
 	// constructor vacío
-	public Contenido() {
+	public Curso() {
 	}
 
-	public Contenido(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
+	public Curso(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
 			String fechaLimite, String programa, Long matriculados, Boolean activado, Categoria categoria,
 			Long precio, double porcentajeAdmin, double calificacion) {
 		this.id = id;
@@ -73,12 +73,12 @@ public class Contenido implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public List<ContenidoUsuario> getListaContenidoUsuario() {
-		return listaContenidoUsuario;
+	public List<CursoUsuario> getListaCursoUsuario() {
+		return listaCursoUsuario;
 	}
 
-	public void setListaContenidoUsuario(List<ContenidoUsuario> listaContenidoUsuario) {
-		this.listaContenidoUsuario = listaContenidoUsuario;
+	public void setListaCursoUsuario(List<CursoUsuario> listaCursoUsuario) {
+		this.listaCursoUsuario = listaCursoUsuario;
 	}
 
 	public static long getSerialversionuid() {

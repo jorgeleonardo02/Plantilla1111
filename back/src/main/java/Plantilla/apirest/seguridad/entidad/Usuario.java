@@ -102,7 +102,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import Plantilla.apirest.models.entity.ContenidoUsuario;
+import Plantilla.apirest.models.entity.CursoUsuario;
 import lombok.Data;
 
 @Entity
@@ -127,7 +127,7 @@ public class Usuario {
     @NotNull
     private String password;
 
-    private Long limiteContenidos;
+    private Long limiteCursos;
 
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
@@ -136,20 +136,20 @@ public class Usuario {
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "usuario", "listaContenidoUsuario", "handler", "hibernateLazyInitializer" })
-    private List<ContenidoUsuario> listaContenidoUsuario;
+    @JsonIgnoreProperties(value = { "usuario", "listaCursoUsuario", "handler", "hibernateLazyInitializer" })
+    private List<CursoUsuario> listaCursoUsuario;
 
     // Constructor completo
     public Usuario() {
     }
 
     public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String correo,
-            Long limiteContenidos, @NotNull String password) {
+            Long limiteCursos, @NotNull String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.correo = correo;
         this.password = password;
-        this.limiteContenidos = limiteContenidos;
+        this.limiteCursos = limiteCursos;
 
     }
 
@@ -217,20 +217,20 @@ public class Usuario {
         this.password = password;
     }
 
-    public Long getLimiteContenidos() {
-        return limiteContenidos;
+    public Long getLimiteCursos() {
+        return limiteCursos;
     }
 
-    public void setLimiteContenidos(Long limiteContenidos) {
-        this.limiteContenidos = limiteContenidos;
+    public void setLimiteCursos(Long limiteCursos) {
+        this.limiteCursos = limiteCursos;
     }
 
-    public List<ContenidoUsuario> getListaContenidoUsuario() {
-        return listaContenidoUsuario;
+    public List<CursoUsuario> getListaCursoUsuario() {
+        return listaCursoUsuario;
     }
 
-    public void setListaContenidoUsuario(List<ContenidoUsuario> listaContenidoUsuario) {
-        this.listaContenidoUsuario = listaContenidoUsuario;
+    public void setListaCursoUsuario(List<CursoUsuario> listaCursoUsuario) {
+        this.listaCursoUsuario = listaCursoUsuario;
     }
 
     public void setRoles(Set<Rol> roles) {

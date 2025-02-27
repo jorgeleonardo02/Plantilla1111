@@ -1,6 +1,5 @@
 package Plantilla.apirest.models.dto;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import Plantilla.apirest.seguridad.entidad.Rol;
@@ -12,19 +11,19 @@ public class UsuarioDto2 {
 	private String nombre;
 	private String nombreUsuario;
 	private String correo;
-	private Long limiteContenidos;
+	private Long limiteCursos;
 	private Set<Rol> roles;
 
 	public UsuarioDto2() {
 		super();
 	}
 
-	public UsuarioDto2(Long id, String nombre, String nombreUsuario, String correo, Long limiteContenidos) {
+	public UsuarioDto2(Long id, String nombre, String nombreUsuario, String correo, Long limiteCursos) {
 		this.id = id;
 		this.nombre = nombre;
 		this.nombreUsuario = nombreUsuario;
 		this.correo = correo;
-		this.limiteContenidos = limiteContenidos;
+		this.limiteCursos = limiteCursos;
 	}
 
 	public Long getId() {
@@ -59,12 +58,12 @@ public class UsuarioDto2 {
 		this.correo = correo;
 	}
 
-	public Long getLimiteContenidos() {
-		return limiteContenidos;
+	public Long getLimiteCursos() {
+		return limiteCursos;
 	}
 
-	public void setLimiteContenidos(Long limiteContenidos) {
-		this.limiteContenidos = limiteContenidos;
+	public void setLimiteCursos(Long limiteCursos) {
+		this.limiteCursos = limiteCursos;
 	}
 
 }
