@@ -38,16 +38,16 @@
   <h1>{{ blog.titulo }}</h1>
 
   <!-- Formulario reactivo para crear secciones -->
-  <form [formGroup]="contenidoForm" (ngSubmit)="crearSeccion()">
+  <form [formGroup]="cursoForm" (ngSubmit)="crearSeccion()">
     <label for="numeroSeccion">Numero de la sección:</label>
     <input id="numerSeccion" type="number" formControlName="numeroSeccion" placeholder="Ingrese el numero de la sección" required/>
     <br>
     <label for="nombreSeccion">Nombre de la sección:</label>
     <input id="nombreSeccion" type="text" formControlName="nombreSeccion" placeholder="Ingrese el nombre de la sección" required/>
     <br>
-    <label for="contenido">Selecciona un contenido:</label>
-    <select formControlName="opcionSeleccionada" id="contenido" required>
-      <option *ngFor="let contenido of contenidos" [ngValue]="contenido">{{ contenido.nombre }}</option>
+    <label for="curso">Selecciona un curso:</label>
+    <select formControlName="opcionSeleccionada" id="curso" required>
+      <option *ngFor="let curso of cursos" [ngValue]="curso">{{ curso.nombre }}</option>
     </select>
 
     <h1>-------------------------------------------------------------------------------</h1>
@@ -58,13 +58,13 @@
     <label for="nombreSubSeccion">Nombre de la Sub Sección:</label>
     <input id="nombreSubSeccion" type="text" formControlName="nombreSubSeccion" placeholder="Ingrese el nombre de la sección" required/>
     <br>
-    <button type="submit" [disabled]="contenidoForm.invalid">Crear sección</button>
+    <button type="submit" [disabled]="cursoForm.invalid">Crear sección</button>
   </form>
 
   <!-- Formulario reactivo para el contenido -->
   <form [formGroup]="editorForm" (ngSubmit)="guardar()">
     <div class="form-group">
-      <label for="titulo">Título del Contenido:</label>
+      <label for="titulo">Nombre del Curso:</label>
       <input
         type="text"
         class="form-control"

@@ -2,15 +2,11 @@ package Plantilla.apirest.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-//import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -21,17 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-//import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,7 +61,7 @@ import Plantilla.apirest.service.IUsuarioService;
 /* @CrossOrigin(origins = { "http://localhost:4200", "*" }, exposedHeaders = { "Access-Control-Expose-Headers",
 		"Content-Disposition" }) */
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/contenidos")
+@RequestMapping("/api/cursos")
 @RestController
 public class CursoRestControllers extends CommonRestController<Curso, ICursoService> {
 
@@ -733,7 +726,7 @@ public class CursoRestControllers extends CommonRestController<Curso, ICursoServ
 		dto.setCategoriaId(curso.getCategoria().getId());
 		dto.setPrecio(curso.getPrecio());
 		dto.setPorcentajeAdmin(curso.getPorcentajeAdmin());
-		dto.setListaContenidoUsuario(curso.getListaCursoUsuario());
+		dto.setListaCursoUsuario(curso.getListaCursoUsuario());
 
 		return dto;
 	}

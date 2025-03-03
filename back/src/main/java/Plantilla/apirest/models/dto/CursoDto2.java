@@ -16,7 +16,7 @@ public class CursoDto2 {
 	private Long matriculados;
 	private boolean comprado;
 	private CategoriaDto categoria;
-	private List<CursoUsuarioDto> listaContenidoUsuario;
+	private List<CursoUsuarioDto> listaCursoUsuario;
 	private Long precio;
 	private double valorAdmin;
 	private double calificacion;
@@ -101,12 +101,12 @@ public class CursoDto2 {
 		this.categoria = categoria;
 	}
 
-	public List<CursoUsuarioDto> getListaContenidoUsuario() {
-		return listaContenidoUsuario;
+	public List<CursoUsuarioDto> getListaCursoUsuario() {
+		return listaCursoUsuario;
 	}
 
-	public void setListaContenidoUsuario(List<CursoUsuarioDto> listaContenidoUsuario) {
-		this.listaContenidoUsuario = listaContenidoUsuario;
+	public void setListaCursoUsuario(List<CursoUsuarioDto> listaCursoUsuario) {
+		this.listaCursoUsuario = listaCursoUsuario;
 	}
 
 }

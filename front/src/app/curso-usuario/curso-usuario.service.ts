@@ -4,26 +4,25 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CommonService } from '../common/common.service';
-//import { UsuarioDto } from './contenido-usuario';
 import alertasSweet from 'sweetalert2';
 import { environment } from 'environments/environment';
-import { ContenidoUsuario } from './contenido-usuario';
+import { CursoUsuario } from './curso-usuario';
 @Injectable({
   providedIn: 'root',
 })
-export class ContenidoUsuarioService extends CommonService<ContenidoUsuario> {
+export class CursoUsuarioService extends CommonService<CursoUsuario> {
   
   //protected override rutaEndPoint = 'http://localhost:8082/api/contenidoUsuario';
 
-  protected override rutaEndPoint = environment.endPointContenidoUsuario;
+  protected override rutaEndPoint = environment.endPointCursoUsuario;
 
   constructor(enrutador: Router,
               http: HttpClient) { super(enrutador, http); // instancio la clase padre
   }
 //http://localhost:8888/api/contenidoUsuario/rolDocente/1
-  public cantidadContenidosDeDocente(usuarioId: number): Observable<any> {
+  public cantidadCursosDeDocente(usuarioId: number): Observable<any> {
     return this.httpCliente
-      .get(this.rutaEndPoint+'/cantidadContenidos/'+usuarioId)
+      .get(this.rutaEndPoint+'/cantidadCursos/'+usuarioId)
       .pipe(
         catchError((e: any) => {
           alertasSweet.fire('Error', e.error.error);
@@ -31,9 +30,9 @@ export class ContenidoUsuarioService extends CommonService<ContenidoUsuario> {
         })
       );
   }
-  public getContenidoUsuarioByRolDocente(contenidoId: number): Observable<any>{
+  public getCursoUsuarioByRolDocente(cursoId: number): Observable<any>{
     return this.httpCliente
-      .get(this.rutaEndPoint+'/rolDocente/'+contenidoId)
+      .get(this.rutaEndPoint+'/rolDocente/'+cursoId)
       .pipe(
         catchError((e: any) => {
           alertasSweet.fire('Error', e.error.error);
@@ -42,7 +41,7 @@ export class ContenidoUsuarioService extends CommonService<ContenidoUsuario> {
       );
   }
 
-  contenidosPorIdUsuario(idUsuario: number){
+  cursosPorIdUsuario(idUsuario: number){
     return this.httpCliente
       .get(this.rutaEndPoint+'/usuario/'+idUsuario)
       .pipe(
@@ -51,7 +50,6 @@ export class ContenidoUsuarioService extends CommonService<ContenidoUsuario> {
           return throwError('error');
         })
       );
-    //return this.httpCliente.get(this.rutaEndPoint+"/usuario/"+idUsuario);
   }
 
 }

@@ -102,25 +102,24 @@
             <li class="nav-link dropdown-hover">
                 <a routerLink="/carrito" class="nav-link p-0" data-toggle="dropdown" href="#">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span *ngIf="contenidoEnCarrito.length!==0" class="badge badge-info navbar-badge Large .btn-lg">{{contenidoEnCarrito.length}}</span>
+                    <span *ngIf="cursoEnCarrito.length!==0" class="badge badge-info navbar-badge Large .btn-lg">{{cursoEnCarrito.length}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <span class="dropdown-header">Cesta</span>
                     <div class="dropdown-divider"></div>
-                    <div [ngClass]="{'pre-scrollable': contenidoEnCarrito.length > 5}">
-                        <div *ngFor="let contenido of contenidoEnCarrito; let i = index;">
+                    <div [ngClass]="{'pre-scrollable': cursoEnCarrito.length > 5}">
+                        <div *ngFor="let curso of cursoEnCarrito; let i = index;">
                             <a class="dropdown-item">
                                 <div class="media">
-                                    <img *ngIf="contenido.nombreFoto" width="240" height="135" [src]="urlFoto+contenido.id" alt="User Avatar" class="size-50 mr-3 img-square">
-                                    <img *ngIf="!contenido.nombreFoto" width="240" height="135" src="../../assets/img/El estoico1.png" alt="User Avatar" class="size-50 mr-3 img-square">
+                                    <img *ngIf="curso.nombreFoto" width="240" height="135" [src]="urlFoto+curso.id" alt="User Avatar" class="size-50 mr-3 img-square">
+                                    <img *ngIf="!curso.nombreFoto" width="240" height="135" src="../../assets/img/El estoico1.png" alt="User Avatar" class="size-50 mr-3 img-square">
                                     <div class="media-body">
                                         <ul class="ml-1 mb-0 fa-ul text-muted">
-                                            <li class="small text-primary"> <b>{{contenido?.nombre}}</b></li>
+                                            <li class="small text-primary"> <b>{{curso?.nombre}}</b></li>
                                             <!-- <li class="small"> {{contenido.listaContenidoUsuario[0].usuario?.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria?.nombre}}</li> -->
-                                            <li class="small">{{ contenido.listaContenidoUsuario[0].usuario.nombre }}, {{ contenido.listaContenidoUsuario[0].contenido.categoria.nombre }}</li>
-                                            <li class="small"> <b>{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$</b></li>
+                                            <li class="small">{{ curso.listaCursoUsuario[0].usuario.nombre }}, {{ curso.listaCursoUsuario[0].curso.categoria.nombre }}</li>
+                                            <li class="small"> <b>{{curso.precio*(1+curso.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$</b></li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </a>
@@ -128,20 +127,20 @@
                         </div>
                     </div>
                     <!-- <a *ngIf="contenidoEnCarrito.length !==0" class="dropdown-item dropdown-footer ">Total: {{sumaTotal | number:'1.0-0'}}&nbsp;COL$</a> -->
-                    <a *ngIf="contenidoEnCarrito.length !==0" class="ud-heading-sm ml-4">Total: {{sumaTotal | number:'1.0-0'}}&nbsp;COL$</a>
+                    <a *ngIf="cursoEnCarrito.length !==0" class="ud-heading-sm ml-4">Total: {{sumaTotal | number:'1.0-0'}}&nbsp;COL$</a>
                     <div class="dropdown-divider"></div>
 
                     <div class="dropdown-divider"></div>
                     <a routerLink="/carrito" class="dropdown-item dropdown-footer">Ir a cesta</a>
                 </div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" *ngIf="contenidoEnCarrito.length === 0">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" *ngIf="cursoEnCarrito.length === 0">
                     <span class="dropdown-header">Cesta vacía</span>
                 </div>
             </li>
             <li class="nav-link" *ngIf="tokenService.rolAdmin()">
                 <!-- " && tokenService.rolDocente()" -->
-                <a class="nav-link p-0" (click)="abrirVentanaModalForm()">Contenido</a>
+                <a class="nav-link p-0" (click)="abrirVentanaModalForm()">Curso</a>
             </li>
             <!-- Mi aprendizaje -->
             <li class="nav-link dropdown-hover" *ngIf="tokenService.logueado()">
@@ -309,7 +308,7 @@
                     </div>
                     <!-- <div *ngIf="tokenService.rolDocente() || tokenService.rolVisitante()"> -->
                     <div>
-                        <a class="dropdown-item" (click)="abrirVentanaModalForm()">Contenido</a>
+                        <a class="dropdown-item" (click)="abrirVentanaModalForm()">Curso</a>
                         <a href="#" class="dropdown-item">Mis cursos</a>
                     </div>
 

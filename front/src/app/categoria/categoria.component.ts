@@ -132,8 +132,8 @@ public Eliminar(categoria: Categoria): void {
   confirmButtonText: 'Si, eliminar!'
   }).then((respuesta) => {
     if (respuesta.value) {
-        if(categoria.listaContenidos.length !=0 ) {
-          this.alertaSnackBar.open("No se puede eliminar esta categoria, hay contenidos de esta categoria!!", 'Cerrar', {
+        if(categoria.listaCurso.length !=0 ) {
+          this.alertaSnackBar.open("No se puede eliminar esta categoria, hay curso de esta categoria!!", 'Cerrar', {
           duration: 8000 });
         } else {
             this.categoriaService.eliminaElemento(categoria.id).subscribe(respuesta => {

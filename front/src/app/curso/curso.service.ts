@@ -4,20 +4,20 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CommonService } from '../common/common.service';
-import { Contenido } from './contenido';
+import { Curso } from './curso';
 import alertasSweet from 'sweetalert2';
 import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContenidoService extends CommonService<Contenido> {
+export class CursoService extends CommonService<Curso> {
   //protected override rutaEndPoint = 'http://localhost:8080/api/contenidos';
 
-  protected override rutaEndPoint = environment.endPointContenido;
+  protected override rutaEndPoint = environment.endPointCursos;
   // esta variable se ubica acá para facilitar el trabajo entre los componentes producto y formularioProducto
   private foto: File | any;
-  listaContenidos: Contenido[];
+  listaCursos: Curso[];
   private eliminarFoto = false;
   private idCategoria = new BehaviorSubject<number>(0);
   private nombreCategoria = new BehaviorSubject<string>("");
@@ -26,16 +26,16 @@ export class ContenidoService extends CommonService<Contenido> {
               http: HttpClient) { super(enrutador, http); // instancio la clase padre
 }
 
-  recogerListaDeContenidos(listaContenidos: Contenido[]) {
-    this.listaContenidos = listaContenidos;
+  recogerListaDeCursos(listaCursos: Curso[]) {
+    this.listaCursos = listaCursos;
   }
 
-  entregarListaContenidos(): Contenido[] {
-    return this.listaContenidos;
+  entregarListaCursos(): Curso[] {
+    return this.listaCursos;
   }
 
-  contenidoExiste(id: number): Observable<boolean> {
-    return this.httpCliente.get<boolean>(`${this.rutaEndPoint}/contenido-existe?id=${id}`);
+  cursoExiste(id: number): Observable<boolean> {
+    return this.httpCliente.get<boolean>(`${this.rutaEndPoint}/curso-existe?id=${id}`);
   }
 
   public setIdCategoria(id: number) {
@@ -59,9 +59,9 @@ export class ContenidoService extends CommonService<Contenido> {
     return this.nombreCategoria.asObservable();
   }
 
-  obtenerFotoContenidoPorID(idContenido: number): Observable<any> {
+  obtenerFotoCursoPorID(idCurso: number): Observable<any> {
     return this.httpCliente
-      .get(this.rutaEndPoint + '/' + 'contenidoFoto' + '/' + idContenido, {
+      .get(this.rutaEndPoint + '/' + 'cursoFoto' + '/' + idCurso, {
         observe: 'response',
         responseType: 'blob',
       })
@@ -74,7 +74,7 @@ export class ContenidoService extends CommonService<Contenido> {
       );
   }
 
-  listarContenidosPorIdCategoria(idCategoria: number): Observable<any> {
+  listarCursosPorIdCategoria(idCategoria: number): Observable<any> {
     return this.httpCliente
       .get(this.rutaEndPoint + '/categoria/' + idCategoria)
       .pipe(
@@ -85,25 +85,25 @@ export class ContenidoService extends CommonService<Contenido> {
       );
   }
 
-  agregarContenidoConfoto(contenido: Contenido, archivo: File): Observable<any> {
+  agregarCursoConfoto(curso: Curso, archivo: File): Observable<any> {
     const datosFormulario = new FormData();
 
     datosFormulario.append('archivo', archivo);
-    datosFormulario.append('nombre', contenido.nombre);
-    datosFormulario.append('descripcion', contenido.descripcion);
-    datosFormulario.append('etiquetas', contenido.etiquetas);
-    datosFormulario.append('programa', contenido.programa);
-    datosFormulario.append('activado', contenido.activado.toString());
+    datosFormulario.append('nombre', curso.nombre);
+    datosFormulario.append('descripcion', curso.descripcion);
+    datosFormulario.append('etiquetas', curso.etiquetas);
+    datosFormulario.append('programa', curso.programa);
+    datosFormulario.append('activado', curso.activado.toString());
     //JSON.stringify: se convierte el objeto en una cadena JSON para poder enviarlo en el cuerpo de la solicitud HTTP
-    datosFormulario.append("idCategoria", contenido.categoria.id.toString());
-    datosFormulario.append("precio", contenido.precio.toString());
+    datosFormulario.append("idCategoria", curso.categoria.id.toString());
+    datosFormulario.append("precio", curso.precio.toString());
 
     console.log('datosFormulario');
     console.log( datosFormulario);
     // al pasar un FormData en el Body no se necesita cabecera porque
     // al ser ese tipo de variable, se sobreentiende que la cabecera será un MultiPart
     return this.httpCliente
-      .post(this.rutaEndPoint + '/' + 'contenidoFoto', datosFormulario)
+      .post(this.rutaEndPoint + '/' + 'cursoFoto', datosFormulario)
       .pipe(
         catchError((e) => {
           console.log(e.error.mensaje);
@@ -113,20 +113,20 @@ export class ContenidoService extends CommonService<Contenido> {
       );
   }
 
-  modificarContenidoConfoto(contenido: Contenido, archivo: File): Observable<any> {
+  modificarCursoConfoto(curso: Curso, archivo: File): Observable<any> {
     const datosFormulario = new FormData();
     datosFormulario.append('archivo', archivo);
-    datosFormulario.append('nombre', contenido.nombre);
-    datosFormulario.append('descripcion', contenido.descripcion);
-    datosFormulario.append('etiquetas', contenido.etiquetas);
-    datosFormulario.append('programa', contenido.programa);
-    datosFormulario.append('nombreFoto', contenido.nombreFoto);
+    datosFormulario.append('nombre', curso.nombre);
+    datosFormulario.append('descripcion', curso.descripcion);
+    datosFormulario.append('etiquetas', curso.etiquetas);
+    datosFormulario.append('programa', curso.programa);
+    datosFormulario.append('nombreFoto', curso.nombreFoto);
 
     // al pasar un FormData en el Body no se necesita cabecera porque
     // al ser ese tipo de variable, se sobreentiende que la cabecera será un MultiPart
     return this.httpCliente
       .put(
-        this.rutaEndPoint + '/contenidoFoto' + '/' + contenido.id,
+        this.rutaEndPoint + '/cursoFoto' + '/' + curso.id,
         datosFormulario
       )
       .pipe(
@@ -138,11 +138,11 @@ export class ContenidoService extends CommonService<Contenido> {
       );
   }
 
-  modificarContenidoFotoNull(contenido: Contenido): Observable<any> {
+  modificarCursoFotoNull(curso: Curso): Observable<any> {
     return this.httpCliente
       .put(
-        this.rutaEndPoint + '/contenidoFotoNull/' + contenido.id,
-        contenido,
+        this.rutaEndPoint + '/cursoFotoNull/' + curso.id,
+        curso,
         { headers: this.cabeceraHttp }
       )
       .pipe(
@@ -171,9 +171,9 @@ export class ContenidoService extends CommonService<Contenido> {
     return this.eliminarFoto;
   }
 
-  eliminaContenido(idElemento: number): Observable<any> {
+  eliminaCurso(idElemento: number): Observable<any> {
     return this.httpCliente
-      .delete(this.rutaEndPoint + '/contenido/' + idElemento, {
+      .delete(this.rutaEndPoint + '/curso/' + idElemento, {
         headers: this.cabeceraHttp,
       })
       .pipe(
@@ -183,36 +183,42 @@ export class ContenidoService extends CommonService<Contenido> {
         })
       );
   }
+
   elementosCategoriaIdPaginado(idCategoria: number, pagina: number, tamanoPagina: number): Observable<any> {
     const parametros = new HttpParams()
     .set('page', pagina)
     .set('size', tamanoPagina);
     return this.httpCliente.get(`${this.rutaEndPoint}/categoria/${idCategoria}/nombre?page=${pagina}&size=${tamanoPagina}`, { params: parametros});
   }
-  contenidosCompleto(nombreCategoria: string, nombreUsuario: string, mostrarTodos: boolean, activado: boolean, pagina?: number, tamanoPagina?: number): Observable<any> {
+
+  cursoCompleto(nombreCategoria: string, nombreUsuario: string, mostrarTodos: boolean, activado: boolean, pagina?: number, tamanoPagina?: number): Observable<any> {
     let url = `${this.rutaEndPoint}/?nombreCategoria=${nombreCategoria.replace(/-/g, " ")}&nombreUsuario=${nombreUsuario}&mostrarTodos=${mostrarTodos}&activado=${activado}`;
     if (pagina !== undefined && tamanoPagina !== undefined) {
       url += `&page=${pagina}&size=${tamanoPagina}`;
     }
+    console.log("url");
+    console.log(url);
+    console.log("this.httpCliente.get(url)");
+    console.log(this.httpCliente.get(url));
     return this.httpCliente.get(url);
   }
 
-  existsContenido(nombreCategoria: string, usuarioId: number, contenidoId: number): Observable<boolean> {
+  existsCurso(nombreCategoria: string, usuarioId: number, cursoId: number): Observable<boolean> {
     let params = new HttpParams()
       .set('nombreCategoria', nombreCategoria)
       .set('usuarioId', usuarioId.toString());
-    return this.httpCliente.get<boolean>(`${this.rutaEndPoint}/${contenidoId}/existe`, { params });
+    return this.httpCliente.get<boolean>(`${this.rutaEndPoint}/${cursoId}/existe`, { params });
   }
 
-  contenidosPorNombreDeCategoriaPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number): Observable<any> {
+  cursosPorNombreDeCategoriaPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number): Observable<any> {
     return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/nombre?page="+pagina+"&size="+tamanoPagina/* , { params: parametros} */ );
   }
 
-  contenidosPorNombreDeCategoriaActivadoPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number/* , activado: boolean */): Observable<any> {
+  cursosPorNombreDeCategoriaActivadoPaginado(nombreCategoria: string, pagina: number, tamanoPagina: number/* , activado: boolean */): Observable<any> {
     return this.httpCliente.get(this.rutaEndPoint+"/categoria/nombre/activado/"+nombreCategoria.replace(/-/g, " ")+"/nombre?page="+pagina+"&size="+tamanoPagina/* "/titulo", { params: parametros} */);
   }
 
-  contenidosPorIdUsuario(idUsuario: number){
+  cursosPorIdUsuario(idUsuario: number){
     return this.httpCliente.get(this.rutaEndPoint+"/usuario/"+idUsuario);
   }
 

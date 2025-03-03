@@ -3,7 +3,6 @@ package Plantilla.apirest.models.dto;
 import java.util.List;
 import Plantilla.apirest.models.entity.Curso;
 import Plantilla.apirest.models.entity.CursoUsuario;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +23,7 @@ public class CursoDto {
 	private Long precio;
 	private double porcentajeAdmin;
 	private double calificacion;
-	private List<CursoUsuario> listaContenidoUsuario;
+	private List<CursoUsuario> listaCursoUsuario;
 
 	public CursoDto() {
 	}

@@ -4,9 +4,6 @@ export interface SubSeccion {
   id: number;
   numeroSubSeccion: number;
   nombreSubseccion: string;
-  /* tipoContenido: string;
-  contenidoUrl: string;
-  contenidoTexto: string; */
-  contenidoSubSeccion: string;
+  cursoSubSeccion: string;
   seccion: Seccion;
 }

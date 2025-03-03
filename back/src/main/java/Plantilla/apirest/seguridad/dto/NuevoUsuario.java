@@ -19,7 +19,7 @@ public class NuevoUsuario {
 	private String correo;
 	@NotBlank
 	private String password;
-	private Long limiteContenidos;
+	private Long limiteCursos;
 	private Set<String> roles = new HashSet<>();// Por que se van a utilisar Json para mejorar el trafico. COn una
 														// API
 	// Rest es mejor usar cadenas (String)
@@ -66,12 +66,12 @@ public class NuevoUsuario {
 		this.roles = roles;
 	}
 
-	public Long getLimiteContenidos() {
-		return limiteContenidos;
+	public Long getLimiteCursos() {
+		return limiteCursos;
 	}
 
-	public void setLimiteContenidos(Long limiteContenidos) {
-		this.limiteContenidos = limiteContenidos;
+	public void setLimiteCursos(Long limiteCursos) {
+		this.limiteCursos = limiteCursos;
 	}
 
 }

@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import { Contenido } from '../contenido/contenido';
-import { ContenidoService } from '../contenido/contenido.service';
+import { Curso } from '../curso/curso';
+import { CursoService } from '../curso/curso.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { url } from 'environments/url';
@@ -13,7 +13,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]); */
 //import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { CarritoService } from '../carrito/carrito.service';
-import { ContenidoUsuarioService } from '../contenido-usuario/contenido-usuario.service';
+import { CursoUsuarioService } from '../curso-usuario/curso-usuario.service';
 
 // Instala los módulos necesarios
 SwiperCore.use([Navigation, Pagination]);
@@ -24,9 +24,9 @@ SwiperCore.use([Navigation, Pagination]);
 })
 export class CuerpoComponent implements OnInit {
 
-  public listaContenidos: Contenido[];
-  public listaContenidos1: Contenido[];
-  public contenidoEnCarrito: Contenido[] = [];
+  public listaCursos: Curso[];
+  public listaCursos1: Curso[];
+  public cursoEnCarrito: Curso[] = [];
   public urlFoto: string = environment.endPointFoto;
   public nombreCategoria: string;
   public nombreUsuario: string;
@@ -37,11 +37,8 @@ export class CuerpoComponent implements OnInit {
   paginaActual = 0;
   totalPorPaginas = 25;
   pageSizeOptions: number[] = [3, 5, 10, 25, 100, 200, 300];
-
-
- 
-
-// ...
+  
+  // ...
 
 // En tu componente
 swiperConfig = {
@@ -51,8 +48,7 @@ swiperConfig = {
    //pagination: { clickable: true } // Agrega paginación (puntos indicadores)
 };
 
-
-  @ViewChild(MatPaginator, {static: true}) paginador: MatPaginator;
+@ViewChild(MatPaginator, {static: true}) paginador: MatPaginator;
 
   // pasarela
   scrollbar: any = false;
@@ -64,8 +60,8 @@ swiperConfig = {
     1200.2: { spaceBetween: 10 }   // Ajusta slidesPerView para que quepan 5 elementos
   };
   calculateSpaceBetween(): number | any {
-    if(this.listaContenidos != null){
-      const totalElements = this.listaContenidos.length;
+    if(this.listaCursos != null){
+      const totalElements = this.listaCursos.length;
    
     console.log("totalElements", totalElements);
     const totalSpace = 10; // Puedes ajustar esto según sea necesario
@@ -88,44 +84,23 @@ swiperConfig = {
 
   //*************************************************************************************
  
-  constructor(private contenidoService: ContenidoService,
+  constructor(private cursoService: CursoService,
               public tokenService: TokenService,
               private router: Router,
-              private contenidoUsuarioService: ContenidoUsuarioService,
+              private cursoUsuarioService: CursoUsuarioService,
               private carritoService: CarritoService,
               private route: ActivatedRoute) {
-              //console.log("constructor cuerpo");
-              //console.log(this.contenidoService);
-              /* this.carritoService.carrito$.subscribe((nuevoCarrito) => {
-                this.contenidoEnCarrito = nuevoCarrito;
-                console.log("carrito en cuerpo");
-                console.log(this.contenidoEnCarrito);
-              }); */
+              
   }
 
-  //ngAfterViewInit() {
-    //if (this.swiper && this.swiperDirective) {
-      //const swiperInstance = this.swiper.swiper();
-      //if (swiperInstance) {
-        //swiperInstance.update();
-      //}
-    //}
-  //}
-  //@ViewChild(SwiperComponent) swiper?: SwiperComponent;
-
-//ngAfterViewInit() {
-  //if (this.swiper) {
-    //this.swiper.setIndex(0); // Ajusta el índice según tu necesidad
-    //this.swiper.update(); // Actualiza Swiper
-  //}
-//}
+  
   ngOnInit(): void {
     console.log("urlFoto", this.urlFoto);
-    this.obtenerListaContenidos();
+    this.obtenerListaCursos();
     this.usuario();
     this.calculateSpaceBetween();
     //this.contenidoPorUsuario(1);
-    this.contenidoService.getNombreCategoria().subscribe( nombreCategoria => {
+    this.cursoService.getNombreCategoria().subscribe( nombreCategoria => {
       console.log("nombreCategoria en cuerpo");
       console.log(nombreCategoria);
       this.filtro = 'todos';
@@ -162,11 +137,11 @@ swiperConfig = {
     console.log("nombreUsuario", this.nombreUsuario);
     
     if(!this.tokenService.logueado()){
-      this.contenidoService.contenidosCompleto(nombreCategoria, this.nombreUsuario, mostrarTodos, activado,
+      this.cursoService.cursoCompleto(nombreCategoria, this.nombreUsuario, mostrarTodos, activado,
         this.paginaActual, this.totalPorPaginas).subscribe((paginacion) => {
-          this.listaContenidos = paginacion.content as Contenido[];
+          this.listaCursos = paginacion.content as Curso[];
           //console.log("this.listaContenidos_leo");
-          //console.log(this.listaContenidos);
+          //console.log(this.listaCursos);
           this.totalRegistros = paginacion.totalElements as number;
           this.paginador._intl.itemsPerPageLabel = 'Registros por página:';
         });
@@ -174,11 +149,13 @@ swiperConfig = {
       if (this.nombreUsuario !== undefined) {
         //console.log("El usuario logueado es: " + this.nombreUsuario);
         //console.log("logeado:"+this.tokenService.logueado());
-        this.contenidoService.contenidosCompleto(nombreCategoria, this.nombreUsuario, mostrarTodos, activado,
+        this.cursoService.cursoCompleto(nombreCategoria, this.nombreUsuario, mostrarTodos, activado,
           this.paginaActual, this.totalPorPaginas).subscribe((paginacion) => {
-            this.listaContenidos = paginacion.content as Contenido[];
-            console.log("this.listaContenidos_leo");
-            console.log(this.listaContenidos);
+            console.log("paginacion");
+            console.log(paginacion);
+            this.listaCursos = paginacion.content as Curso[];
+            console.log("this.listaCursos_leo");
+            console.log(this.listaCursos);
             this.totalRegistros = paginacion.totalElements as number;
             this.paginador._intl.itemsPerPageLabel = 'Registros por página:';
           });
@@ -186,11 +163,11 @@ swiperConfig = {
     }    
   }
   
-  obtenerListaContenidos() {
-    this.contenidoService.listarElementos().subscribe((contenidos) => {
-      this.listaContenidos1 = contenidos;
-      console.log("Lista de contenidos")
-      console.log(this.listaContenidos1);
+  obtenerListaCursos() {
+    this.cursoService.listarElementos().subscribe((cursos) => {
+      this.listaCursos1 = cursos;
+      console.log("Lista de cursos")
+      console.log(this.listaCursos1);
     });
   }
   
@@ -213,7 +190,7 @@ swiperConfig = {
     });
   }
   
-  public filtrarContenidos() {
+  public filtrarCursos() {
     const nombreCategoria = this.route.snapshot.paramMap.get('nombreCategoria');
       //console.log("cuerpo1");
       //console.log(this.route.snapshot.paramMap);
@@ -222,17 +199,10 @@ swiperConfig = {
       }
   }
 
-  /* public contenidoPorUsuario(idContenido: number){
-    this.contenidoUsuarioService.getContenidoUsuarioByRolDocente(idContenido).subscribe(r => {
-      console.log("contenidoPorUsuario");
-      console.log(r);
-    }) ;
-  } */
-
-  agregarAlCarrito(contenido: Contenido): void {
+  agregarAlCarrito(curso: Curso): void {
     console.log("AgregarCarrito contenido");
-    console.log(contenido);
-    this.carritoService.agregarAlCarrito(contenido);
+    console.log(curso);
+    this.carritoService.agregarAlCarrito(curso);
     console.log('CuerpoComponent inicializado');
   }
 }

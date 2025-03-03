@@ -7,8 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { CarritoService } from 'src/app/carrito/carrito.service';
-import { ContenidoService } from 'src/app/contenido/contenido.service';
-import { Contenido } from 'src/app/contenido/contenido';
+import { CursoService } from 'src/app/curso/curso.service';
+import { Curso } from 'src/app/curso/curso';
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                private constructorFormulario: FormBuilder,
                private usuarioService: UsuarioService,
                private carritoService: CarritoService,
-               private contenidoService: ContenidoService,
+               private cursoService: CursoService,
                private toastr: ToastrService) { }
                
   ngOnInit(): void {
@@ -85,8 +85,8 @@ export class LoginComponent implements OnInit {
               let carrito = this.carritoService.obtenerCarritoActual();
               let observables = carrito.map(elemento => {
                 console.log(elemento);
-                 let nombreCategoria = elemento?.listaContenidoUsuario?.[0]?.contenido?.categoria?.nombre;
-                return this.contenidoService.existsContenido(nombreCategoria, usuario.id, elemento.id).pipe(
+                 let nombreCategoria = elemento?.listaCursoUsuario?.[0]?.curso?.categoria?.nombre;
+                return this.cursoService.existsCurso(nombreCategoria, usuario.id, elemento.id).pipe(
                   map(existe => ({ existe, elemento }))
                 );
               });
@@ -118,13 +118,13 @@ export class LoginComponent implements OnInit {
       });
     }
 
-  listaContenidos: Contenido[];
-  contenidoPorCategoria(nombreCategoria: string, nombreUsuario: string, mostrarTodos:boolean, activado:boolean){
-    this.contenidoService.contenidosCompleto(nombreCategoria, nombreUsuario, mostrarTodos, activado).subscribe((paginacion) => {
-      this.listaContenidos = paginacion.content as Contenido[];
+  listaCursos: Curso[];
+  cursoPorCategoria(nombreCategoria: string, nombreUsuario: string, mostrarTodos:boolean, activado:boolean){
+    this.cursoService.cursoCompleto(nombreCategoria, nombreUsuario, mostrarTodos, activado).subscribe((paginacion) => {
+      this.listaCursos = paginacion.content as Curso[];
       });
   }
-  eliminarDelCarrito(contenido: Contenido): void {
-    this.carritoService.eliminarElementoDelCarrito(contenido.id);
+  eliminarDelCarrito(curso: Curso): void {
+    this.carritoService.eliminarElementoDelCarrito(curso.id);
   }
 }

@@ -90,7 +90,7 @@ public class AuthControlador {
         if (usuarioService.existsByCorreo(nuevoUsuario.getCorreo()))
             return new ResponseEntity<>(new Mensaje("Ese correo ya existe"), HttpStatus.BAD_REQUEST);
         Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
-                nuevoUsuario.getCorreo(), nuevoUsuario.getLimiteContenidos(),
+                nuevoUsuario.getCorreo(), nuevoUsuario.getLimiteCursos(),
                 passwordEncoder.encode(nuevoUsuario.getPassword()));
         Set<Rol> roles = new HashSet<>();
         if (nuevoUsuario.getRoles().contains("ADMIN"))

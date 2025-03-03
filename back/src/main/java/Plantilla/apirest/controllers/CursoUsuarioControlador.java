@@ -38,9 +38,9 @@ import Plantilla.apirest.service.IUsuarioService;
 
 //@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/contenidoUsuario")
+@RequestMapping("/api/cursoUsuario")
 @RestController
-public class ContenidoUsuarioControlador extends CommonRestController<CursoUsuario, ICursoUsuarioServicio> {
+public class CursoUsuarioControlador extends CommonRestController<CursoUsuario, ICursoUsuarioServicio> {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     boolean tieneRolDocente;

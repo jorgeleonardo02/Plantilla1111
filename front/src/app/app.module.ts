@@ -32,7 +32,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AppComponent } from './app.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { FormCategoriaComponent } from './categoria/form-categoria/form-categoria.component';
-import { FormContenidoComponent } from './contenido/form-contenido/form-contenido.component';
+import { FormCursoComponent } from './curso/form-curso/form-curso.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './seguridad/auth/login.component';
 import { RegistroComponent } from './seguridad/auth/registro.component';
@@ -41,97 +41,13 @@ import { LoginGuard } from './seguridad/guards/login.guard';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { CuerpoComponent } from './cuerpo/cuerpo.component';
 import { CarritoComponent } from './carrito/carrito.component';
-import { DetalleContenidoComponent } from './contenido/detalle-contenido/detalle-contenido.component';
+import { DetalleCursoComponent } from './curso/detalle-contenido/detalle-curso.component';
 import { EstrellaComponent } from './estrella/estrella.component';
 import { ChatComponent } from './chat/chat.component';
-import { ContenidoProgramaticoComponent } from './contenido/contenido-programatico/contenido-programatico.component';
+import { ContenidoProgramaticoComponent } from './curso/contenido-programatico/contenido-programatico.component';
 import { SubseccionComponent } from './subseccion/subseccion/subseccion.component';
 import { interceptorProvider } from './seguridad/interceptors/pro-interceptor.service';
 import { StompConfig } from '@stomp/stompjs';
-/*
-// Definición de rutas
-const routes: Routes = [
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: 'categorias', component: CategoriaComponent },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'registro', component: RegistroComponent },
-  { path: 'inicio', component: IndexComponent },
-  { path: 'curso/:nombreCategoria', component: CuerpoComponent },
-  { path: 'programa', component: ContenidoProgramaticoComponent },
-  { path: 'detalle/:id', component: DetalleContenidoComponent },
-  { path: 'chat/:userId', loadComponent: () => import('./chat/chat.component').then(m => m.ChatComponent)},
-  { path: 'carrito', component: CarritoComponent },
-  { path: '**', redirectTo: '/inicio' },
-];
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    CategoriaComponent,
-    FormCategoriaComponent,
-    FormContenidoComponent,
-    FooterComponent,
-    LoginComponent,
-    RegistroComponent,
-    IndexComponent,
-    EncabezadoComponent,
-    CuerpoComponent,
-    CarritoComponent,
-    EstrellaComponent,
-    DetalleContenidoComponent,
-    ContenidoProgramaticoComponent,
-    SubseccionComponent, // Declarar SubseccionComponent aquí
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routes),
-    QuillModule.forRoot(), 
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    AuthModule.forRoot({
-      domain: 'dev-raf1r7abq103mk71.us.auth0.com',
-      clientId: 'YMbmAKbkQTzZjCgSP9DUIODlDsKFV5Bt',
-      authorizationParams: {
-        redirect_uri: window.location.origin,
-      },
-    }),
-    MatGridListModule,
-    MatCardModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSlideToggleModule,
-    MatOptionModule,
-    MatDatepickerModule,
-    MatCheckboxModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatInputModule,
-    MatIconModule,
-    MatMomentDateModule,
-    SwiperModule,
-  ],
-  providers: [
-    interceptorProvider,
-    StompConfig,
-    provideHttpClient(withInterceptorsFromDi())
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
-  bootstrap: [AppComponent],
-  
-})
-export class AppModule {}
- */
-
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -141,7 +57,7 @@ const routes: Routes = [
   { path: 'inicio', component: IndexComponent },
   { path: 'curso/:nombreCategoria', component: CuerpoComponent },
   { path: 'programa', component: ContenidoProgramaticoComponent },
-  { path: 'detalle/:id', component: DetalleContenidoComponent },
+  { path: 'detalle/:id', component: DetalleCursoComponent },
   { path: 'chat/:userId', loadComponent: () => import('./chat/chat.component').then(m => m.ChatComponent) },
   { path: 'carrito', component: CarritoComponent },
   { path: '**', redirectTo: '/inicio' },
@@ -152,7 +68,7 @@ const routes: Routes = [
     AppComponent,
     CategoriaComponent,
     FormCategoriaComponent,
-    FormContenidoComponent,
+    FormCursoComponent,
     FooterComponent,
     LoginComponent,
     RegistroComponent,
@@ -161,7 +77,7 @@ const routes: Routes = [
     CuerpoComponent,
     CarritoComponent,
     EstrellaComponent,
-    DetalleContenidoComponent,
+    DetalleCursoComponent,
     ContenidoProgramaticoComponent,
     SubseccionComponent, // Declarar SubseccionComponent aquí
   ],

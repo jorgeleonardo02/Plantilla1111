@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 @Component({
-  selector: 'app-detalle-contenido',
-  templateUrl: './detalle-contenido.component.html',
-  styleUrls: ['./detalle-contenido.component.css']
+  selector: 'app-detalle-curso',
+  templateUrl: './detalle-curso.component.html',
+  styleUrls: ['./detalle-curso.component.css']
 })
-export class DetalleContenidoComponent implements OnInit {
+export class DetalleCursoComponent implements OnInit {
   
   form: FormGroup;
 

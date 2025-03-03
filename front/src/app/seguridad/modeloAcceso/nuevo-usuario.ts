@@ -4,5 +4,5 @@ export class NuevoUsuario {
     correo: string;
     password: string;
     roles: any[];
-    limiteContenidos: number;
+    limiteCursos: number;
 }

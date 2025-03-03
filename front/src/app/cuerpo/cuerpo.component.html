@@ -8,7 +8,7 @@
 
         <div class="filter-select" *ngIf="tokenService.rolDocente() || tokenService.rolAdmin()">
             <label for="filtro">Filtrar por:</label>
-            <select id="filtro" [(ngModel)]="filtro" (change)="filtrarContenidos()">
+            <select id="filtro" [(ngModel)]="filtro" (change)="filtrarCursos()">
               <option value="todos">Mostrar Todos</option>
               <option value="activados">Mostrar Activados</option>
               <option value="desactivados">Mostrar Desactivados</option>
@@ -111,7 +111,7 @@
             <div class="card card-solid">
                 <div class="card-body pb-0">
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" *ngFor="let contenido of listaContenidos; let i = index;">
+                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" *ngFor="let curso of listaCursos; let i = index;">
                             <div class="carousel-module--container--27wzs">
                                 <div class="course-unit--grid--1irZ- carousel-module--scroll-port--28Dow carousel-module--grid--3Qw6j ">
                                     <div class="carousel-module--scroll-item--2CpA_">
@@ -119,27 +119,26 @@
                                             <div class="popper-module--popper--2BpLn">
                                                 <div id="u81-popper-trigger--473">
                                                     <div class="course-card--container--1QM2W course-card--medium--Fdbz0">
-                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="contenido.nombreFoto">
-                                                            <img width="240" height="135" [src]="urlFoto+contenido.id" class="course-card--course-image--3QvbQ browse-course-card--image--1-_Wa card-img">
-                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(contenido)">
+                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="curso.nombreFoto">
+                                                            <img width="240" height="135" [src]="urlFoto+curso.id" class="course-card--course-image--3QvbQ browse-course-card--image--1-_Wa card-img">
+                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(curso)">
                                                                 <mat-icon>add_shopping_cart</mat-icon>
                                                             </button>
 
                                                         </div>
-                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="!contenido.nombreFoto">
+                                                        <div class="course-card--image-wrapper--1F9ny" *ngIf="!curso.nombreFoto">
                                                             <img width="240" height="135" src="../../assets/img/El estoico1.png" class="course-card--course-image--3QvbQ browse-course-card--image--1-_Wa card-img">
-                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(contenido)">
+                                                            <button mat-icon-button class="add-to-cart-button" (click)="agregarAlCarrito(curso)">
                                                                 <mat-icon>add_shopping_cart</mat-icon>
                                                             </button>
                                                         </div>
                                                         <div>
                                                             <h3 class="ud-heading-md">
-                                                                <a>{{contenido.nombre}}</a></h3>
-
+                                                                <a>{{curso.nombre}}</a></h3>
                                                             <div class="ud-text-xs">
                                                                 <div class="course-card--instructor-list--nH1OC">
-                                                                    {{contenido.listaContenidoUsuario[0].usuario.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria.nombre}}
-                                                                </div>
+                                                                    {{curso.listaCursoUsuario[0].usuario.nombre}}, {{ curso.listaCursoUsuario[0].curso.categoria.nombre }} 
+                                                                  </div>
                                                             </div>
                                                             <div class="course-card--row--29Y0w">
                                                                 <!-- <span> -->
@@ -150,7 +149,7 @@
                                                                 <span aria-label="415 reseñas" class="course-card--reviews-text--1yloi">(415)</span>
                                                             </div>
                                                             <div>
-                                                                <div class="ud-heading-md">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                                                <div class="ud-heading-md">{{curso.precio*(1+curso.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
                                                                 </div>
                                                             </div>
                                                         </div>

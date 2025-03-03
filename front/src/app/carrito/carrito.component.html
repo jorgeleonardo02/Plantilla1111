@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- <h4>Cesta</h4> -->
-                        <div class="post clearfix" *ngFor="let contenido of contenidoEnCarrito; let i= index">
+                        <div class="post clearfix" *ngFor="let curso of cursoEnCarrito; let i= index">
                             <div>
                                 <!--class="user-block" <img class="img-circle img-bordered-sm" width="90" height="90" [src]="urlFoto+contenido.id" alt="User Image">
                             <div class="course-card--main-content--2XqiY course-card--has-price-text--1c0ze">class="size-50 mr-3 img-square"
@@ -34,17 +34,17 @@
                                 </div>
                             </div> -->
                                 <div class="media">
-                                    <img *ngIf="contenido.nombreFoto" width="840" height="735" [src]="urlFoto+contenido.id" class="img-lg2 nav-link">
-                                    <img *ngIf="!contenido.nombreFoto" width="840" height="735" src="../../assets/img/El estoico1.png" class="img-lg2 nav-link">
+                                    <img *ngIf="curso.nombreFoto" width="840" height="735" [src]="urlFoto+curso.id" class="img-lg2 nav-link">
+                                    <img *ngIf="!curso.nombreFoto" width="840" height="735" src="../../assets/img/El estoico1.png" class="img-lg2 nav-link">
                                     <div class="media-body">
                                         <div>
                                             <div class="course-card--main-content--2XqiY course-card--has-price-text--1c0ze nav-link">
                                                 <h3 class="ud-heading-md">
-                                                    <a>{{contenido?.nombre}}</a></h3>
+                                                    <a>{{curso?.nombre}}</a></h3>
 
                                                 <div class="ud-text-xs">
                                                     <div class="course-card--instructor-list--nH1OC">
-                                                        {{contenido.listaContenidoUsuario[0].usuario.nombre}}, {{contenido.listaContenidoUsuario[0].contenido.categoria.nombre}}
+                                                        {{curso.listaCursoUsuario[0].usuario.nombre}}, {{curso.listaCursoUsuario[0].curso.categoria.nombre}}
                                                     </div>
                                                 </div>
                                                 <div class="course-card--row--29Y0w">
@@ -62,9 +62,9 @@
                                         </div>
                                     </div>
                                     <span class="username nav-link">
-                                    <a class="text-primary" (click)="carritoService.eliminarElementoDelCarrito(contenido.id)">Eliminar</a>
+                                    <a class="text-primary" (click)="carritoService.eliminarElementoDelCarrito(curso.id)">Eliminar</a>
                                   </span>
-                                    <div class="ud-heading-md nav-link">{{contenido.precio*(1+contenido.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
+                                    <div class="ud-heading-md nav-link">{{curso.precio*(1+curso.porcentajeAdmin) | number:'1.0-0'}}&nbsp;COL$
                                     </div>
                                 </div>
 
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="contenidoEnCarrito.length!==0" class="col-12 col-md-12 col-lg-4 order-1 order-md-2 nav-link">
+            <div *ngIf="cursoEnCarrito.length!==0" class="col-12 col-md-12 col-lg-4 order-1 order-md-2 nav-link">
                 <h3 class="text-primary">
                     Total</h3>
                 <p class="ud-heading-md">
@@ -84,12 +84,12 @@
                 </p>
                 <div>
                     <!-- <a (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
-                    <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="(tokenService.rolVisitante()||tokenService.rolEstudiante()) && contenidoUsuario()" class="btn btn-lg btn-block btn-warning">Pagar</a>
+                    <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="(tokenService.rolVisitante()||tokenService.rolEstudiante()) && cursoUsuario()" class="btn btn-lg btn-block btn-warning">Pagar</a>
                     <!-- <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
                 </div>
             </div>
         </div>
-        <div *ngIf="contenidoEnCarrito.length==0" class="navbar-collapse">
+        <div *ngIf="cursoEnCarrito.length==0" class="navbar-collapse">
             <p class="ud-heading-md">
                 Cesta vacía.
             </p>

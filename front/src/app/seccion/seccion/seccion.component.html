@@ -13,14 +13,14 @@
                 <label for="nombreSubseccion">Nombre de la Subsección:</label>
                 <input formControlName="nombreSubseccion" class="form-control" placeholder="Nombre de la Subsección">
 
-                <label for="contenidoTipo">Tipo de Contenido:</label>
-                <select formControlName="contenidoTipo" class="form-control">
+                <label for="cursoTipo">Tipo de Curso:</label>
+                <select formControlName="cursoTipo" class="form-control">
             <option value="texto">Texto</option>
             <option value="url">URL</option>
           </select>
 
-                <label for="contenidoTexto">Contenido:</label>
-                <textarea formControlName="contenidoTexto" class="form-control" placeholder="Contenido"></textarea>
+                <label for="cursoTexto">Curso:</label>
+                <textarea formControlName="cursoTexto" class="form-control" placeholder="Curso"></textarea>
 
                 <button type="button" class="btn btn-danger mt-2" (click)="eliminarSubseccion(i)">Eliminar Subsección</button>
             </div>

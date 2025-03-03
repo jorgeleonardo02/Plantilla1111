@@ -39,9 +39,9 @@
                     </mat-select>
                     <mat-error>Debe seleccionar el rol</mat-error>
                 </mat-form-field>
-                <mat-form-field class="input-group mb-3" *ngIf="mostrarLimiteContenidos" appearance="outline">
-                    <mat-label>Límite de Contenidos</mat-label>
-                    <input matInput formControlName="limiteContenidos" type="number" placeholder="Límite de Contenidos">
+                <mat-form-field class="input-group mb-3" *ngIf="mostrarLimiteCursos" appearance="outline">
+                    <mat-label>Límite de Cursos</mat-label>
+                    <input matInput formControlName="limiteCursos" type="number" placeholder="Límite de Cursos">
                     <mat-error>Debe ingresar un límite válido</mat-error>
                 </mat-form-field>
                 <!-- <mat-form-field class="input-group mb-3" *ngIf="tokenService.logueado()" appearance="outline">

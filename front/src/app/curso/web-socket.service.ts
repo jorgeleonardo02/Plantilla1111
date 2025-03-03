@@ -72,7 +72,7 @@ import { Injectable } from '@angular/core';
 import { Client, Message, StompConfig, StompHeaders } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { Observable, Subject } from 'rxjs';
-import { Contenido } from './contenido';
+import { Contenido } from './curso';
 
 @Injectable({
   providedIn: 'root'

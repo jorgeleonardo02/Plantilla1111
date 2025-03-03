@@ -3,44 +3,43 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Categoria } from 'src/app/categoria/categoria';
 import { CategoriaService } from 'src/app/categoria/categoria.service';
-import { Contenido } from '../contenido';
-import { ContenidoService } from '../contenido.service';
+import { Curso} from '../curso';
+import { CursoService } from '../curso.service';
 import { Route, Router } from '@angular/router';
-//import { MediaService } from '../../Archivo/media.service';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { UsuarioDto } from 'src/app/usuario/usuario-dto';
 import { TokenService } from '../../seguridad/service/token.service';
 import { UsuarioDto2 } from 'src/app/usuario/usuario-dto2';
-import { ContenidoUsuarioService } from '../../contenido-usuario/contenido-usuario.service';
+import { CursoUsuarioService } from '../../curso-usuario/curso-usuario.service';
 import { ElementRef, ViewChild } from '@angular/core';
 
 
 @Component({
-  selector: 'app-form-contenido',
-  templateUrl: './form-contenido.component.html',
-  styleUrls: ['./form-contenido.component.css'],
+  selector: 'app-form-curso',
+  templateUrl: './form-curso.component.html',
+  styleUrls: ['./form-curso.component.css'],
   //changeDetection: ChangeDetectionStrategy.OnPush  // Añadido para desactivar la detección de cambios automática
 })
-export class FormContenidoComponent implements OnInit {
+export class FormCursoComponent implements OnInit {
 
   @ViewChild('archivoFotoInput') archivoFotoInput: ElementRef<HTMLInputElement>;
 
   camposFormulario: FormGroup;
   listaCategoria: Categoria[];
-  listaContenidos: Contenido[];
+  listaCursos: Curso[];
   fotoSeleccionada: File;
 
-  constructor(private referenciaVentanaModal: MatDialogRef<FormContenidoComponent>,
+  constructor(private referenciaVentanaModal: MatDialogRef<FormCursoComponent>,
               private categoriaSevice: CategoriaService,
-              private contenidoService: ContenidoService,
+              private cursoService: CursoService,
               private usuarioService: UsuarioService,
               private router: Router,
               public tokenService: TokenService,
-              private contenidoUsuarioService: ContenidoUsuarioService,
+              private cursoUsuarioService: CursoUsuarioService,
               private constructorFormulario: FormBuilder) { }
 
   ngOnInit(): void {
-    this.contenidoService.setFoto(null);
+    this.cursoService.setFoto(null);
     this.crearFormulario();
     this.listarCategorias();
     this.listarUsuarioDocentes();
@@ -85,23 +84,7 @@ export class FormContenidoComponent implements OnInit {
       console.log(docentes);
     });
   }
-  /* ObtenerListaContenidos(){
-    this.contenidoService.listarElementos().subscribe(contenidos =>{
-      this.listaContenidos = contenidos;
-    });
-  } */
-
-  /* seleccionarFoto(evento: any): void {
-    this.fotoSeleccionada = evento.target.files[0];
-    console.log("fotoSeleccionada");
-    console.log(evento);
-    this.contenidoService.setFoto(this.fotoSeleccionada);// asigno la foto en el service para compartirla entre componentes
-  } */
-  /* abrirSelectorDeArchivo(): void {
-  // Simula el clic en el input de tipo "file"
-  const inputArchivo = document.getElementById('archivoFoto') as HTMLInputElement;
-  inputArchivo.click();
-} */
+  
 abrirSelectorDeArchivo(): void {
   // Obtiene el elemento por su ID
   const inputArchivo = document.getElementById('archivoFoto');
@@ -119,7 +102,7 @@ seleccionarFoto(evento: any): void {
   this.fotoSeleccionada = evento.target.files[0];
   console.log("fotoSeleccionada");
   console.log(evento);
-  this.contenidoService.setFoto(this.fotoSeleccionada);
+  this.cursoService.setFoto(this.fotoSeleccionada);
 }
   
   cancelarOperacion(): void {
@@ -136,10 +119,10 @@ async enviarFormulario() { //contendrá operaciones asincrónicas
   try {
     // await: esperará a que esta función asíncrona se complete 
     // antes de continuar con el siguiente paso.
-    console.log("this.camposFormulario.value.usuarioDocentes.limiteContenidos: "/* +this.camposFormulario.value */);
+    console.log("this.camposFormulario.value.usuarioDocentes.limiteCursos: "/* +this.camposFormulario.value */);
     console.log(this.camposFormulario.value);
     console.log("this.camposFormulario.value.usuarioDocentes.id: "+this.camposFormulario.value.usuarioDocentes.id);
-    await this.limiteContenidosPorDocente(this.camposFormulario.value.usuarioDocentes.id);
+    await this.limiteCursosPorDocente(this.camposFormulario.value.usuarioDocentes.id);
     console.log("this.cantidad");
     console.log(this.cantidad);
     //console.log("cantidad De Contenidos ya creados: " + this.cantidad);
@@ -147,11 +130,11 @@ async enviarFormulario() { //contendrá operaciones asincrónicas
     console.log(this.camposFormulario.value);
     //console.log("usuarioSeleccionado.limite: ");
     //console.log(this.camposFormulario.value.usuarioDocentes.limiteContenidos);
-    if (this.cantidad < this.camposFormulario.value.usuarioDocentes.limiteContenidos) {
+    if (this.cantidad < this.camposFormulario.value.usuarioDocentes.limiteCursos) {
       this.referenciaVentanaModal.close(this.camposFormulario.value);
       this.router.navigateByUrl('/curso/'+this.camposFormulario.value.categoria.nombre);
     } else {
-      console.log("ya llego al límite de contenidos por docentes");
+      console.log("ya llego al límite de cursos por docentes");
       this.referenciaVentanaModal.close();
     }
   } catch (error) {// Si ocurre algún error durante la ejecución  
@@ -160,8 +143,8 @@ async enviarFormulario() { //contendrá operaciones asincrónicas
   }
 }
 
-async limiteContenidosPorDocente(idUsuarioSeleccionado: number) {//funcion asincrona
-  this.cantidad = await this.contenidoUsuarioService.cantidadContenidosDeDocente(idUsuarioSeleccionado).toPromise();
+async limiteCursosPorDocente(idUsuarioSeleccionado: number) {//funcion asincrona
+  this.cantidad = await this.cursoUsuarioService.cantidadCursosDeDocente(idUsuarioSeleccionado).toPromise();
 }
   
 }

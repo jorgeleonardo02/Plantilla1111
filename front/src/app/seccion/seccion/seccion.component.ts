@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { SeccionService } from 'src/app/contenido/contenido.service';
 import { Seccion } from '../seccion';
+import { SeccionService } from '../seccion.service';
 
 @Component({
   selector: 'app-seccion',

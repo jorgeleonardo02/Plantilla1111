@@ -4,20 +4,18 @@ import { CategoriaService } from 'src/app/categoria/categoria.service';
 import { TokenService } from 'src/app/seguridad/service/token.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Categoria } from 'src/app/categoria/categoria';
-import { FormContenidoComponent } from 'src/app/contenido/form-contenido/form-contenido.component';
+import { FormCursoComponent } from 'src/app/curso/form-curso/form-curso.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Contenido } from 'src/app/contenido/contenido';
-import { ContenidoService } from 'src/app/contenido/contenido.service';
+import { Curso } from 'src/app/curso/curso';
+import { CursoService } from 'src/app/curso/curso.service';
 import alertasSweet from 'sweetalert2';
-import { ContenidoUsuario } from '../contenido-usuario/contenido-usuario';
+import { CursoUsuario } from '../curso-usuario/curso-usuario';
 import { switchMap, take, map } from 'rxjs/operators';
-import { ContenidoUsuarioService } from '../contenido-usuario/contenido-usuario.service';
-import { UsuarioDto } from '../usuario/usuario-dto';
+import { CursoUsuarioService } from '../curso-usuario/curso-usuario.service';
 import { UsuarioDto2 } from '../usuario/usuario-dto2';
 import { CarritoService } from '../carrito/carrito.service';
 import { environment } from 'environments/environment';
 import { Observable, Subscription } from 'rxjs';
-//import { CarritoCompartidoService } from '../carrito/carritocompartido.service';
 import { UsuarioService } from '../usuario/usuario.service';
 
 @Component({
@@ -29,17 +27,17 @@ export class EncabezadoComponent {
   public finSesion: boolean;
   public pagina: string = 'login';
   public camposFormulario: FormGroup;
-  public contenido: Contenido;
+  public curso: Curso;
   public listaCategorias: Categoria[];
   public foto: File;
   public idCategoriaSeleccionada: number;
   public mensaje: string;
-  contenidoEnCarrito: Contenido[] = [];
+  public cursoEnCarrito: Curso[] = [];
   public urlFoto: string = environment.endPointFoto;
-  public contenidoUsuario: ContenidoUsuario;
-  nombreUsuario: string;
-  nombreRol: string;
-  usuario: UsuarioDto2;
+  public cursoUsuario: CursoUsuario;
+  public nombreUsuario: string;
+  public nombreRol: string;
+  public usuario: UsuarioDto2;
   private rolSubscription: Subscription;
   sumaTotal: number = 0;
   usuarioDto: UsuarioDto2;
@@ -50,16 +48,16 @@ export class EncabezadoComponent {
     public tokenService: TokenService,
     public ventanaModal: MatDialog,
     public categoriaService: CategoriaService,
-    public contenidoService: ContenidoService,
+    public cursoService: CursoService,
     public router: Router,
-    private contenidoUsuarioService: ContenidoUsuarioService,
+    private cursoUsuarioService: CursoUsuarioService,
     private carritoService: CarritoService,
     private usuarioService: UsuarioService
   ) {
     this.carritoService.carrito$.subscribe(nuevoCarrito => {
-      this.contenidoEnCarrito = nuevoCarrito;
-      console.log("contenidoEnCarrito");
-      console.log(this.contenidoEnCarrito);
+      this.cursoEnCarrito = nuevoCarrito;
+      console.log("cursooEnCarrito");
+      console.log(this.cursoEnCarrito);
       this.calcularSumaTotal();
     });
     this.tokenService.usuarioActual().subscribe((usuario: UsuarioDto2) => {
@@ -69,45 +67,17 @@ export class EncabezadoComponent {
       //console.log(this.usuario1.roles[0].rolNombre);
       console.log(this.usuario1);
       }
-      
     });
-    //------------------------------------------------------
-    /* this.tokenService.usuarioActual2().subscribe(
-      usuario => {
-        if(usuario?.roles[0].rolNombre === "ROLE_ESTUDIANTE"){
-          let nombreCategoria = this.carritoService.obtenerCarritoActual()?.[0]?.listaContenidoUsuario?.[0]?.contenido?.categoria?.nombre;
-          console.log("Nombre categoria: ", nombreCategoria);
-          let nombreUsuario = usuario.nombreUsuario;
-          console.log("Nombre usuario: ", nombreUsuario);
-          if(nombreCategoria){
-            this.contenidoPorCategoria(nombreCategoria, nombreUsuario, true, true);
-          }
-
-          let carrito = this.carritoService.obtenerCarritoActual();
-          carrito.forEach((elemento, i) =>{this.contenidoService.existsContenido(nombreCategoria, usuario.id ,elemento.id).subscribe(existe=>{
-              console.log("existe contenido1111?: ", existe);
-              if(!existe){
-                this.eliminarDelCarrito(elemento);
-              }
-            });
-          });
-        }
-        console.log("Usuario actual:", usuario);
-      },
-      error => {
-        console.error("Error obteniendo el usuario actual:", error);
-      }
-    ); */
-    //------------------------------------------------------
   } 
-  listaContenidos: Contenido[];
-  contenidoPorCategoria(nombreCategoria: string, nombreUsuario: string, mostrarTodos:boolean, activado:boolean){
-    this.contenidoService.contenidosCompleto(nombreCategoria, nombreUsuario, mostrarTodos, activado).subscribe((paginacion) => {
-      this.listaContenidos = paginacion.content as Contenido[];
+
+  listaCursos: Curso[];
+  cursoPorCategoria(nombreCategoria: string, nombreUsuario: string, mostrarTodos:boolean, activado:boolean){
+    this.cursoService.cursoCompleto(nombreCategoria, nombreUsuario, mostrarTodos, activado).subscribe((paginacion) => {
+      this.listaCursos = paginacion.content as Curso[];
       });
   }
-  eliminarDelCarrito(contenido: Contenido): void {
-    this.carritoService.eliminarElementoDelCarrito(contenido.id);
+  eliminarDelCarrito(curso: Curso): void {
+    this.carritoService.eliminarElementoDelCarrito(curso.id);
   }
   usuario1: UsuarioDto2;
   ngOnInit() {
@@ -116,8 +86,8 @@ export class EncabezadoComponent {
 
   calcularSumaTotal(): void {
     this.sumaTotal = 0;
-      this.contenidoEnCarrito.forEach(contenido => {
-        this.sumaTotal = this.sumaTotal+(contenido.precio * (1 + contenido.porcentajeAdmin));
+      this.cursoEnCarrito.forEach(curso => {
+        this.sumaTotal = this.sumaTotal+(curso.precio * (1 + curso.porcentajeAdmin));
         console.log(this.sumaTotal);
       });
   }
@@ -136,7 +106,7 @@ export class EncabezadoComponent {
     console.log(categoria.nombre);
     //this.contenidoService.setIdCategoria(categoria.id);
     //this.router.navigate(['/cuerpo/' + categoria.id]);
-    this.contenidoService.setNombreCategoria(categoria.nombre.replace(/ /g, "-"));
+    this.cursoService.setNombreCategoria(categoria.nombre.replace(/ /g, "-"));
     this.router.navigate(['/curso/'+categoria.nombre.replace(/ /g, "-")]);
   }
 
@@ -159,7 +129,7 @@ export class EncabezadoComponent {
     // Desactivar la detección de cambios
     //this.changeDetectorRef.detach();
     const referenciaVentanaModal = this.ventanaModal.open(
-      FormContenidoComponent,
+      FormCursoComponent,
       {
         width: '60%',
         height: 'auto',
@@ -173,145 +143,70 @@ export class EncabezadoComponent {
       // no hay resultados cuando se cancela la operación (se cierra la ventana modal)
       if (resultado != null) {
         // el resultado es el cliente que se ha llenado en el formulario
-        this.contenido = resultado;
-        console.log("Form contenido");
-        console.log(this.contenido);
+        this.curso = resultado;
+        console.log("Form curso");
+        console.log(this.curso);
         this.usuarioDto = resultado.usuarioDocentes;
 
-        this.agregarContenido();
+        this.agregarCurso();
       }
     });
   }
 
-  agregarContenido(): void {
+  agregarCurso(): void {
     this.FormatoFecha();
   
-    const contenidoUsuario: ContenidoUsuario = new ContenidoUsuario();
-    contenidoUsuario.usuario = this.usuarioDto;
+    const cursoUsuario: CursoUsuario = new CursoUsuario();
+    cursoUsuario.usuario = this.usuarioDto;
   
-    if (this.contenidoService.obtenerFoto == null) {
-      this.contenidoService.agregarElemento(this.contenido)
+    if (this.cursoService.obtenerFoto == null) {
+      this.cursoService.agregarElemento(this.curso)
         .pipe(
           switchMap((resultado) => {
             this.mensaje = resultado.mensaje;
-            contenidoUsuario.contenido = resultado.elemento;
-            console.log("contenidoUsuario-encabezado");
-            console.log(contenidoUsuario);
-            return this.contenidoUsuarioService.agregarElemento(contenidoUsuario);
+            cursoUsuario.curso = resultado.elemento;
+            console.log("cursoUsuario-encabezado");
+            console.log(cursoUsuario);
+            return this.cursoUsuarioService.agregarElemento(cursoUsuario);
           })
         )
         .subscribe(() => {
           this.setCategoriaEvento();
           //this.router.navigate(['/curso/' + this.contenido.categoria.nombre.replace(/ /g, "-")]);
         }, (error) => {
-          console.error('Error al agregar contenido:', error);
+          console.error('Error al agregar curso:', error);
         });
     } else {
-      this.foto = this.contenidoService.obtenerFoto;
-      console.log("contenido antes de agregar");
-      console.log(this.contenido);
-      this.contenidoService.agregarContenidoConfoto(this.contenido, this.foto)
-        .subscribe((contenido) => {
-          this.mensaje = contenido.mensaje;
-          contenidoUsuario.contenido = contenido.elemento;
-          console.log("contenidoUsuario-encabezado");
-            console.log(contenidoUsuario);
-          this.contenidoUsuarioService.agregarElemento(contenidoUsuario)
+      this.foto = this.cursoService.obtenerFoto;
+      console.log("curso antes de agregar");
+      console.log(this.curso);
+      this.cursoService.agregarCursoConfoto(this.curso, this.foto)
+        .subscribe((curso) => {
+          this.mensaje = curso.mensaje;
+          cursoUsuario.curso = curso.elemento;
+          console.log("cursoUsuario-encabezado");
+          console.log(cursoUsuario);
+          this.cursoUsuarioService.agregarElemento(cursoUsuario)
             .subscribe(() => {
               this.setCategoriaEvento();
               //this.router.navigate(['/curso/' + this.contenido.categoria.nombre.replace(/ /g, "-")]);
             }, (error) => {
-              console.error('Error al agregar contenido con foto:', error);
+              console.error('Error al agregar curso con foto:', error);
             });
         }, (error) => {
-          console.error('Error al agregar contenido con foto:', error);
+          console.error('Error al agregar curso con foto:', error);
         });
     }
   }
   
-  // agregarContenido(): void {
-  //  this.FormatoFecha();
-    
-    //const contenidoUsuario: ContenidoUsuario = new ContenidoUsuario();
-    //contenidoUsuario.usuario = this.usuarioDto;
-  
-    //if (this.contenidoService.obtenerFoto == null) {
-      //this.contenidoService.agregarElemento(this.contenido)
-        //.pipe(
-          //switchMap((resultado) => {
-            //this.mensaje = resultado.mensaje;
-            //contenidoUsuario.contenido = resultado.elemento;
-            //console.log("contenidoUsuario-encabezado");
-            //console.log(contenidoUsuario);
-            //return this.contenidoUsuarioService.agregarElemento(contenidoUsuario);
-          //})
-        //)
-        //.subscribe(() => {
-          //this.setCategoriaEvento();
-          //this.router.navigate(['/curso/' + this.contenido.categoria.nombre.replace(/ /g, "-")]);
-        //}, (error) => {
-          //console.error('Error al agregar contenido:', error);
-        //});
-    //} else {
-      //this.foto = this.contenidoService.obtenerFoto;
-      //console.log("contenido antes de agregar");
-      //console.log(this.contenido);
-      //this.contenidoService.agregarContenidoConfoto(this.contenido, this.foto)
-        //.subscribe((contenido) => {
-          //this.mensaje = contenido.mensaje;
-          //contenidoUsuario.contenido = contenido.elemento;
-          //console.log("contenidoUsuario-encabezado");
-          //console.log(contenidoUsuario);
-          //this.contenidoUsuarioService.agregarElemento(contenidoUsuario)
-            //.subscribe(() => {
-              //this.setCategoriaEvento();
-              //this.router.navigate(['/curso/' + this.contenido.categoria.nombre.replace(/ /g, "-")]);
-            //}, (error) => {
-              //console.error('Error al agregar contenido con foto:', error);
-            //});
-        //}, (error) => {
-          //console.error('Error al agregar contenido con foto:', error);
-        //});
-    //}
-  
-    // Antes de agregar el contenido al carrito, eliminar los elementos del carrito que ya no están en los nuevos contenidos
-    //this.carritoService.carrito$.pipe(
-      //take(1) // Tomar solo el primer valor del observable
-    //).subscribe(carrito => {
-      //const nuevosContenidos: Contenido[] = []; // Array para almacenar los nuevos contenidos
-      //const contenidoEnCarritoActualizado: Contenido[] = []; // Array para almacenar el carrito actualizado
-  
-      // Obtener los nuevos contenidos del servidor (por ejemplo, desde una variable en tu componente)
-      // Si los nuevos contenidos no están disponibles directamente en el componente, necesitarás algún mecanismo para obtenerlos aquí.
-  
-      // Recorrer los nuevos contenidos para obtener sus IDs
-      //nuevosContenidos.forEach(contenido => {
-        // Agregar el ID del contenido al array de nuevos IDs
-        // Supongamos que el ID del contenido se encuentra en una propiedad llamada 'id'
-        // Reemplaza 'id' por la propiedad real que contiene el ID del contenido
-        // Si es necesario, puedes ajustar esta lógica según la estructura real de tus objetos de contenido
-        //const idContenido = contenido.id;
-        //if (!carrito.some(item => item.id === idContenido)) {
-          // Si el contenido no está presente en el carrito actual, agregarlo al array de contenidos a mantener
-          //contenidoEnCarritoActualizado.push(contenido);
-        //}
-      //});
-  
-      // Actualizar el carrito con los nuevos contenidos (sin los elementos que no están en los nuevos contenidos)
-      //this.carritoService.actualizarCarrito(contenidoEnCarritoActualizado);
-  
-      // Continuar con la lógica de agregar el contenido al carrito
-      // ...
-    //});
-  //}
- //
+
   setCategoriaEvento(): void {
-    this.contenidoService.setNombreCategoria(this.contenido.categoria.nombre.replace(/ /g, "-"));
-    this.router.navigate(['/curso/' + this.contenido.categoria.nombre.replace(/ /g, "-")]);
+    this.cursoService.setNombreCategoria(this.curso.categoria.nombre.replace(/ /g, "-"));
+    this.router.navigate(['/curso/' + this.curso.categoria.nombre.replace(/ /g, "-")]);
   }
 
   FormatoFecha() {
-    let fechaI = this.contenido;
+    let fechaI = this.curso;
     console.log('Fecha: ' + fechaI);
   }
 }

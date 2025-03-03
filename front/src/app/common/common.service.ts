@@ -6,14 +6,11 @@ import { catchError } from 'rxjs/operators';
 import alertasSweet from 'sweetalert2';
 import { EntityGenerico } from './EntityGenerico';
 
-
 @Injectable({
   providedIn: 'root'
 })
 
-
 export abstract class CommonService<E extends EntityGenerico> {
-
 
   protected rutaEndPoint: string;
   protected cabeceraHttp: HttpHeaders = new HttpHeaders({'Content-type': 'application/json'});
@@ -31,7 +28,6 @@ export abstract class CommonService<E extends EntityGenerico> {
       alertasSweet.fire('Error', e.error.mensaje + ' : ' + e.error.error);
       return throwError(() =>e);
     }))
-    
   }
   
   obtenerElementosPaginado(paginaIndex: string, tamanoPagina: string): Observable<any> {
@@ -56,7 +52,6 @@ export abstract class CommonService<E extends EntityGenerico> {
       return throwError(() =>e);
     }));
   }
-
 
   eliminaElemento(idElemento: number): Observable<any> {
     return this.httpCliente.delete(this.rutaEndPoint + '/' + idElemento, {headers: this.cabeceraHttp}).pipe(

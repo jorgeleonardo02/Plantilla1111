@@ -1,7 +1,7 @@
-import { Contenido } from "../contenido/contenido";
+import { Curso } from "../curso/curso";
 
 export class Categoria {
     id: number;
     nombre: string;
-    listaContenidos: Contenido[]; 
+    listaCurso: Curso[]; 
 }

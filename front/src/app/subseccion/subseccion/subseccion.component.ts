@@ -1,28 +1,3 @@
-/* import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-@Component({
-  selector: 'app-subseccion',
-  standalone: true,
-  imports: [],
-  templateUrl: './subseccion.component.html',
-  styleUrl: './subseccion.component.css'
-})
-export class SubseccionComponent {
-    @Input() formGroup: FormGroup;
-    //@Output() eliminar = new EventEmitter<void>();
-} */
-/* import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-@Component({
-  selector: 'app-subseccion',
-  templateUrl: './subseccion.component.html',
-})
-export class SubseccionComponent {
-  @Input() formGroup!: FormGroup; // Recibe el FormGroup desde el componente padre
-}
- */
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -41,7 +16,7 @@ export class SubseccionComponent {
     // Inicializa formGroup utilizando FormBuilder
     this.formGroup = this.formBuilder.group({
       nombreSubseccion: [''],
-      contenidoTexto: ['']
+      cursoTexto: ['']
     });
   }
 

@@ -47,8 +47,6 @@ public class CursoUsuario implements Serializable {
                 "id=" + id +
                 ", curso=" + curso.getId() +
                 ", usuario=" + usuario.getId() +
-                // Omitir la llamada a listaContenidoUsuario en toString()
-                // ", listaContenidoUsuario=" + listaContenidoUsuario +
                 '}';
     }
 

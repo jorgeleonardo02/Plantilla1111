@@ -1,7 +1,7 @@
 import { Categoria } from "../categoria/categoria";
-import { ContenidoUsuario } from "../contenido-usuario/contenido-usuario";
+import { CursoUsuario } from "../curso-usuario/curso-usuario";
 
-export class Contenido {
+export class Curso {
     id: number;
     nombreFoto: string;
     nombre: string;
@@ -15,5 +15,5 @@ export class Contenido {
     precio: number;
 	porcentajeAdmin: number;
 	calificacion: number;
-    listaContenidoUsuario: ContenidoUsuario[];
+    listaCursoUsuario: CursoUsuario[];
 }

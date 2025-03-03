@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   errMsj: string;
   camposFormulario: FormGroup;
   public eventoCheckbox: boolean = false;
-  mostrarLimiteContenidos: boolean = false;
+  mostrarLimiteCursos: boolean = false;
 
   constructor(public tokenService: TokenService,
               private authService: AuthService,
@@ -50,18 +50,18 @@ export class RegistroComponent implements OnInit {
       password: ['', Validators.required],
       correo: ['', Validators.email],
       roles: ['VISITANTE',Validators.required],
-      limiteContenidos: [{ value: 5, disabled: true }] // Deshabilitamos el campo por defecto
+      limiteCursos: [{ value: 5, disabled: true }] // Deshabilitamos el campo por defecto
     });
   }
   onRolSelectionChange(event: MatSelectChange) {
     const rolSeleccionado = event.value as string;
-    this.mostrarLimiteContenidos = rolSeleccionado === 'DOCENTE';
-    const limiteContenidosControl = this.camposFormulario.get('limiteContenidos');
+    this.mostrarLimiteCursos = rolSeleccionado === 'DOCENTE';
+    const limiteCursosControl = this.camposFormulario.get('limiteCursos');
     
-    if (this.mostrarLimiteContenidos) {
-      limiteContenidosControl?.enable();
+    if (this.mostrarLimiteCursos) {
+      limiteCursosControl?.enable();
     } else {
-      limiteContenidosControl?.disable();
+      limiteCursosControl?.disable();
     }
   }
 

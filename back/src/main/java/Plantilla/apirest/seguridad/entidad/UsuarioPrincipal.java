@@ -17,18 +17,18 @@ public class UsuarioPrincipal implements UserDetails { // interface userdetails
     private String nombreUsuario;
     private String correo;
     private String password;
-    private Long limiteContenidos;
+    private Long limiteCursos;
     private Collection<? extends GrantedAuthority> autoridades;// autenticacion, autorizacion
 
     // Constructor de todos los campos
-    public UsuarioPrincipal(String nombre, String nombreUsuario, String correo, String password, Long limiteContenidos,
+    public UsuarioPrincipal(String nombre, String nombreUsuario, String correo, String password, Long limiteCursos,
             Collection<? extends GrantedAuthority> autoridades) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.correo = correo;
         this.password = password;
         this.autoridades = autoridades;
-        this.limiteContenidos = limiteContenidos;
+        this.limiteCursos = limiteCursos;
     }
 
     // Metodo estatico mas importante, asigna los provilegios a cada usuario,
@@ -89,8 +89,8 @@ public class UsuarioPrincipal implements UserDetails { // interface userdetails
         return correo;
     }
 
-    public Long getLimiteContenidos() {
-        return limiteContenidos;
+    public Long getLimiteCursos() {
+        return limiteCursos;
     }
 
     /**
@@ -130,8 +130,8 @@ public class UsuarioPrincipal implements UserDetails { // interface userdetails
         this.password = password;
     }
 
-    public void setLimiteContenidos(Long limiteContenidos) {
-        this.limiteContenidos = limiteContenidos;
+    public void setLimiteCursos(Long limiteCursos) {
+        this.limiteCursos = limiteCursos;
     }
 
 }
