@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Categoria } from 'src/app/categoria/categoria';
 import { CategoriaService } from 'src/app/categoria/categoria.service';
@@ -44,22 +44,52 @@ export class FormCursoComponent implements OnInit {
     this.listarCategorias();
     this.listarUsuarioDocentes();
     this.usuarioActual();
+    this.textoSlideToggle = this.camposFormulario.get('activado')?.value ? "Ocultar" : "Mostrar";
+  }
+
+  textoSlideToggle: string = "Mostrar";
+  cambiarTextoSlideToggle() {
+    const activado = this.camposFormulario.get('activado')?.value;
+    this.textoSlideToggle = activado ? "Ocultar" : "Mostrar";
   }
 
   crearFormulario(): void {
-    this.camposFormulario = this.constructorFormulario.group(
-      {
+    this.camposFormulario = this.constructorFormulario.group({
         nombre: ['', Validators.required],
         descripcion: ['', Validators.required],
         etiquetas: ['', Validators.required],
-        fechaLimite:[''],
-        programa: [''],
+        fechaLimite: [''],
+        habilidades: this.constructorFormulario.array([]), // Ahora será una lista de objetos con nombre
         categoria: ['', Validators.required],
         precio: ['', Validators.required],
         usuarioDocentes: [/* this.usuarioDocenteActual */, Validators.required],
         activado: [false] // Establecer el valor por defecto en false
-     });
-  }
+    });
+
+    this.agregarHabilidad(); // Agrega una habilidad por defecto
+}
+
+// Método para obtener el FormArray de habilidades
+get habilidades(): FormArray {
+    return this.camposFormulario.get('habilidades') as FormArray;
+}
+
+// Método para crear una nueva habilidad con estructura de objeto
+crearHabilidad(): FormGroup {
+    return this.constructorFormulario.group({
+        nombre: ['', Validators.required]  // En lugar de un string, ahora tiene un objeto con 'nombre'
+    });
+}
+
+// Método para agregar una nueva habilidad
+agregarHabilidad() {
+    this.habilidades.push(this.crearHabilidad());
+}
+
+// Método para eliminar una habilidad por índice
+eliminarHabilidad(index: number) {
+    this.habilidades.removeAt(index);
+}
 
   listarCategorias():any{
     this.categoriaSevice.listarElementos().subscribe(categorias => {
