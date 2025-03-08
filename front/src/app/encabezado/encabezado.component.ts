@@ -158,6 +158,16 @@ export class EncabezadoComponent {
   
     const cursoUsuario: CursoUsuario = new CursoUsuario();
     cursoUsuario.usuario = this.usuarioDto;
+
+    /* if (this.curso.listaHabilidades) {
+      console.log("listaHabilidades");
+      console.log(this.curso.listaHabilidades);
+      //this.curso.listaHabilidades = this.curso.listaHabilidades.map((h: any) => h.nombre);
+      //console.log("listaHabilidades2");
+      //console.log(this.curso.listaHabilidades);
+    } else {
+       console.log("listaHabilidades vacia");
+    } */
   
     if (this.cursoService.obtenerFoto == null) {
       this.cursoService.agregarElemento(this.curso)
@@ -198,7 +208,7 @@ export class EncabezadoComponent {
         });
     }
   }
-  
+    
 
   setCategoriaEvento(): void {
     this.cursoService.setNombreCategoria(this.curso.categoria.nombre.replace(/ /g, "-"));

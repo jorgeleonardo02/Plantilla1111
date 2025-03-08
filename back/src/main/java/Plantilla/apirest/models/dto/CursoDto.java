@@ -15,7 +15,6 @@ public class CursoDto {
 	private String descripcion;
 	private String etiquetas;
 	private String fechaLimite;
-	private String programa;
 	private Long matriculados;
 	private Boolean activado;
 	private CategoriaDto categoria;
@@ -24,6 +23,7 @@ public class CursoDto {
 	private double porcentajeAdmin;
 	private double calificacion;
 	private List<CursoUsuario> listaCursoUsuario;
+	private List<String> listaHabilidades;
 
 	public CursoDto() {
 	}
@@ -35,17 +35,17 @@ public class CursoDto {
 		this.descripcion = curso.getDescripcion();
 		this.etiquetas = curso.getEtiquetas();
 		this.fechaLimite = curso.getFechaLimite();
-		this.programa = curso.getPrograma();
 		this.matriculados = curso.getMatriculados();
 		this.activado = curso.getActivado();
 		this.precio = curso.getPrecio();
 		this.porcentajeAdmin = curso.getPorcentajeAdmin();
 		this.calificacion = curso.getCalificacion();
 		this.categoria = new CategoriaDto(curso.getCategoria());
+		this.listaHabilidades = curso.getListaHabilidades(); // Cargar habilidades
 	}
 
 	public CursoDto(Long id, String nombreFoto, String nombre, String descripcion, String etiquetas,
-			String fechaLimite, String programa, Long matriculados, Boolean activado,
+			String fechaLimite, List<String> listaHabilidades, Long matriculados, Boolean activado,
 			Long precio, double porcentajeAdmin, double calificacion, CategoriaDto categoria) {
 		this.id = id;
 		this.nombreFoto = nombreFoto;
@@ -53,7 +53,7 @@ public class CursoDto {
 		this.descripcion = descripcion;
 		this.etiquetas = etiquetas;
 		this.fechaLimite = fechaLimite;
-		this.programa = programa;
+		this.listaHabilidades = listaHabilidades;
 		this.matriculados = matriculados;
 		this.activado = activado;
 		this.categoria = categoria;

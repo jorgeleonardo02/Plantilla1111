@@ -92,7 +92,7 @@ export class CursoService extends CommonService<Curso> {
     datosFormulario.append('nombre', curso.nombre);
     datosFormulario.append('descripcion', curso.descripcion);
     datosFormulario.append('etiquetas', curso.etiquetas);
-    datosFormulario.append('programa', curso.programa);
+    datosFormulario.append('listaHabilidades', JSON.stringify(curso.listaHabilidades));
     datosFormulario.append('activado', curso.activado.toString());
     //JSON.stringify: se convierte el objeto en una cadena JSON para poder enviarlo en el cuerpo de la solicitud HTTP
     datosFormulario.append("idCategoria", curso.categoria.id.toString());
@@ -119,7 +119,7 @@ export class CursoService extends CommonService<Curso> {
     datosFormulario.append('nombre', curso.nombre);
     datosFormulario.append('descripcion', curso.descripcion);
     datosFormulario.append('etiquetas', curso.etiquetas);
-    datosFormulario.append('programa', curso.programa);
+    datosFormulario.append('listaHabilidades', JSON.stringify(curso.listaHabilidades));
     datosFormulario.append('nombreFoto', curso.nombreFoto);
 
     // al pasar un FormData en el Body no se necesita cabecera porque

@@ -200,6 +200,7 @@ public class CursoRestControllers extends CommonRestController<Curso, ICursoServ
 			log.info("curso: {}", curso.toString());
 			log.info("precio: {}", curso.getPrecio());
 			log.info("curso porcentaje: {}", curso.getPorcentajeAdmin());
+			log.info("habilidades: {}", curso.getListaHabilidades());
 			cursoNuevo = super.iService.guardarElemento(curso);
 		} catch (DataAccessException e) {
 
@@ -291,7 +292,7 @@ public class CursoRestControllers extends CommonRestController<Curso, ICursoServ
 			cursoActual.setFechaLimite(curso.getFechaLimite());
 			cursoActual.setCategoria(curso.getCategoria());
 			cursoActual.setFechaLimite(curso.getFechaLimite());
-			cursoActual.setPrograma(curso.getPrograma());
+			cursoActual.setListaHabilidades(curso.getListaHabilidades());
 			cursoActual.setMatriculados(curso.getMatriculados());
 			cursoActual = iService.guardarElemento(cursoActual);// persistir o guardar
 		} catch (DataAccessException e) {
@@ -720,7 +721,7 @@ public class CursoRestControllers extends CommonRestController<Curso, ICursoServ
 		dto.setDescripcion(curso.getDescripcion());
 		dto.setEtiquetas(curso.getEtiquetas());
 		dto.setFechaLimite(curso.getFechaLimite());
-		dto.setPrograma(curso.getPrograma());
+		dto.setListaHabilidades(curso.getListaHabilidades());
 		dto.setMatriculados(curso.getMatriculados());
 		dto.setActivado(curso.getActivado());
 		dto.setCategoriaId(curso.getCategoria().getId());

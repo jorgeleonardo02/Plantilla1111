@@ -59,7 +59,7 @@ export class FormCursoComponent implements OnInit {
         descripcion: ['', Validators.required],
         etiquetas: ['', Validators.required],
         fechaLimite: [''],
-        habilidades: this.constructorFormulario.array([]), // Ahora será una lista de objetos con nombre
+        listaHabilidades: this.constructorFormulario.array([]), // Ahora será una lista de objetos con nombre
         categoria: ['', Validators.required],
         precio: ['', Validators.required],
         usuarioDocentes: [/* this.usuarioDocenteActual */, Validators.required],
@@ -70,8 +70,8 @@ export class FormCursoComponent implements OnInit {
 }
 
 // Método para obtener el FormArray de habilidades
-get habilidades(): FormArray {
-    return this.camposFormulario.get('habilidades') as FormArray;
+get listaHabilidades(): FormArray {
+    return this.camposFormulario.get('listaHabilidades') as FormArray;
 }
 
 // Método para crear una nueva habilidad con estructura de objeto
@@ -83,12 +83,12 @@ crearHabilidad(): FormGroup {
 
 // Método para agregar una nueva habilidad
 agregarHabilidad() {
-    this.habilidades.push(this.crearHabilidad());
+    this.listaHabilidades.push(this.crearHabilidad());
 }
 
 // Método para eliminar una habilidad por índice
 eliminarHabilidad(index: number) {
-    this.habilidades.removeAt(index);
+    this.listaHabilidades.removeAt(index);
 }
 
   listarCategorias():any{
@@ -141,37 +141,63 @@ seleccionarFoto(evento: any): void {
 
   cantidad: number;
 
-async enviarFormulario() { //contendrá operaciones asincrónicas
-  if (this.camposFormulario.invalid) {
-    return this.camposFormulario.markAllAsTouched();
-  }
+  async enviarFormulario() {  
+    if (this.camposFormulario.invalid) {
+      this.camposFormulario.markAllAsTouched();
+      return;
+    }
+  
+    try {
+      const usuario = this.camposFormulario.value.usuarioDocentes;
+  
+      if (!usuario || !usuario.id || !usuario.limiteCursos) {
+        console.error("Error: Datos del usuarioDocente no válidos");
+        return this.referenciaVentanaModal.close();
+      }
+  
+      console.log("Usuario ID:", usuario.id);
+      console.log("Límite de Cursos:", usuario.limiteCursos);
+  
+      await this.limiteCursosPorDocente(usuario.id); // Espera la cantidad de cursos existentes
+  
+      console.log("Cantidad de cursos creados:", this.cantidad);
 
-  try {
-    // await: esperará a que esta función asíncrona se complete 
-    // antes de continuar con el siguiente paso.
-    console.log("this.camposFormulario.value.usuarioDocentes.limiteCursos: "/* +this.camposFormulario.value */);
-    console.log(this.camposFormulario.value);
-    console.log("this.camposFormulario.value.usuarioDocentes.id: "+this.camposFormulario.value.usuarioDocentes.id);
-    await this.limiteCursosPorDocente(this.camposFormulario.value.usuarioDocentes.id);
-    console.log("this.cantidad");
-    console.log(this.cantidad);
-    //console.log("cantidad De Contenidos ya creados: " + this.cantidad);
-    console.log("Formularioleo: ");
-    console.log(this.camposFormulario.value);
-    //console.log("usuarioSeleccionado.limite: ");
-    //console.log(this.camposFormulario.value.usuarioDocentes.limiteContenidos);
-    if (this.cantidad < this.camposFormulario.value.usuarioDocentes.limiteCursos) {
-      this.referenciaVentanaModal.close(this.camposFormulario.value);
-      this.router.navigateByUrl('/curso/'+this.camposFormulario.value.categoria.nombre);
-    } else {
-      console.log("ya llego al límite de cursos por docentes");
+      console.log("Antes de transformar listaHabilidades:", this.camposFormulario.value.listaHabilidades[0]);
+      
+      const listaHabilidades = Array.isArray(this.camposFormulario.value.listaHabilidades)
+        ? this.camposFormulario.value.listaHabilidades
+            .filter((h: any) => h && h.nombre) // Filtra objetos sin `nombre`
+            .map((h: any) => h.nombre.trim())  // Extrae nombres sin agregar comillas extra
+        : [];
+  
+      console.log("Lista de habilidades:");
+      console.log(JSON.stringify(listaHabilidades));
+  
+   // Crear objeto con los datos del curso
+   const datosCurso = {
+    ...this.camposFormulario.value,
+    listaHabilidades
+  };
+  console.log("datosCurso");
+  console.log(JSON.stringify(datosCurso));
+      if (this.cantidad < usuario.limiteCursos) {
+        this.referenciaVentanaModal.close(datosCurso); // Se envía el objeto transformado
+  
+        if (this.camposFormulario.value.categoria?.nombre) {
+          this.router.navigateByUrl(`/curso/${this.camposFormulario.value.categoria.nombre}`);
+        } else {
+          console.warn("Advertencia: No se pudo redirigir porque 'categoria.nombre' no está definido.");
+        }
+      } else {
+        console.warn("El docente ha alcanzado el límite de cursos permitidos.");
+        this.referenciaVentanaModal.close();
+      }
+    } catch (error) {
+      console.error("Error al obtener la cantidad:", error);
       this.referenciaVentanaModal.close();
     }
-  } catch (error) {// Si ocurre algún error durante la ejecución  
-    console.error("Error al obtener la cantidad:", error); // muestra el error
-    this.referenciaVentanaModal.close();
   }
-}
+  
 
 async limiteCursosPorDocente(idUsuarioSeleccionado: number) {//funcion asincrona
   this.cantidad = await this.cursoUsuarioService.cantidadCursosDeDocente(idUsuarioSeleccionado).toPromise();

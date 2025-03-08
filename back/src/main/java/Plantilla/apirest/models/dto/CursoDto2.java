@@ -12,7 +12,7 @@ public class CursoDto2 {
 	private String descripcion;
 	private String etiquetas;
 	private String fechaLimite;
-	private String programa;
+	private List<String> listaHabilidades;
 	private Long matriculados;
 	private boolean comprado;
 	private CategoriaDto categoria;
@@ -69,13 +69,7 @@ public class CursoDto2 {
 		this.fechaLimite = fechaLimite;
 	}
 
-	public String getPrograma() {
-		return programa;
-	}
 
-	public void setPrograma(String programa) {
-		this.programa = programa;
-	}
 
 	public Long getMatriculados() {
 		return matriculados;

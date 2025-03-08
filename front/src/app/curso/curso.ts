@@ -8,7 +8,6 @@ export class Curso {
     descripcion: string;
     etiquetas: string;
     fechaLimite: string;
-    programa: string;
     matriculados: number;
     categoria: Categoria;
     activado: boolean;
@@ -16,4 +15,5 @@ export class Curso {
 	porcentajeAdmin: number;
 	calificacion: number;
     listaCursoUsuario: CursoUsuario[];
+    listaHabilidades: string[];
 }

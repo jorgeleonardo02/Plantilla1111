@@ -77,12 +77,12 @@
         </div>
         <h4>Habilidades a desarrollar</h4>
 
-        <div formArrayName="habilidades">
-            <div *ngFor="let habilidad of habilidades.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center">
+        <div formArrayName="listaHabilidades">
+            <div *ngFor="let habilidad of listaHabilidades.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center">
                 <mat-form-field class="tresPartes">
                     <input type="text" matInput placeholder="Habilidad" formControlName="nombre">
                 </mat-form-field>
-                <button mat-icon-button color="warn" (click)="eliminarHabilidad(i)" *ngIf="habilidades.length > 1">
+                <button mat-icon-button color="warn" (click)="eliminarHabilidad(i)" *ngIf="listaHabilidades.length > 1">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
