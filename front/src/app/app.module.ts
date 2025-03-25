@@ -48,6 +48,7 @@ import { ContenidoProgramaticoComponent } from './curso/contenido-programatico/c
 import { SubseccionComponent } from './subseccion/subseccion/subseccion.component';
 import { interceptorProvider } from './seguridad/interceptors/pro-interceptor.service';
 import { StompConfig } from '@stomp/stompjs';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -82,6 +83,7 @@ const routes: Routes = [
     SubseccionComponent, // Declarar SubseccionComponent aquí
   ],
   imports: [
+    MatExpansionModule,
     BrowserModule,
     CommonModule,
     FormsModule,

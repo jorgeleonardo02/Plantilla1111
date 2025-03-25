@@ -1,0 +1,99 @@
+<!-- ************************************************************************************************************************************************************************************ -->
+
+<h2 mat-dialog-title>Contenido del Curso</h2>
+
+<div mat-dialog-content>
+  <form [formGroup]="formSeccion" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline" class="unaParte">
+      <mat-label>Nombre del curso</mat-label>
+      <input matInput formControlName="nombreCurso" placeholder="Nombre del curso" />
+    </mat-form-field>
+
+    <div class="acordeon-80" formArrayName="secciones">
+    
+      <div *ngIf="secciones.controls[paginaActual]" [formGroupName]="paginaActual" class="seccion-container">
+        
+        <div class="seccion-header">
+          <h3>Sección {{ paginaActual + 1 }}</h3>
+          <div class="botones-header">
+            <button mat-mini-fab color="warn" (click)="eliminarSeccion(paginaActual)" [disabled]="totalPaginas === 1">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="agregarSeccion()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Detalles de la Sección</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field appearance="outline" class="dosPartes">
+            <mat-label>Número de sección</mat-label>
+            <input matInput formControlName="numeroSeccion" placeholder="Número de sección" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="dosPartes">
+            <mat-label>Nombre de sección</mat-label>
+            <input matInput formControlName="nombreSeccion" placeholder="Nombre de sección" />
+          </mat-form-field>
+
+          <div formArrayName="subSecciones" class="acordeon-70">
+            <div *ngFor="let subSeccion of seccionesPaginadasSubSeccion(); let j = index" [formGroupName]="j" class="subseccion-container">
+
+              <div class="subseccion-header">
+                <h4>Subsección {{ paginaActualSubSeccion + 1 }}</h4>
+                <div class="botones-header">
+                  <button
+                    mat-mini-fab
+                    color="warn"
+                    (click)="eliminarSubSeccion(paginaActual, j)"
+                    *ngIf="getSubSecciones(paginaActual).length > 1">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="primary" (click)="agregarSubSeccion(paginaActual)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Detalles de la Subsección</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-form-field appearance="outline" class="dosPartes">
+                  <mat-label>Número de subsección</mat-label>
+                  <input matInput formControlName="numeroSubSeccion" placeholder="Número de subsección" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="dosPartes">
+                  <mat-label>Nombre de subsección</mat-label>
+                  <input matInput formControlName="nombreSubSeccion" placeholder="Nombre de subsección" />
+                </mat-form-field>
+              </mat-expansion-panel>
+
+            </div>
+          </div>
+          <div class="paginador">
+            <button mat-button color="primary" (click)="paginaAnteriorSubSeccion()" [disabled]="paginaActualSubSeccion === 0">Anterior</button>
+            <span>Página {{ paginaActualSubSeccion + 1 }} de {{ totalPaginasSubSeccion }}</span>
+            <button mat-button color="primary" (click)="paginaSiguienteSubSeccion()" [disabled]="paginaActualSubSeccion >= totalPaginasSubSeccion - 1">Siguiente</button>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+    <div class="paginador">
+      <button mat-button color="primary" (click)="paginaAnterior()" [disabled]="paginaActual === 0">Anterior</button>
+      <span>Página {{ paginaActual + 1 }} de {{ totalPaginas }}</span>
+      <button mat-button color="primary" (click)="paginaSiguiente()" [disabled]="paginaActual >= totalPaginas - 1">Siguiente</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- ************************************************************************************************************************************************************************************ -->

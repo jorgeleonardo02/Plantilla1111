@@ -14,6 +14,8 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]); */
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { CarritoService } from '../carrito/carrito.service';
 import { CursoUsuarioService } from '../curso-usuario/curso-usuario.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ContenidoComponent } from '../curso/contenido/contenido.component';
 
 // Instala los módulos necesarios
 SwiperCore.use([Navigation, Pagination]);
@@ -87,6 +89,7 @@ swiperConfig = {
   constructor(private cursoService: CursoService,
               public tokenService: TokenService,
               private router: Router,
+              private dialog: MatDialog,
               private cursoUsuarioService: CursoUsuarioService,
               private carritoService: CarritoService,
               private route: ActivatedRoute) {
@@ -204,6 +207,20 @@ swiperConfig = {
     console.log(curso);
     this.carritoService.agregarAlCarrito(curso);
     console.log('CuerpoComponent inicializado');
+  }
+
+  abrirModalCrearSeccion(curso: any): void {
+    const dialogRef = this.dialog.open(ContenidoComponent, {
+      width: '1200px',
+      height: '600px',
+      data: { curso }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Contenido guardado:', result);
+      }
+    });
   }
 }
 

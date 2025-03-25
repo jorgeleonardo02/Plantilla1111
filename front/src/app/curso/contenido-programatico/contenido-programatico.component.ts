@@ -67,7 +67,7 @@ export class ContenidoProgramaticoComponent implements OnInit, AfterViewInit {
   };
 
   blog = {
-    titulo: 'Cualquier cosa',
+    titulo: 'Contenido del Curso',
     descripcion: 'Esta es mi descripción'
   };
 

@@ -1,0 +1,38 @@
+.unaParte {
+  width: 40%;
+  display: block;
+  margin: 0 auto 16px auto;
+  text-align: center;
+}
+.dosPartes {
+  width: 50%;
+  padding-right: 4px;
+}
+
+.acordeon-80{
+  width: 80%;
+  margin: 0 auto;
+}
+.acordeon-70{
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* Alineación de las secciones y botones fuera */
+.seccion-header,
+.subseccion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Paginador centrado */
+.paginador {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ******************************** */
