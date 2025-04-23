@@ -1,21 +1,22 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import { Curso } from '../curso/curso';
-import { CursoService } from '../curso/curso.service';
+import { Curso } from '../curso';
+import { CursoService } from '../curso.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { url } from 'environments/url';
 import { environment } from 'environments/environment';
-import { TokenService } from '../seguridad/service/token.service';
+import { TokenService } from '../../seguridad/service/token.service';
 //import Swiper from 'swiper';
 //import 'swiper/swiper-bundle.css';
 /* import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]); */
 //import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { CarritoService } from '../carrito/carrito.service';
-import { CursoUsuarioService } from '../curso-usuario/curso-usuario.service';
+import { CarritoService } from '../../carrito/carrito.service';
+import { CursoUsuarioService } from '../../curso-usuario/curso-usuario.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ContenidoComponent } from '../curso/contenido/contenido.component';
+import { ContenidoComponent } from '../contenido/contenido.component';
+import { Contenido2Component } from '../contenido2/contenido2.component';
 
 // Instala los módulos necesarios
 SwiperCore.use([Navigation, Pagination]);
@@ -209,6 +210,21 @@ swiperConfig = {
     console.log('CuerpoComponent inicializado');
   }
 
+  abrirModalCrearSeccion2(curso: any): void {
+    const dialogRef = this.dialog.open(Contenido2Component, {
+      width: '900px',
+      height: '600px',
+      data: { curso },
+      autoFocus: false, // ⬅️ previene problemas de foco en campos ocultos
+      restoreFocus: false, // ⬅️ previene problemas al cerrar el diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Contenido guardado:', result);
+      }
+    });
+  }
   abrirModalCrearSeccion(curso: any): void {
     const dialogRef = this.dialog.open(ContenidoComponent, {
       width: '1200px',

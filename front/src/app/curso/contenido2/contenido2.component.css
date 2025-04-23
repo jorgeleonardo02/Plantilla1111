@@ -1,0 +1,59 @@
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin: 4px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid #3f51b5;
+  gap: 1rem;
+}
+
+.contenido-seccion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.unaParte {
+  width: 100%;
+}
+
+.dosPartes {
+  width: 250px;
+}
+
+.info-path {
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+  margin-right: 12px;
+  min-width: 60px;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.contenido-scroll {
+  max-height: 400px; 
+  overflow-y: auto;
+  margin-top: 20px;
+  padding-right: 8px;
+}
+
+/* ********************************************************* */
+
+
+/* ********************************************************* */
+
+
+
+
+/* ********************************************************* */
+

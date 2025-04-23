@@ -39,7 +39,7 @@ import { RegistroComponent } from './seguridad/auth/registro.component';
 import { IndexComponent } from './seguridad/index/index.component';
 import { LoginGuard } from './seguridad/guards/login.guard';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
-import { CuerpoComponent } from './cuerpo/cuerpo.component';
+import { CuerpoComponent } from './curso/cuerpo/cuerpo.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { DetalleCursoComponent } from './curso/detalle-contenido/detalle-curso.component';
 import { EstrellaComponent } from './estrella/estrella.component';

@@ -1,0 +1,104 @@
+<!-- **************************************************** 1 ******************************************************************************************************************************** -->
+
+<h2 mat-dialog-title>Contenido del Curso</h2>
+<br>
+<div mat-dialog-content>
+  <form [formGroup]="formSeccion" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="unaParte">
+      <mat-label>Nombre del curso</mat-label>
+      <input matInput formControlName="nombreCurso" placeholder="Nombre del curso" />
+    </mat-form-field>
+  </form>
+</div>
+<div class="contenido-scroll">
+<div class="acciones-globales" style="display: flex; align-items: center; gap: 8px;">
+  <button mat-icon-button color="primary" (click)="agregarSeccion()" matTooltip="Agregar sección">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-icon-button color="warn" (click)="eliminarUltimaSeccion()" matTooltip="Eliminar última sección">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <div class="tree-node" [formGroup]="getFormGroup(getNodoDesdePlano(node))">
+      <div class="formulario-nodo">
+        <h3>Detalles de Sección/Subsección</h3>
+        <mat-form-field appearance="outline" class="dosPartes">
+          <mat-label>Número de sección</mat-label>
+          <input matInput formControlName="numeroSeccion" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="dosPartes">
+          <mat-label>Nombre de sección</mat-label>
+          <input matInput formControlName="nombreSeccion" />
+        </mat-form-field>
+      </div>
+      <span>{{ node.path }}</span>
+      <span class="acciones">
+        <button mat-icon-button color="primary" (click)="agregarHijo(getNodoDesdePlano(node))">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="eliminarNodo(getParent(getNodoDesdePlano(node)), getNodoDesdePlano(node))">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+    </div>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <div class="tree-node" [formGroup]="getFormGroup(getNodoDesdePlano(node))">
+      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon>
+          {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </button>
+      <div class="formulario-nodo">
+        <h3>Detalles de Sección/Subsección</h3>
+        <mat-form-field appearance="outline" class="dosPartes">
+          <mat-label>Número de sección</mat-label>
+          <input matInput formControlName="numeroSeccion" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="dosPartes">
+          <mat-label>Nombre de sección</mat-label>
+          <input matInput formControlName="nombreSeccion" />
+        </mat-form-field>
+      </div>
+      <span>{{ node.path }}</span>
+      <span class="acciones">
+        <button mat-icon-button color="primary" (click)="agregarHijo(getNodoDesdePlano(node))">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="eliminarNodo(getParent(getNodoDesdePlano(node)), getNodoDesdePlano(node))">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </span>
+    </div>
+  </mat-tree-node>
+</mat-tree>
+<div class="paginacion">
+  <button mat-button (click)="paginaAnterior()" [disabled]="paginaActual === 0">Anterior</button>
+  <span>Página {{ paginaActual + 1 }} de {{ totalPaginas }}</span>
+  <button mat-button (click)="paginaSiguiente()" [disabled]="paginaActual >= totalPaginas - 1">Siguiente</button>
+</div>
+</div>
+ 
+
+<!-- ***********************************************************************2************************************************************************************************************* -->
+
+
+
+<!-- ************************************************************************************************************************************************************************************ -->
+
+
+
+<!------------------------------------- 5 ------------------------------------------->
+
+
+
+
+<!-- --------------------------------------bueno----------------------------------------- -->
+
+
+
+<!-- ------------------------------------------------------------------------------- -->
+
+

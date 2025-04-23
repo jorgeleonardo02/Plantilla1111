@@ -87,12 +87,27 @@ export class ContenidoComponent implements OnInit {
 
   // Eliminar una sección
   eliminarSeccion(index: number): void {
+      
     this.secciones.removeAt(index);
+    // Si elimino la última sección, me muevo a la página anterior
+    if (this.paginaActual >= this.totalPaginas) {
+      this.paginaActual = Math.max(0, this.paginaActual - 1);
+    }
   }
 
   // Eliminar una subsección de una sección específica
   eliminarSubSeccion(seccionIndex: number, subIndex: number): void {
-    this.getSubSecciones(seccionIndex).removeAt(subIndex);
+    //this.getSubSecciones(seccionIndex).removeAt(subIndex);
+    const subsecciones = this.getSubSecciones(seccionIndex);
+    subsecciones.removeAt(subIndex); // Elimina la subsección
+
+    // Verifica si la página actual quedó vacía y ajusta la paginación
+    const totalSubSecciones = subsecciones.length; // Total de subsecciones después de eliminar
+    const totalPaginasSubSeccion = Math.ceil(totalSubSecciones / this.tamanioPaginaSubSeccion);
+
+    if (this.paginaActualSubSeccion >= totalPaginasSubSeccion) {
+      this.paginaActualSubSeccion = Math.max(0, this.paginaActualSubSeccion - 1);
+    }
   }
 
   onGuardar(): void {
@@ -125,10 +140,12 @@ export class ContenidoComponent implements OnInit {
   }
 
   paginaAnterior() {
+    this.paginaActualSubSeccion = 0;
     if (this.paginaActual > 0) this.paginaActual--;
   }
 
   paginaSiguiente() {
+    this.paginaActualSubSeccion = 0;
     if (this.paginaActual < this.totalPaginas - 1) this.paginaActual++;
   }
 
