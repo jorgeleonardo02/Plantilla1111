@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h5 class="modal-title">Editor de Contenido</h5>
+  </div>
+  
+  <div class="modal-body">
+    <form [formGroup]="editorForm" (ngSubmit)="guardar()">
+  
+      <!-- Título del contenido -->
+      <div class="form-group mb-3">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" class="form-control" formControlName="titulo" placeholder="Ingresa el título">
+      </div>
+  
+      <!-- Editor Quill -->
+      <div class="form-group">
+        <label for="editor">Contenido</label>
+        <quill-editor
+          #editor
+          formControlName="editorContent"
+          [modules]="modulesQuill"
+          (onEditorCreated)="onEditorCreated($event)"
+          (onContentChanged)="Eventos($event)"
+          format="html"
+          placeholder="Escribe tu contenido aquí..."
+          style="height: 300px;">
+        </quill-editor>
+      </div>
+  
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="guardar()" [disabled]="editorForm.invalid">
+      Guardar y Exportar PDF
+    </button>
+  </div>

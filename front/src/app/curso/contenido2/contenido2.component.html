@@ -26,7 +26,8 @@
         <h3>Detalles de Sección/Subsección</h3>
         <mat-form-field appearance="outline" class="dosPartes">
           <mat-label>Número de sección</mat-label>
-          <input matInput formControlName="numeroSeccion" />
+         <!--  <input matInput formControlName="numeroSeccion" /> -->
+          <input matInput formControlName="numeroSeccion" readonly />
         </mat-form-field>
         <mat-form-field appearance="outline" class="dosPartes">
           <mat-label>Nombre de sección</mat-label>
@@ -37,6 +38,9 @@
       <span class="acciones">
         <button mat-icon-button color="primary" (click)="agregarHijo(getNodoDesdePlano(node))">
           <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="abrirEditor(getNodoDesdePlano(node))" matTooltip="Editar contenido">
+          <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="eliminarNodo(getParent(getNodoDesdePlano(node)), getNodoDesdePlano(node))">
           <mat-icon>delete</mat-icon>
@@ -55,7 +59,8 @@
         <h3>Detalles de Sección/Subsección</h3>
         <mat-form-field appearance="outline" class="dosPartes">
           <mat-label>Número de sección</mat-label>
-          <input matInput formControlName="numeroSeccion" />
+          <!-- <input matInput formControlName="numeroSeccion" /> -->
+          <input matInput formControlName="numeroSeccion" readonly />
         </mat-form-field>
         <mat-form-field appearance="outline" class="dosPartes">
           <mat-label>Nombre de sección</mat-label>
@@ -66,6 +71,9 @@
       <span class="acciones">
         <button mat-icon-button color="primary" (click)="agregarHijo(getNodoDesdePlano(node))">
           <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="abrirEditor(getNodoDesdePlano(node))" matTooltip="Editar contenido">
+          <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="eliminarNodo(getParent(getNodoDesdePlano(node)), getNodoDesdePlano(node))">
           <mat-icon>delete</mat-icon>
@@ -80,10 +88,38 @@
   <button mat-button (click)="paginaSiguiente()" [disabled]="paginaActual >= totalPaginas - 1">Siguiente</button>
 </div>
 </div>
- 
-
+ <br>
+ <button (click)="onClickGuardar()">Guardar árbol</button>
 <!-- ***********************************************************************2************************************************************************************************************* -->
 
+<!-- <ul>
+  <ng-container *ngFor="let nodo of dataArbol; let i = index">
+    <ng-template [ngTemplateOutlet]="renderNodo" [ngTemplateOutletContext]="{ nodo: nodo, index: i, nivel: '' }"></ng-template>
+  </ng-container>
+</ul>
+
+<ng-template #renderNodo let-nodo let-index="index" let-nivel="nivel">
+  <li [style.marginLeft.px]="20 * (nivel.split('.').length - 1)">
+    <span (click)="toggleNodo(imprimirSeccionNumero(nodo, index, nivel))" class="toggle">
+      {{ nodo.children?.length ? (estaExpandido(imprimirSeccionNumero(nodo, index, nivel)) ? '▼' : '▶') : '•' }}
+    </span>
+    número de sección: {{ imprimirSeccionNumero(nodo, index, nivel) }}
+    nombre de sección: {{ nodo.name }}
+
+    <ul *ngIf="nodo.children?.length && estaExpandido(imprimirSeccionNumero(nodo, index, nivel))">
+      <ng-container *ngFor="let hijo of nodo.children; let j = index">
+        <ng-template
+          [ngTemplateOutlet]="renderNodo"
+          [ngTemplateOutletContext]="{
+            nodo: hijo,
+            index: j,
+            nivel: imprimirSeccionNumero(nodo, index, nivel)
+          }">
+        </ng-template>
+      </ng-container>
+    </ul>
+  </li>
+</ng-template> -->
 
 
 <!-- ************************************************************************************************************************************************************************************ -->

@@ -48,7 +48,23 @@
 }
 
 /* ********************************************************* */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
 
+li {
+  line-height: 1.5em;
+  margin: 0.25em 0;
+}
+
+.toggle {
+  cursor: pointer;
+  user-select: none;
+  margin-right: 0.5em;
+  font-weight: bold;
+}
 
 /* ********************************************************* */
 
