@@ -18,6 +18,7 @@
         <querydsl.plugin.version>5.0.0</querydsl.plugin.version>
     </properties>
     <dependencies>
+        
         <!-- Dependencia para la validación de Jakarta EE -->
         <dependency>
             <groupId>jakarta.validation</groupId>
@@ -104,12 +105,13 @@
             <artifactId>hibernate-types-55</artifactId>
             <version>2.21.1</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>com.vladmihalcea</groupId>
-            <artifactId>hibernate-types-60</artifactId> 
-            <version>2.21.1</version> 
-        </dependency> -->
-
+        
+        <dependency>
+            <groupId>com.mercadopago</groupId>
+            <artifactId>dx-java</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        
     </dependencies>
     <build>
         <plugins>

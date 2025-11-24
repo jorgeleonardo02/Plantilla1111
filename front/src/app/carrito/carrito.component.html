@@ -82,9 +82,16 @@
                 <p class="ud-heading-md">
                     {{sumaTotal | number:'1.0-0'}}&nbsp;COL$
                 </p>
-                <div>
+                <div class="cho-container">
                     <!-- <a (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
-                    <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="(tokenService.rolVisitante()||tokenService.rolEstudiante()) && cursoUsuario()" class="btn btn-lg btn-block btn-warning">Pagar</a>
+                    <!-- <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" 
+                    (click)="(tokenService.rolVisitante()||tokenService.rolEstudiante()) && cursoUsuario()" 
+                    class="btn btn-lg btn-block btn-warning">Pagar</a> -->
+                    <a [routerLink]="!tokenService.logueado() ? '/registro' : null"
+                        (click)="tokenService.logueado() && pagar()"
+                        class="btn btn-lg btn-block btn-warning">
+                        Pagar
+                    </a>
                     <!-- <a [routerLink]="tokenService.logueado() ? '/carrito' : '/registro'" (click)="onPagarClick()" class="btn btn-lg btn-block btn-warning">Pagar</a> -->
                 </div>
             </div>

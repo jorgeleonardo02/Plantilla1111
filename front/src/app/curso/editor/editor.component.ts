@@ -494,7 +494,7 @@ export class EditorComponent implements AfterViewInit {
       titulo: this.editorForm.value.titulo,
       contenidoHTML: this.editorForm.value.editorContent
     });
-    //this.generarPDF();
+    this.generarPDF();
   }
 
     quillInstance!: Quill;
@@ -621,8 +621,10 @@ export class EditorComponent implements AfterViewInit {
       }
     }  
   
-}
- */
+} */
+
+
+//----------------------------------------------------------------------------------------------------------
 
 import { Component, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -639,21 +641,17 @@ import { NodoContenido } from '../contenido2/contenido2.component';
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    QuillModule,
-    // otros módulos necesarios...
+    QuillModule
   ],
   standalone: true,
   styleUrls: ['./editor.component.css'],
-  
 })
-export class EditorComponent implements OnInit, AfterViewInit {
+export class EditorComponent implements OnInit {
 
   editorForm!: FormGroup;
-  @ViewChild('quillEditor', { static: false }) quillEditorComponent!: QuillEditorComponent;
-  
+  @ViewChild('quillEditor', { static: false }) quillEditorComponent!: QuillEditorComponent;  
   private quillInstance!: Quill;
   htmlContent: any;
-
   readonly modulesQuill = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -667,50 +665,38 @@ export class EditorComponent implements OnInit, AfterViewInit {
       ['clean'],
     ]
   };
-
   blog = {
     titulo: 'Contenido del Curso',
     descripcion: 'Esta es mi descripción'
   };
-
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { nodo: NodoContenido },
     private pdfService: PdfGeneratorService
   ) {}
-
   ngOnInit(): void {
     console.log("data");
     console.log(this.data);
     const nombre = this.data.nodo.name || '';
     const contenido = this.data.nodo.contenidoTexto || '';
-
-  this.editorForm = this.fb.group({
-    titulo: [nombre, Validators.required],
-    editorContent: [contenido, Validators.required],
-  });
+    this.editorForm = this.fb.group({
+      titulo: [nombre, Validators.required],
+      editorContent: [contenido, Validators.required],
+    });
   }
-
-  ngAfterViewInit(): void {
-    this.quillInstance = this.quillEditorComponent.quillEditor;
-  }
-
   guardar(): void {
     if (this.editorForm.invalid) {
       console.warn('Formulario inválido');
       return;
     }
-
     this.dialogRef.close({
       titulo: this.editorForm.value.titulo,
       contenidoHTML: this.editorForm.value.editorContent
     });
-
     // Si quieres generar PDF automáticamente al guardar, descomenta esto:
     this.generarPDF();
   }
-  
   onEditorCreated(quill: Quill) {
     this.quillInstance = quill;
   }
@@ -720,11 +706,20 @@ export class EditorComponent implements OnInit, AfterViewInit {
       //console.log('HTML actualizado:', this.htmlContent);
     }
   }
-
   generarPDF(): void {
     if (this.quillInstance) {
       const delta = this.quillInstance.getContents();
+      console.log('Delta:', delta);
+      // Si lo estás transformando a HTML:
+      const html = this.quillInstance.root.innerHTML;
+      console.log('HTML generado:', html); 
       this.pdfService.generarPDF(delta);
     }
   }
+  /* generarPDF(): void {
+    if (this.quillInstance) {
+      const html = this.quillInstance.root.innerHTML;
+      this.pdfService.generarPDFdesdeHTML(html); // Usa esta nueva función
+    }
+  } */
 }

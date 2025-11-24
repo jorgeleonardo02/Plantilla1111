@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { CursoUsuario } from '../curso-usuario/curso-usuario';
 import { UsuarioDto2 } from '../usuario/usuario-dto2';
 import { CursoService } from '../curso/curso.service';
+import { HttpClient } from '@angular/common/http';
+
+declare var MercadoPago: any;
 
 @Component({
   selector: 'app-carrito',
@@ -24,6 +27,7 @@ export class CarritoComponent implements OnInit {
   sumaTotal: number = 0;
   usuario: UsuarioDto2 = new UsuarioDto2();
   listaCursos: Curso[] = []; // Lista de curso suscritos por categoría
+  // MercadoPago: any;
   constructor(
     public carritoService: CarritoService,
     private cursoUsuarioService: CursoUsuarioService,
@@ -31,7 +35,8 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     public tokenService: TokenService,
-    private cursoService: CursoService
+    private cursoService: CursoService,
+    private http: HttpClient
   ) {
     
   }
@@ -44,12 +49,56 @@ export class CarritoComponent implements OnInit {
       });
   }
 
+  onPagarClick() {
+  if (!this.tokenService.logueado()) {
+    this.router.navigate(['/registro']);
+    return;
+  }
+
+  // Construir la lista que espera tu backend
+  const cursos = this.cursoEnCarrito.map(curso => ({
+    id: curso.id,
+    nombre: curso.nombre,
+    precio: curso.precio,
+    porcentajeAdmin: curso.porcentajeAdmin
+  }));
+
+  // Llamar a tu backend
+  this.http.post('http://localhost:8888/api/pagos/crear-preferencia', cursos)
+    .subscribe((preferenceId: any) => {
+
+      // Inicializar Mercado Pago
+      /* const mp = new MercadoPago('TU_PUBLIC_KEY_AQUI', {
+        locale: 'es-CO'
+      }); */
+      const mp = new MercadoPago('TEST-12345678-abcd1234efgh5678ijkl', {
+        locale: 'es-CO'
+      });
+
+      // Abrir checkout
+      mp.checkout({
+        preference: { id: preferenceId.id },
+        autoOpen: true
+      });
+    });
+}
   ngOnInit(): void {
+
+    // Cargar MercadoPago global
+    MercadoPago = (window as any).MercadoPago;
+
     this.carritoService.carrito$.subscribe(nuevoCarrito => {
       this.cursoEnCarrito = nuevoCarrito;
       this.calcularSumaTotal();
       this.crearCursoUsuario();
     });
+  }
+  pagar() {
+    // Primero convertir el usuario a estudiante si es necesario
+    this.cursoUsuario();
+
+    // Luego abrir MercadoPago
+    this.onPagarClick();
   }
   calcularSumaTotal(): void {
     this.sumaTotal = this.cursoEnCarrito.reduce((total, curso) => 
